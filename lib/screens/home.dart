@@ -10,6 +10,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(244, 235, 221, 9),
       appBar: AppBar(
         title: Text("DnD App MockUp"),
       ),
