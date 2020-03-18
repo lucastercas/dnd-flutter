@@ -3,7 +3,7 @@
   "surname": "Kvo",
   "race": "Human",
   "class": "Bard",
-  "maxHealth": 8,
-  "curHealth": 7,
+  "maxHealth": 10,
+  "curHealth": 2,
   "max_magic_slot": 2
 }
