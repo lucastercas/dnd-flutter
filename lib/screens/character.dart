@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dnd/models/char.dart';
+import 'package:dnd/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 
 class CharacterScreen extends StatefulWidget {
@@ -43,19 +44,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                 children: <Widget>[
                   Text("${char.name} ${char.surname}"),
                   Text("${char.race} - ${char.charClass}"),
-                  Container(
-                    height: 10,
-                    width: 100,
-                    child: LinearProgressIndicator(
-                      value: 0.89,
-                      backgroundColor: Colors.amber,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                    ),
-                  ),
-                  // CircularProgressIndicator(
-                  //   backgroundColor: Colors.black,
-                  //   valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                  // )
+                  ProgressBar(),
                 ],
               ),
             ],
