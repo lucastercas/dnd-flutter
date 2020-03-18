@@ -3,7 +3,35 @@
   "surname": "Kvo",
   "race": "Human",
   "class": "Bard",
+  "level": 2,
   "maxHealth": 10,
   "curHealth": 2,
-  "max_magic_slot": 2
+  "healing": 4,
+  "max_magic_slot": 2,
+  "abilities": {
+    "str": {
+      "value": 14,
+      "mod": 2
+    },
+    "dex": {
+      "value": 10,
+      "mod": 0
+    },                      
+    "const": {
+      "value": 16,
+      "mod": 3
+    },
+    "int": {                                                             
+      "value": 10,
+      "mod": 0
+    },
+    "wis": {
+      "value": 12,
+      "mod": 1
+    },
+    "char": {
+      "value": 18,
+      "mod":  4                                          
+    }
+  }
 }
