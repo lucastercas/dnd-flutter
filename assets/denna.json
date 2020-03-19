@@ -12,9 +12,15 @@
   "skills": ["athletics", "acrobatics", "deception"],
   "items": ["Small Sword", "Dagger", "Leather Jacket"],
   "spells": {
-    "max_spell_slots": 2,
-    "cur_spell_slots": 1,
-    "spells": ["Friendship", "Animate Object", "Bestow Curse", "Blade Ward"]
+    "slots": {
+      "Friendship": {
+        "used": false
+      },
+      "AnimateObject": {
+        "used": true
+      }
+    },
+    "learned_spells": ["Friendship", "Animate Object", "Bestow Curse", "Blade Ward"]
   },
   "savingThrows": ["dex", "cha"],
   "abilities": {

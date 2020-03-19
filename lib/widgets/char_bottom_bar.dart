@@ -1,3 +1,4 @@
+import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 
 class DiamondClipper extends CustomClipper<Path> {
@@ -19,7 +20,10 @@ class DiamondClipper extends CustomClipper<Path> {
 class CharacterScreenBottomBar extends StatelessWidget {
   const CharacterScreenBottomBar({
     Key key,
+    this.char,
   }) : super(key: key);
+
+  final Character char;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +31,19 @@ class CharacterScreenBottomBar extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black),
       ),
+      height: 60,
       padding: EdgeInsets.all(8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          MagicSlotDiamond(used: true),
-          MagicSlotDiamond(used: false)
-        ],
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: char.spells["slots"].length,
+        itemBuilder: (BuildContext context, int index) {
+          String key = char.spells["slots"].keys.elementAt(index);
+          var curSlot = char.spells["slots"][key];
+          return MagicSlotDiamond(
+            used: curSlot["used"],
+            image: key,
+          );
+        },
       ),
     );
   }
@@ -43,9 +53,11 @@ class MagicSlotDiamond extends StatelessWidget {
   const MagicSlotDiamond({
     Key key,
     @required this.used,
+    @required this.image,
   }) : super(key: key);
 
   final bool used;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +69,7 @@ class MagicSlotDiamond extends StatelessWidget {
           height: 50,
           width: 50,
           color: used ? Colors.grey : Colors.blueGrey[600],
+          child: Text(image),
         ),
       ),
     );

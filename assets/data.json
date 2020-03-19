@@ -1,19 +1,24 @@
 {
   "spells": {
     "Friendship": {
-      "school": "Enchantment"
+      "school": "Enchantment",
+      "image": "F"
     },
     "Animate Object": {
-      "school": "Transmutation"
+      "school": "Transmutation",
+      "image": "AO"
     },
     "Bestow Curse": {
-      "school": "Necromancy"
+      "school": "Necromancy",
+      "image": "BC"
     },
     "Blade Ward": {
-      "school": "Abjuration"
+      "school": "Abjuration",
+      "image": "BW"
     },
     "Blindness/Deafness": {
-      "school": "Necromancy"
+      "school": "Necromancy",
+      "image": "B/D"
     }
   },
   "items": {

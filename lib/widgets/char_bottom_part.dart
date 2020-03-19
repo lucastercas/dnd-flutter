@@ -34,9 +34,10 @@ class BottomPart extends StatelessWidget {
         itemCount: char.abilities.length,
         itemBuilder: (BuildContext context, int index) {
           String key = char.abilities.keys.elementAt(index);
+          var curAbility = char.abilities[key];
           return AbilityWidget(
-            mod: char.abilities[key]["mod"],
-            value: char.abilities[key]["value"],
+            mod: curAbility["mod"],
+            value: curAbility["value"],
             name: key,
           );
         },

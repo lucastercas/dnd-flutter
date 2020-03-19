@@ -48,6 +48,7 @@ class Character {
   Map<String, dynamic> toJson() => {
         'name': name,
         'surname': surname,
+        'spells': spells,
         'race': race,
         'level': level,
         'class': charClass,

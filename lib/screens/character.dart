@@ -31,7 +31,7 @@ class _CharacterScreenState extends State<CharacterScreen> {
                   Expanded(child: TopPart(char: char), flex: 1),
                   Divider(color: Colors.black),
                   Expanded(child: BottomPart(char: char), flex: 3),
-                  CharacterScreenBottomBar(),
+                  CharacterScreenBottomBar(char: char),
                 ],
               );
       },
