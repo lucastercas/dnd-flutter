@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dnd/models/char.dart';
+import 'package:dnd/widgets/char_bottom_bar.dart';
 import 'package:dnd/widgets/char_bottom_part.dart';
 import 'package:dnd/widgets/char_top_part.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +21,17 @@ class _CharacterScreenState extends State<CharacterScreen> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: DefaultAssetBundle.of(context).loadString("assets/data.json"),
+      future: DefaultAssetBundle.of(context).loadString("assets/denna.json"),
       builder: (context, snapshot) {
-        if (snapshot.hasError) return Container();
-        var data = snapshot.data;
-        Character char = parseJson(data);
-
+        Character char = parseJson(snapshot.data);
         return char == null
             ? Container(child: Text("NULL"))
             : Column(
                 children: <Widget>[
-                  Expanded(child: TopPart(char: char), flex: 2),
+                  Expanded(child: TopPart(char: char), flex: 1),
                   Divider(color: Colors.black),
-                  Expanded(child: BottomPart(char: char), flex: 7),
+                  Expanded(child: BottomPart(char: char), flex: 3),
+                  CharacterScreenBottomBar(),
                 ],
               );
       },

@@ -1,44 +1,43 @@
 {
-  "playerName": "Lucas Terças",
-  "name": "Denna",
-  "surname": "Kvo",
-  "race": "Human",
-  "class": "Bard",
-  "alignment": "Chaotic Neutral",
-  "level": 2,
-  "maxHealth": 10,
-  "curHealth": 2,
-  "healing": 4,
-  "skills": ["athletics", "acrobatics", "deception"],
   "spells": {
-    "maxSpellsSlots": 2,
-    "curSpellsSlots": 1,
-    "spells": []
+    "Friendship": {
+      "school": "Enchantment"
+    },
+    "Animate Object": {
+      "school": "Transmutation"
+    },
+    "Bestow Curse": {
+      "school": "Necromancy"
+    },
+    "Blade Ward": {
+      "school": "Abjuration"
+    },
+    "Blindness/Deafness": {
+      "school": "Necromancy"
+    }
   },
-  "abilities": {
-    "str": {
-      "value": 14,
-      "mod": 2
+  "items": {
+    "Small Sword": {
+      "class": "weapon",
+      "damage": "1d8"
     },
-    "dex": {
-      "value": 10,
-      "mod": 0
+    "Dagger": {
+      "class": "weapon",
+      "damage": "1d8"
     },
-    "con": {
-      "value": 16,
-      "mod": 3
-    },
-    "int": {
-      "value": 10,
-      "mod": 0
-    },
-    "wis": {
-      "value": 12,
-      "mod": 1
-    },
-    "cha": {
-      "value": 18,
-      "mod": 4
+    "Leather Jacket": {
+      "class": "armour"
     }
   }
 }
+
+// SCHOOLS
+// "enchantment",
+// "divination",
+// "transmutation",
+// "evocation",
+// "illusion",
+// "conjuration",
+// "abjuration",
+// "ritual",
+// "necromancy"

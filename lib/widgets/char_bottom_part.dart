@@ -18,7 +18,6 @@ class BottomPart extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 Expanded(child: _buildSkills()),
-                Expanded(child: _buildSpells()),
               ],
             ),
           ),
@@ -51,12 +50,6 @@ class BottomPart extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return Text("${char.skills[index]} (Abi)");
       },
-    );
-  }
-
-  Widget _buildSpells() {
-    return ListView.builder(
-      itemBuilder: (BuildContext context, int index) {},
     );
   }
 }
