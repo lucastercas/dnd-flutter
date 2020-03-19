@@ -4,7 +4,8 @@ import 'package:dnd/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
 
 const TextStyle _textStyle = TextStyle(
-  fontSize: 15,
+  fontSize: 14,
+  fontFamily: 'Cinzel',
 );
 
 class TopPart extends StatelessWidget {
@@ -12,9 +13,9 @@ class TopPart extends StatelessWidget {
 
   final Character char;
 
-  Padding buildAvatar({String name}) {
+  Widget buildAvatar({String name}) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -25,24 +26,10 @@ class TopPart extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Image.asset(
-              "assets/images/bard.jpg",
-              // width: 100,
-              // height: 120,
-            ),
+            child: Image.asset("assets/images/bard.jpg"),
           ),
-          Text(
-            name,
-            style: TextStyle(
-              fontFamily: 'Cinzel',
-            ),
-          ),
-          Text(
-            "LV. ${char.level}",
-            style: TextStyle(
-              fontFamily: 'Cinzel',
-            ),
-          ),
+          Text(name, style: _textStyle),
+          Text("LV. ${char.level}", style: _textStyle),
         ],
       ),
     );
@@ -57,31 +44,28 @@ class TopPart extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text(
-                "${char.race} - ${char.charClass}",
-                style: _textStyle,
-              ),
+              Text("${char.race} ${char.charClass} - ${char.alignment}",
+                  style: _textStyle),
               Divider(),
               Row(
-                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Expanded(
                     child: Column(
                       children: <Widget>[
                         Text(
-                            "${char.curHealth + char.healing} / ${char.maxHealth}"),
-                        Container(
-                          height: 17,
-                          child: LinearHealthProgressIndicator(
-                            maxHealth: char.maxHealth,
-                            curHealth: char.curHealth,
-                            healing: char.healing,
-                          ),
+                          "${char.curHealth + char.healing} / ${char.maxHealth}",
+                          style: _textStyle,
+                        ),
+                        LinearHealthProgressIndicator(
+                          maxHealth: char.maxHealth,
+                          curHealth: char.curHealth,
+                          healing: char.healing,
                         ),
                       ],
                     ),
                   ),
+                  // Vertical Divider
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -90,15 +74,13 @@ class TopPart extends StatelessWidget {
                       width: 1,
                     ),
                   ),
-                  Text(
-                    "${char.curHealth} + ${char.healing}",
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  Text("${char.curHealth} + ${char.healing}",
+                      style: _textStyle),
                 ],
               ),
               Divider(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   CharButton(
                     text: "Damage",

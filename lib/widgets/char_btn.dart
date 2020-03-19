@@ -9,19 +9,22 @@ class CharButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      padding: EdgeInsets.all(5),
-      height: 10,
-      child: Text(
-        this.text,
-        style: TextStyle(
-          color: Colors.white,
-          fontFamily: 'Sacramento',
-          fontSize: 15,
+    return SizedBox(
+      height: 20,
+      child: MaterialButton(
+        padding: EdgeInsets.all(2),
+        child: Text(
+          this.text,
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'Cinzel',
+            fontSize: 12,
+            textBaseline: TextBaseline.alphabetic,
+          ),
         ),
+        onPressed: () {},
+        color: Colors.black,
       ),
-      onPressed: () {},
-      color: Colors.black,
     );
   }
 }

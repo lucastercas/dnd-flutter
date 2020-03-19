@@ -22,16 +22,19 @@ class _CharacterScreenState extends State<CharacterScreen> {
     return FutureBuilder(
       future: DefaultAssetBundle.of(context).loadString("assets/data.json"),
       builder: (context, snapshot) {
-        Character char = parseJson(snapshot.data.toString());
-        return Column(
-          children: <Widget>[
-            TopPart(char: char),
-            Divider(
-              color: Colors.black,
-            ),
-            BottomPart(char: char),
-          ],
-        );
+        if (snapshot.hasError) return Container();
+        var data = snapshot.data;
+        Character char = parseJson(data);
+
+        return char == null
+            ? Container(child: Text("NULL"))
+            : Column(
+                children: <Widget>[
+                  Expanded(child: TopPart(char: char), flex: 2),
+                  Divider(color: Colors.black),
+                  Expanded(child: BottomPart(char: char), flex: 7),
+                ],
+              );
       },
     );
   }

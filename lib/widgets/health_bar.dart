@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const int _kIndeterminateLinearDuration = 1800;
-const double _kLinearHealthProgressIndicatorHeight = 6.0;
 
 abstract class HealthProgressIndicator extends StatefulWidget {
   const HealthProgressIndicator({
@@ -81,7 +80,7 @@ class _LinearHealthProgressIndicatorState
     return Container(
       constraints: const BoxConstraints(
         minWidth: double.infinity,
-        minHeight: _kLinearHealthProgressIndicatorHeight,
+        minHeight: 17,
       ),
       child: CustomPaint(
         painter: _LinearHealthProgressIndicatorPainter(
@@ -131,27 +130,6 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
   final double healingValue;
   final double animationValue;
   final TextDirection textDirection;
-
-  static const Curve line1Head = Interval(
-    0.0,
-    750.0 / _kIndeterminateLinearDuration,
-    curve: Cubic(0.2, 0.0, 0.8, 1.0),
-  );
-  static const Curve line1Tail = Interval(
-    333.0 / _kIndeterminateLinearDuration,
-    (333.0 + 750.0) / _kIndeterminateLinearDuration,
-    curve: Cubic(0.4, 0.0, 1.0, 1.0),
-  );
-  static const Curve line2Head = Interval(
-    1000.0 / _kIndeterminateLinearDuration,
-    (1000.0 + 567.0) / _kIndeterminateLinearDuration,
-    curve: Cubic(0.0, 0.0, 0.65, 1.0),
-  );
-  static const Curve line2Tail = Interval(
-    1267.0 / _kIndeterminateLinearDuration,
-    (1267.0 + 533.0) / _kIndeterminateLinearDuration,
-    curve: Cubic(0.10, 0.0, 0.45, 1.0),
-  );
 
   @override
   void paint(Canvas canvas, Size size) {

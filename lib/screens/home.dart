@@ -12,7 +12,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(244, 235, 221, 9),
       appBar: AppBar(
-        title: Text("DnD App MockUp"),
+        backgroundColor: Color.fromRGBO(244, 235, 221, 1000),
+        title: Text("DnD App MockUp", style: TextStyle(color: Colors.black, fontFamily: "Cinzel")),
       ),
       body: CharacterScreen(),
     );

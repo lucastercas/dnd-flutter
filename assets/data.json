@@ -1,13 +1,20 @@
 {
+  "playerName": "Lucas Terças",
   "name": "Denna",
   "surname": "Kvo",
   "race": "Human",
   "class": "Bard",
+  "alignment": "Chaotic Neutral",
   "level": 2,
   "maxHealth": 10,
   "curHealth": 2,
   "healing": 4,
-  "max_magic_slot": 2,
+  "skills": ["athletics", "acrobatics", "deception"],
+  "spells": {
+    "maxSpellsSlots": 2,
+    "curSpellsSlots": 1,
+    "spells": []
+  },
   "abilities": {
     "str": {
       "value": 14,
@@ -16,12 +23,12 @@
     "dex": {
       "value": 10,
       "mod": 0
-    },                      
-    "const": {
+    },
+    "con": {
       "value": 16,
       "mod": 3
     },
-    "int": {                                                             
+    "int": {
       "value": 10,
       "mod": 0
     },
@@ -29,9 +36,9 @@
       "value": 12,
       "mod": 1
     },
-    "char": {
+    "cha": {
       "value": 18,
-      "mod":  4                                          
+      "mod": 4
     }
   }
 }
