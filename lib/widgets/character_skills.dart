@@ -1,4 +1,3 @@
-
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,13 @@ class CharacterSkills extends StatelessWidget {
     return Expanded(
       child: Column(
         children: <Widget>[
-          Text("Skill", style: TextStyle(fontWeight: FontWeight.bold)),
+          Text(
+            "Skills",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
           Container(
             height: 400,
             child: ListView.builder(

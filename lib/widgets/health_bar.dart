@@ -22,7 +22,6 @@ abstract class HealthProgressIndicator extends StatefulWidget {
   final Animation<Color> healingColor = const AlwaysStoppedAnimation<Color>(
     Color.fromRGBO(219, 174, 172, 1),
   );
-
 }
 
 class LinearHealthProgressIndicator extends HealthProgressIndicator {
@@ -136,6 +135,7 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
     final Paint bkgPaint = Paint()
       ..color = backgroundColor
       ..style = PaintingStyle.fill;
+
     canvas.drawRect(Offset.zero & size, bkgPaint);
 
     final healthPaint = Paint()
@@ -148,15 +148,7 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
 
     void drawHealthBar(double x, double width) {
       if (width <= 0.0) return;
-      double left;
-      switch (textDirection) {
-        case TextDirection.rtl:
-          left = size.width - width - x;
-          break;
-        case TextDirection.ltr:
-          left = x;
-          break;
-      }
+      double left = x;
       canvas.drawRect(
         Offset(left, 0.0) & Size(width, size.height),
         healthPaint,
@@ -165,15 +157,7 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
 
     void drawHealingBar(double x, double width) {
       if (width <= 0.0) return;
-      double left;
-      switch (textDirection) {
-        case TextDirection.rtl:
-          left = size.width - width - x;
-          break;
-        case TextDirection.ltr:
-          left = x;
-          break;
-      }
+      double left = x;
       canvas.drawRect(
         Offset(left, 0.0) & Size(width, size.height),
         healingPaint,

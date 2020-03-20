@@ -9,18 +9,10 @@
   "level": 2,
   "maxHealth": 10,
   "curHealth": 2,
-  "proficiencyBonus": 2,
+  "tempHealth": 3,
   "healing": 4,
-  "proficiencies": ["str", "con"],
+  "proficiencyBonus": 2,
   "passivePerception": 16,
-  "savingThrows": {
-    "Strenght": { "value": 5, "proficient": true },
-    "Dexterity": { "value": -1, "proficient": false },
-    "Constitution": { "value": 4, "proficient": true },
-    "Intelligence": { "value": 0, "proficient": false },
-    "Wisdom": { "value": 2, "proficient": false },
-    "Charisma": { "value": 2, "proficient": false }
-  },
   "skills": {
     "Acrobatics": { "value": -1, "ability": "dex", "proficient": false },
     "Animal Handling": { "value": 1, "ability": "wis", "proficient": false },
@@ -58,30 +50,39 @@
       "Blade Ward"
     ]
   },
+  "proficiencies": ["str", "con"],
+  "savingThrows": {
+    "Strenght": { "value": 5, "proficient": true },
+    "Constitution": { "value": 4, "proficient": true },
+    "Dexterity": { "value": -1, "proficient": false },
+    "Charisma": { "value": 2, "proficient": false },
+    "Intelligence": { "value": 0, "proficient": false },
+    "Wisdom": { "value": 2, "proficient": false }
+  },
   "abilities": {
     "str": {
-      "value": 14,
-      "mod": 2
-    },
-    "dex": {
-      "value": 10,
-      "mod": 0
-    },
-    "con": {
       "value": 16,
       "mod": 3
     },
+    "con": {
+      "value": 15,
+      "mod": 2
+    },
+    "dex": {
+      "value": 9,
+      "mod": -1
+    },
+    "cha": {
+      "value": 14,
+      "mod": 2
+    },
     "int": {
-      "value": 10,
+      "value": 11,
       "mod": 0
     },
     "wis": {
-      "value": 12,
+      "value": 13,
       "mod": 1
-    },
-    "cha": {
-      "value": 18,
-      "mod": 4
     }
   }
 }

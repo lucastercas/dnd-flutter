@@ -18,20 +18,7 @@ class AbilitiesTabView extends StatelessWidget {
         Container(
           padding: EdgeInsets.only(top: 8),
           height: 108,
-          child: ListView.builder(
-            physics: BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: char.abilities.length,
-            itemBuilder: (BuildContext context, int index) {
-              String abilityName = char.abilities.keys.elementAt(index);
-              var curAbility = char.abilities[abilityName];
-              return AbilityWidget(
-                mod: curAbility["mod"],
-                value: curAbility["value"],
-                name: abilityName,
-              );
-            },
-          ),
+          child: _buildAbilities(),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -42,11 +29,29 @@ class AbilitiesTabView extends StatelessWidget {
         ),
         Row(
           children: <Widget>[
-            CharacterSavingThrows(),
+            CharacterSavingThrows(char: char),
             CharacterSkills(char: char),
           ],
         ),
       ],
+    );
+  }
+
+  ListView _buildAbilities() {
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      scrollDirection: Axis.horizontal,
+      itemCount: char.abilities.length,
+      itemBuilder: (BuildContext context, int index) {
+        String abilityName = char.abilities.keys.elementAt(index);
+        var curAbility = char.abilities[abilityName];
+        return AbilityWidget(
+          mod: curAbility["mod"],
+          value: curAbility["value"],
+          name: abilityName,
+          proficient: char.proficiencies.contains(abilityName),
+        );
+      },
     );
   }
 }

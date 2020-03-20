@@ -35,20 +35,20 @@ Path makePath(Size size) {
   return path;
 }
 
-class ArmourPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..color = Colors.black;
-    Path path = makePath(size);
-    canvas.drawPath(path, paint);
-  }
+// class ArmourPainter extends CustomPainter {
+//   @override
+//   void paint(Canvas canvas, Size size) {
+//     Paint paint = Paint()
+//       ..style = PaintingStyle.stroke
+//       ..strokeWidth = 3
+//       ..color = Colors.black;
+//     Path path = makePath(size);
+//     canvas.drawPath(path, paint);
+//   }
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
+//   @override
+//   bool shouldRepaint(CustomPainter oldDelegate) => true;
+// }
 
 class ArmourClipper extends CustomClipper<Path> {
   @override
@@ -67,29 +67,28 @@ class Armour extends StatelessWidget {
     return Container(
       height: 30,
       width: 30,
-      child: Stack(
-        children: <Widget>[
-          CustomPaint(
-            painter: ArmourPainter(),
-            child: Container(height: 30),
-          ),
-          ClipPath(
-            clipper: ArmourClipper(),
-            child: Container(
-              alignment: Alignment(0, 0),
-              color: Colors.grey[600],
-              child: Text(
-                "${armourValue}",
-                style: TextStyle(
-                  color: Colors.white,
-                  
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+      child: ClipPath(
+        clipper: ArmourClipper(),
+        child: Container(
+          alignment: Alignment(0, 0),
+          color: Colors.black,
+          child: Text(
+            "${armourValue}",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
             ),
-          )
-        ],
+          ),
+        ),
       ),
+      // child: Stack(
+      //   children: <Widget>[
+      //     // CustomPaint(
+      //     //   painter: ArmourPainter(),
+      //     //   child: Container(height: 30),
+      //     // ),
+      //   ],
+      // ),
     );
   }
 }

@@ -15,24 +15,33 @@ class ValueAbility extends StatelessWidget {
       bottom: 0,
       child: Container(
         alignment: Alignment(0, 0),
-        decoration: BoxDecoration(
-          color: Colors.grey[350],
-          shape: BoxShape.circle,
-          border: Border.all(
-            width: 2,
-            color: Colors.grey[700],
-          ),
-        ),
-        child: Text(
-          "${this.value}",
-          style: TextStyle(
-            color: Colors.black,
-            
-            fontWeight: FontWeight.w500,
-          ),
-        ),
         height: 40,
         width: 60,
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(224, 215, 201, 1),
+          shape: BoxShape.circle,
+          border: Border.all(
+            width: 1.5,
+            color: Colors.black,
+          ),
+        ),
+        child: Container(
+          height: 30,
+          alignment: Alignment(0, 0),
+          width: 50,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: Color.fromRGBO(254, 245, 231, 1),
+          ),
+          child: Text(
+            "${this.value}",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w500,
+              fontSize: 15
+            ),
+          ),
+        ),
       ),
     );
   }

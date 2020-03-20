@@ -10,6 +10,7 @@ class Character {
       this.alignment,
       this.maxHealth,
       this.curHealth,
+      this.tempHealth,
       this.healing,
       this.level,
       this.armour,
@@ -36,6 +37,7 @@ class Character {
   final int maxHealth;
   final int curHealth;
   final int healing;
+  final int tempHealth;
   final int armour;
 
   Character.fromJson(Map<String, dynamic> json)
@@ -47,9 +49,10 @@ class Character {
         race = json['race'],
         level = json['level'],
         alignment = json['alignment'],
-        maxHealth = json['maxHealth'],
         charClass = json['class'],
+        maxHealth = json['maxHealth'],
         curHealth = json['curHealth'],
+        tempHealth = json['tempHealth'],
         healing = json['healing'],
         proficiencies = json['proficiencies'],
         savingThrows = json['savingThrows'],
@@ -65,6 +68,7 @@ class Character {
         'class': charClass,
         'maxHealth': maxHealth,
         'curHealth': curHealth,
+        'tempHealth': tempHealth,
         'savingThrows': savingThrows,
         'healing': healing,
         'proficiencies': proficiencies,

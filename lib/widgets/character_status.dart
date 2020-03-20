@@ -86,9 +86,31 @@ class _CharacterStatusState extends State<CharacterStatus> {
           fit: FlexFit.loose,
           child: Column(
             children: <Widget>[
-              Text(
-                "${widget.char.curHealth + widget.char.healing} / ${widget.char.maxHealth}",
-                style: _textStyle,
+              Row(
+                children: <Widget>[
+                  Text(
+                    "${widget.char.curHealth}",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  widget.char.healing != 0 ? Text(" + ") : Container(),
+                  widget.char.healing != 0
+                      ? Text(
+                          "${widget.char.healing}",
+                          style: TextStyle(color: Colors.green),
+                        )
+                      : Container(),
+                  widget.char.healing != 0 ? Text(" + ") : Container(),
+                  widget.char.healing != 0
+                      ? Text(
+                          "${widget.char.tempHealth}",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      : Container(),
+                  Text(
+                    " / ${widget.char.maxHealth}",
+                    style: TextStyle(color: Colors.black),
+                  )
+                ],
               ),
               Container(
                 width: 230,

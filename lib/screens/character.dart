@@ -41,7 +41,7 @@ class _CharacterScreenState extends State<CharacterScreen>
             SliverPersistentHeader(
               floating: true,
               pinned: true,
-              delegate: _SliverCharacterHeaderDelegate(
+              delegate: _SliverCharacterStatusDelegate(
                 minHeight: 75,
                 maxHeight: 150,
                 char: char,
@@ -75,8 +75,8 @@ class _CharacterScreenState extends State<CharacterScreen>
   }
 }
 
-class _SliverCharacterHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _SliverCharacterHeaderDelegate({
+class _SliverCharacterStatusDelegate extends SliverPersistentHeaderDelegate {
+  _SliverCharacterStatusDelegate({
     @required this.minHeight,
     @required this.maxHeight,
     @required this.char,
@@ -107,7 +107,7 @@ class _SliverCharacterHeaderDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(_SliverCharacterHeaderDelegate oldDelegate) {
+  bool shouldRebuild(_SliverCharacterStatusDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight;
   }
