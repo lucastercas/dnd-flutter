@@ -7,9 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Cinzel',
-      ),
+      theme: ThemeData(fontFamily: 'Cinzel'),
       title: 'D&D App Mockup',
       home: Scaffold(
         appBar: AppBar(

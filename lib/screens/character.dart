@@ -39,6 +39,7 @@ class _CharacterScreenState extends State<CharacterScreen>
           slivers: <Widget>[
             // Character Status
             SliverPersistentHeader(
+              floating: true,
               pinned: true,
               delegate: _SliverCharacterHeaderDelegate(
                 minHeight: 75,

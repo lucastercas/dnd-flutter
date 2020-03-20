@@ -1,5 +1,9 @@
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/ability.dart';
+import 'package:dnd/widgets/character_passive_perception.dart';
+import 'package:dnd/widgets/character_proficiency_bonus.dart';
+import 'package:dnd/widgets/character_saving_throws.dart';
+import 'package:dnd/widgets/character_skills.dart';
 import 'package:flutter/material.dart';
 
 class AbilitiesTabView extends StatelessWidget {
@@ -32,92 +36,14 @@ class AbilitiesTabView extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 2),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text(
-                      "${char.proficiencyBonus}",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 22),
-                    ),
-                  ),
-                ),
-                Column(
-                  children: <Widget>[
-                    Text("Proficiency"),
-                    Text("Bonus"),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(width: 2),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      "${char.proficiencyBonus}",
-                    ),
-                  ),
-                ),
-                Column(
-                  children: <Widget>[
-                    Text("Passive"),
-                    Text("Perception"),
-                  ],
-                ),
-              ],
-            ),
+            CharacterProficiencyBonus(char: char),
+            CharacterPassivePerception(char: char),
           ],
         ),
         Row(
           children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Text("Saving Throws"),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Text("Skill", style: TextStyle(fontWeight: FontWeight.bold)),
-                  Container(
-                    height: 400,
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
-                      itemCount: char.skills.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        String skillName = char.skills.keys.elementAt(index);
-                        Map<String, dynamic> curSkill = char.skills[skillName];
-                        return Container(
-                          child: Text(
-                            "${curSkill["value"]} $skillName (${curSkill['ability']})",
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: curSkill["proficient"]
-                                  ? FontWeight.bold
-                                  : FontWeight.normal,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  )
-                ],
-              ),
-            ),
+            CharacterSavingThrows(),
+            CharacterSkills(char: char),
           ],
         ),
       ],

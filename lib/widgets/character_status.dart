@@ -51,11 +51,12 @@ class _CharacterStatusState extends State<CharacterStatus> {
                     "${widget.char.race} ${widget.char.charClass} - ${widget.char.alignment}",
                     style: _textStyle,
                   )
-                : Container(height: 0,),
-            Divider(color: Colors.black, height: widget.expanded ? 3 : 0,),
+                : Container(
+                    height: 0,
+                  ),
+            widget.expanded ? Divider(color: Colors.black) : Container(),
             _buildHealth(),
-            Divider(color: Colors.black, height: widget.expanded ? 3 : 1,),
-            // Buttons
+            widget.expanded ? Divider(color: Colors.black) : Container(),
             _buildButtons(),
           ],
         ),
