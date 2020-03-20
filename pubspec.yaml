@@ -30,7 +30,8 @@ flutter:
 
   assets:
    - assets/images/
-   - assets/data.json
+   - assets/spells.json
+   - assets/weapons.json
    - assets/denna.json
 
   fonts:

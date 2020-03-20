@@ -1,4 +1,22 @@
 class Character {
+  Character(
+      this.name,
+      this.surname,
+      this.abilities,
+      this.spells,
+      this.skills,
+      this.race,
+      this.charClass,
+      this.alignment,
+      this.maxHealth,
+      this.curHealth,
+      this.healing,
+      this.level,
+      this.armour,
+      this.proficiencies,
+      this.proficiencyBonus,
+      this.savingThrows);
+
   final String name;
   final String surname;
 
@@ -6,30 +24,19 @@ class Character {
   final String race;
   final String charClass;
 
+  final List<dynamic> proficiencies;
   final Map<String, dynamic> abilities;
+  final int proficiencyBonus;
   final Map<String, dynamic> spells;
-  final List<dynamic> skills;
+  final Map<String, dynamic> skills;
+  final Map<String, dynamic> savingThrows;
 
   final String alignment;
 
   final int maxHealth;
   final int curHealth;
   final int healing;
-
-  Character(
-    this.name,
-    this.surname,
-    this.abilities,
-    this.spells,
-    this.skills,
-    this.race,
-    this.charClass,
-    this.alignment,
-    this.maxHealth,
-    this.curHealth,
-    this.healing,
-    this.level,
-  );
+  final int armour;
 
   Character.fromJson(Map<String, dynamic> json)
       : name = json['name'],
@@ -43,7 +50,11 @@ class Character {
         maxHealth = json['maxHealth'],
         charClass = json['class'],
         curHealth = json['curHealth'],
-        healing = json['healing'];
+        healing = json['healing'],
+        proficiencies = json['proficiencies'],
+        savingThrows = json['savingThrows'],
+        armour = json['armour'],
+        proficiencyBonus = json['proficiencyBonus'];
 
   Map<String, dynamic> toJson() => {
         'name': name,
@@ -54,7 +65,11 @@ class Character {
         'class': charClass,
         'maxHealth': maxHealth,
         'curHealth': curHealth,
+        'savingThrows': savingThrows,
         'healing': healing,
+        'proficiencies': proficiencies,
         'abilities': abilities,
+        'armour': armour,
+        'proficiencyBonus': proficiencyBonus,
       };
 }
