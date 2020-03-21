@@ -6,38 +6,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 
-class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
+class CharacterFetchBloc
+    extends Bloc<CharacterFetchEvent, CharacterFetchState> {
   final CharacterRepository charRepo;
 
-  CharacterBloc({
+  CharacterFetchBloc({
     this.charRepo,
   }) : assert(charRepo != null);
 
   @override
-  CharacterState get initialState {
-    return CharacterUninitializedState();
-  }
+  CharacterFetchState get initialState => CharacterUninitializedState();
 
   @override
-  Stream<CharacterState> mapEventToState(
-    CharacterEvent event,
+  Stream<CharacterFetchState> mapEventToState(
+    CharacterFetchEvent event,
   ) async* {
     yield CharacterFetchingState();
     Character char;
 
-    try {
-      if (event is CharacterSelectedEvent) {
+    if (event is CharacterSelectedEvent) {
+      try {
         char = await charRepo.fetchCharacter(
           event.filePath,
           event.charName,
         );
+        if (char == null)
+          yield CharacterEmptyState();
+        else
+          yield CharacterFetchedState(char: char);
+      } catch (_) {
+        yield CharacterErrorState();
       }
-      if (char == null)
-        yield CharacterEmptyState();
-      else
-        yield CharacterFetchedState(char: char);
-    } catch (_) {
-      yield CharacterErrorState();
     }
   }
 }

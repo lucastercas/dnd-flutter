@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 class BlackButton extends StatelessWidget {
   BlackButton({
     this.text,
+    this.onPressed,
   });
 
   final String text;
+  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(1),
+      padding: EdgeInsets.all(1),
       child: SizedBox(
         height: 20,
         child: MaterialButton(
@@ -22,7 +24,7 @@ class BlackButton extends StatelessWidget {
               textBaseline: TextBaseline.alphabetic,
             ),
           ),
-          onPressed: () {},
+          onPressed: onPressed,
           color: Colors.black,
         ),
       ),

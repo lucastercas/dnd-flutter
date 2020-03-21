@@ -1,4 +1,4 @@
-import 'package:dnd/blocs/char_bloc.dart';
+import 'package:dnd/blocs/char_fetching_bloc.dart';
 import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
@@ -7,12 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CharacterAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final charBloc = BlocProvider.of<CharacterBloc>(
+    final charBloc = BlocProvider.of<CharacterFetchBloc>(
       context,
     );
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterState state) {
+      builder: (BuildContext context, CharacterFetchState state) {
         if (state is CharacterFetchedState) {
           final Character char = state.char;
           return ClipRRect(

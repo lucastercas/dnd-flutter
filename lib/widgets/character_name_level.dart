@@ -1,4 +1,4 @@
-import 'package:dnd/blocs/char_bloc.dart';
+import 'package:dnd/blocs/char_fetching_bloc.dart';
 import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,11 @@ const TextStyle _textStyle = TextStyle(
 class CharacterLevelName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CharacterBloc charBloc =
-        BlocProvider.of<CharacterBloc>(context);
+    final CharacterFetchBloc charBloc =
+        BlocProvider.of<CharacterFetchBloc>(context);
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterState state) {
+      builder: (BuildContext context, CharacterFetchState state) {
         if (state is CharacterFetchedState) {
           final Character char = state.char;
           return Column(

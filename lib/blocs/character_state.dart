@@ -1,17 +1,17 @@
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 
-abstract class CharacterState {}
+abstract class CharacterFetchState {}
 
-class CharacterUninitializedState extends CharacterState {}
+class CharacterUninitializedState extends CharacterFetchState {}
 
-class CharacterFetchingState extends CharacterState {}
+class CharacterFetchingState extends CharacterFetchState {}
 
-class CharacterFetchedState extends CharacterState {
+class CharacterFetchedState extends CharacterFetchState {
   final Character char;
   CharacterFetchedState({@required this.char});
 }
 
-class CharacterErrorState extends CharacterState {}
+class CharacterErrorState extends CharacterFetchState {}
 
-class CharacterEmptyState extends CharacterState {}
+class CharacterEmptyState extends CharacterFetchState {}

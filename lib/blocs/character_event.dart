@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-abstract class CharacterEvent {}
+abstract class CharacterFetchEvent {}
 
-class CharacterSelectedEvent extends CharacterEvent {
+class CharacterSelectedEvent extends CharacterFetchEvent {
   final String filePath;
   final String charName;
+
   CharacterSelectedEvent({
     @required this.filePath,
     @required this.charName,

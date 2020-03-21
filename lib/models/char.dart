@@ -23,24 +23,24 @@ class Character {
   final String surname;
   final String avatar;
 
-  final int level;
+  int level;
   final String race;
   final String charClass;
 
-  final List<dynamic> proficiencies;
-  final Map<String, dynamic> abilities;
-  final int proficiencyBonus;
-  final Map<String, dynamic> spells;
-  final Map<String, dynamic> skills;
-  final Map<String, dynamic> savingThrows;
+  List<dynamic> proficiencies;
+  Map<String, dynamic> abilities;
+  int proficiencyBonus;
+  Map<String, dynamic> spells;
+  Map<String, dynamic> skills;
+  Map<String, dynamic> savingThrows;
 
   final String alignment;
 
-  final int maxHealth;
-  final int curHealth;
-  final int healing;
-  final int tempHealth;
-  final int armour;
+  int maxHealth;
+  int curHealth;
+  int healing;
+  int tempHealth;
+  int armour;
 
   Character.fromJson(Map<String, dynamic> json)
       : name = json['name'],
