@@ -1,37 +1,42 @@
+import 'package:dnd/blocs/char_bloc.dart';
+import 'package:dnd/blocs/player_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterPassivePerception extends StatelessWidget {
-  const CharacterPassivePerception({
-    Key key,
-    @required this.char,
-  }) : super(key: key);
-
-  final Character char;
-
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(width: 2),
-          ),
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Text(
-              "${char.proficiencyBonus}",
-            ),
-          ),
-        ),
-        Column(
-          children: <Widget>[
-            Text("Passive"),
-            Text("Perception"),
-          ],
-        ),
-      ],
+    return BlocBuilder(
+      bloc: BlocProvider.of<CharacterListingBloc>(context),
+      builder: (context, state) {
+        if (state is CharacterFetchedState) {
+          Character char = state.char;
+          return Row(
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(width: 2),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    "${char.proficiencyBonus}",
+                  ),
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Text("Passive"),
+                  Text("Perception"),
+                ],
+              ),
+            ],
+          );
+        }
+        return Container();
+      },
     );
   }
 }

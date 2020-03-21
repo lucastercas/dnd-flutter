@@ -12,9 +12,6 @@ Path makePath(Size size) {
   Offset end1 = Offset(5, 5);
   bezierTo(path, control1, end1);
 
-  // Offset control2 = Offset(5, 0);
-  // Offset end2 = Offset(size.width / 2, 0);
-  // bezierTo(path, control2, end2);
   path.lineTo(size.width / 2, 0);
 
   path.lineTo(size.width - 5, 5);
@@ -92,14 +89,3 @@ class Armour extends StatelessWidget {
     );
   }
 }
-
-// SizedBox _buildArmour() {
-//   return SizedBox(
-//     height: 20,
-//     width: 30,
-//     child: Text(
-//       "${widget.char.curHealth} + ${widget.char.healing}",
-//       style: _textStyle,
-//     ),
-//   );
-// }

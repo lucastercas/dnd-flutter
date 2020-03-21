@@ -23,7 +23,6 @@ class CharacterListingBloc
   Stream<CharacterListingState> mapEventToState(
     CharacterListingEvent event,
   ) async* {
-    print("Mapping event to state");
     yield CharacterFetchingState();
     Character char;
 
