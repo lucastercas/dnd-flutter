@@ -5,11 +5,12 @@ import 'package:dnd/blocs/character_event.dart';
 import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/models/char.dart';
+import 'package:dnd/services/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterFetchBloc extends Bloc<CharacterEvent, CharacterState> {
   final CharacterRepository charRepo;
-  Character blocChar;
+  StreamSubscription subscription;
 
   CharacterFetchBloc({
     this.charRepo,
@@ -22,18 +23,22 @@ class CharacterFetchBloc extends Bloc<CharacterEvent, CharacterState> {
   Stream<CharacterState> mapEventToState(
     CharacterEvent event,
   ) async* {
-    yield Initial();
-    print("Mapping char fetching to new state");
-    print("$event");
     if (event is CharacterSelectedEvent) {
-      Character char = await charRepo.fetchCharacter(
-        event.filePath,
-        event.charName,
-      );
-      yield Fetched(char: char);
-    } else if (event is CharacterUpdateEvent) {
-      
+      subscription?.cancel();
+      subscription = charRepo.getCharacter(event.charName).listen((event) {
+        print(event);
+      });
     }
+    // yield Initial();
+    // print("Mapping char fetching to new state");
+    // print("$event");
+    // if (event is CharacterSelectedEvent) {
+    //   Character char = await charRepo.fetchCharacter(
+    //     event.filePath,
+    //     event.charName,
+    //   );
+    //   yield Fetched(char: char);
+    // } else if (event is CharacterUpdateEvent) {}
 
     // if (event is CharacterSelectedEvent) {
     //   try {

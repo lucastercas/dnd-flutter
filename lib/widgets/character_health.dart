@@ -1,4 +1,4 @@
-import 'package:dnd/blocs/char_fetching_bloc.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/health_bar.dart';

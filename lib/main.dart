@@ -4,6 +4,7 @@ import 'package:dnd/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   CharacterRepository _repo = CharacterRepository();
   runApp(MyApp(charRepo: _repo));
 }

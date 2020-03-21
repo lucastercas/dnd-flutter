@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreProvider {
   Firestore _firestore = Firestore.instance;
+  // const FirestoreProvider(){
+    // _firestore = Firestore.instance;
+  // }
 
   Stream<QuerySnapshot> getCollectionStream(String col) {
     return _firestore.collection(col).snapshots();

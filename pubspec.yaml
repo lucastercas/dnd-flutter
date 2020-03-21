@@ -1,5 +1,5 @@
 name: dnd
-description: A new Flutter project.
+description: D&D App Mockup
 
 version: 1.0.0+1
 
@@ -28,7 +28,8 @@ flutter:
 
   assets:
    - assets/images/
-   - assets/
+   - assets/seeds/
+   - assets/fonts/
 
   fonts:
     - family: Cinzel

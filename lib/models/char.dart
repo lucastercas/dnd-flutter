@@ -1,6 +1,6 @@
-import 'package:dnd/blocs/character_event.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Character extends CharacterEvent {
+class Character {
   Character(
     this.name,
     this.surname,
@@ -22,22 +22,22 @@ class Character extends CharacterEvent {
     this.savingThrows,
   );
 
-  final String name;
-  final String surname;
-  final String avatar;
+  String name;
+  String surname;
+  String avatar;
 
-  final int level;
-  final String race;
-  final String charClass;
+  int level;
+  String race;
+  String charClass;
 
-  final List<dynamic> proficiencies;
-  final Map<String, dynamic> abilities;
-  final int proficiencyBonus;
-  final Map<String, dynamic> spells;
-  final Map<String, dynamic> skills;
-  final Map<String, dynamic> savingThrows;
+  List<dynamic> proficiencies;
+  Map<dynamic, dynamic> abilities;
+  int proficiencyBonus;
+  Map<dynamic, dynamic> spells;
+  Map<dynamic, dynamic> skills;
+  Map<dynamic, dynamic> savingThrows;
 
-  final String alignment;
+  String alignment;
 
   int maxHealth;
   int curHealth;
@@ -56,7 +56,27 @@ class Character extends CharacterEvent {
     this.healing += amount;
   }
 
-  Character.fromJson(Map<String, dynamic> json)
+  Character.fromSnapshot(DocumentSnapshot snapshot)
+      : name = snapshot['name'],
+        surname = snapshot['surname'],
+        abilities = snapshot['abilities'],
+        skills = snapshot['skills'],
+        avatar = snapshot['avatar'],
+        spells = snapshot['spells'],
+        race = snapshot['race'],
+        level = snapshot['level'],
+        alignment = snapshot['alignment'],
+        charClass = snapshot['class'],
+        maxHealth = snapshot['maxHealth'],
+        curHealth = snapshot['curHealth'],
+        tempHealth = snapshot['tempHealth'],
+        healing = snapshot['healing'],
+        proficiencies = snapshot['proficiencies'],
+        savingThrows = snapshot['savingThrows'],
+        armour = snapshot['armour'],
+        proficiencyBonus = snapshot['proficiencyBonus'];
+
+  Character.fromJson(Map<dynamic, dynamic> json)
       : name = json['name'],
         surname = json['surname'],
         abilities = json['abilities'],

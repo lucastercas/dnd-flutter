@@ -32,6 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    _charListingBloc.close();
+    super.dispose();
+  }
 }
 
 class HomeScreenWidget extends StatelessWidget {
@@ -40,13 +46,13 @@ class HomeScreenWidget extends StatelessWidget {
     final charListingBloc = BlocProvider.of<CharacterListingBloc>(
       context,
     );
-    charListingBloc.add(CharacterListingEvent(
-      filePath: "assets/characters.json",
-    ));
+    charListingBloc.add(StartFetchEvent());
     return BlocBuilder(
       bloc: charListingBloc,
       builder: (BuildContext context, CharacterListingState state) {
-        if (state is CharacterListingFetchedState) {
+        if (state is InitialState) {
+          return Container(child: Text("$state."));
+        } else if (state is UpdateState) {
           List<Character> characters = state.characters;
           return ListView.builder(
             itemCount: characters.length,
@@ -55,9 +61,11 @@ class HomeScreenWidget extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/character', arguments: {
-                      "charName": characters[index].name,
-                    });
+                    Navigator.pushNamed(
+                      context,
+                      '/character',
+                      arguments: {"charName": characters[index].name},
+                    );
                   },
                   child: Container(
                     padding: EdgeInsets.all(8.0),
@@ -86,7 +94,6 @@ class HomeScreenWidget extends StatelessWidget {
             },
           );
         }
-        return Container(child: Text("$state"));
       },
     );
   }

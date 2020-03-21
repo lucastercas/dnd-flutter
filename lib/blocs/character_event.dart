@@ -8,11 +8,6 @@ abstract class CharacterEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CharacterUpdateEvent extends CharacterEvent {
-  final Character char;
-  CharacterUpdateEvent({@required this.char});
-}
-
 class CharacterSelectedEvent extends CharacterEvent {
   final String filePath;
   final String charName;
@@ -21,4 +16,9 @@ class CharacterSelectedEvent extends CharacterEvent {
     @required this.filePath,
     @required this.charName,
   });
+}
+
+class CharacterUpdateEvent extends CharacterEvent {
+  final Character char;
+  CharacterUpdateEvent({@required this.char});
 }
