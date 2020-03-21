@@ -1,0 +1,22 @@
+{
+  "Friendship": {
+    "school": "Enchantment",
+    "image": "F"
+  },
+  "Animate Object": {
+    "school": "Transmutation",
+    "image": "AO"
+  },
+  "Bestow Curse": {
+    "school": "Necromancy",
+    "image": "BC"
+  },
+  "Blade Ward": {
+    "school": "Abjuration",
+    "image": "BW"
+  },
+  "Blindness/Deafness": {
+    "school": "Necromancy",
+    "image": "B/D"
+  }
+}
