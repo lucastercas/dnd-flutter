@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/char_bloc.dart';
-import 'package:dnd/blocs/character_listing_event.dart';
+import 'package:dnd/blocs/character_event.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/widgets/abilities_tab_view.dart';
 import 'package:dnd/widgets/app_bar.dart';
@@ -9,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterScreen extends StatefulWidget {
+  static const routeName = '/character';
   final CharacterRepository charRepo;
-  final String charName;
-  CharacterScreen({this.charRepo, this.charName});
+  CharacterScreen({
+    @required this.charRepo,
+  });
   @override
   _CharacterScreenState createState() => _CharacterScreenState();
 }
@@ -19,7 +21,7 @@ class CharacterScreen extends StatefulWidget {
 class _CharacterScreenState extends State<CharacterScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
-  CharacterListingBloc _charListingBloc;
+  CharacterBloc _charBloc;
 
   @override
   void initState() {
@@ -29,25 +31,27 @@ class _CharacterScreenState extends State<CharacterScreen>
       length: 3,
       vsync: this,
     );
-    _charListingBloc = CharacterListingBloc(charRepo: widget.charRepo);
+    _charBloc = CharacterBloc(charRepo: widget.charRepo);
   }
 
   @override
   void dispose() {
     _tabController.dispose();
-    _charListingBloc.close();
+    _charBloc.close();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final dynamic args = ModalRoute.of(context).settings.arguments;
+    final String charName = args["charName"];
     return BlocProvider(
-      create: (BuildContext context) => _charListingBloc,
+      create: (BuildContext context) => _charBloc,
       child: Scaffold(
         appBar: MyAppBar(),
         body: CharacterScreenWidget(
           tabController: _tabController,
-          charName: widget.charName,
+          charName: charName,
         ),
       ),
     );
@@ -60,16 +64,21 @@ class CharacterScreenWidget extends StatelessWidget {
     @required TabController tabController,
     @required String charName,
   })  : _tabController = tabController,
+        charName = charName,
         super(key: key);
 
   final TabController _tabController;
-  final String charName = "oi";
+  final String charName;
 
   @override
   Widget build(BuildContext context) {
-    final CharacterListingBloc charBloc =
-        BlocProvider.of<CharacterListingBloc>(context);
-    charBloc.add(CharacterSelectedEvent(filePath: "assets/$charName.json"));
+    final CharacterBloc charBloc = BlocProvider.of<CharacterBloc>(
+      context,
+    );
+    charBloc.add(CharacterSelectedEvent(
+      filePath: "assets/characters.json",
+      charName: charName,
+    ));
     return CustomScrollView(
       slivers: <Widget>[
         SliverPersistentHeader(
