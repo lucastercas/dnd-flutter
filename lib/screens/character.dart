@@ -1,13 +1,16 @@
-import 'dart:math' as math;
-
+import 'package:dnd/blocs/char_bloc.dart';
+import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/services/json_parser.dart';
 import 'package:dnd/widgets/abilities_tab_view.dart';
 import 'package:dnd/widgets/character_screen_tabs.dart';
-import 'package:dnd/widgets/character_status.dart';
+import 'package:dnd/widgets/character_screen_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterScreen extends StatefulWidget {
+  final CharacterRepository charRepo;
+  CharacterScreen({this.charRepo});
   @override
   _CharacterScreenState createState() => _CharacterScreenState();
 }
@@ -15,6 +18,7 @@ class CharacterScreen extends StatefulWidget {
 class _CharacterScreenState extends State<CharacterScreen>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
+  CharacterListingBloc _charListingBloc;
 
   @override
   void initState() {
@@ -24,10 +28,44 @@ class _CharacterScreenState extends State<CharacterScreen>
       length: 3,
       vsync: this,
     );
+    _charListingBloc = CharacterListingBloc(charRepo: widget.charRepo);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (BuildContext context) => _charListingBloc,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color.fromRGBO(244, 235, 221, 1000),
+          title: Center(
+            child: Text(
+              "D&D App Mockup",
+              style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverPersistentHeader(
+              floating: true,
+              pinned: true,
+              delegate: SliverCharacterStatusDelegate(
+                minHeight: 75,
+                maxHeight: 150,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+
     return FutureBuilder(
       future: parseJson("assets/denna.json"),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -41,10 +79,10 @@ class _CharacterScreenState extends State<CharacterScreen>
             SliverPersistentHeader(
               floating: true,
               pinned: true,
-              delegate: _SliverCharacterStatusDelegate(
+              delegate: SliverCharacterStatusDelegate(
                 minHeight: 75,
                 maxHeight: 150,
-                char: char,
+                // char: char,
               ),
             ),
             // Tab Bar
@@ -72,43 +110,5 @@ class _CharacterScreenState extends State<CharacterScreen>
         );
       },
     );
-  }
-}
-
-class _SliverCharacterStatusDelegate extends SliverPersistentHeaderDelegate {
-  _SliverCharacterStatusDelegate({
-    @required this.minHeight,
-    @required this.maxHeight,
-    @required this.char,
-  });
-
-  final double minHeight;
-  final double maxHeight;
-  final Character char;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return Container(
-      color: Color.fromRGBO(244, 235, 221, 1),
-      child: CharacterStatus(
-        char: char,
-        expanded: shrinkOffset < 5,
-      ),
-    );
-  }
-
-  @override
-  double get maxExtent => math.max(maxHeight, minHeight);
-  @override
-  double get minExtent => minHeight;
-
-  @override
-  bool shouldRebuild(_SliverCharacterStatusDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight;
   }
 }
