@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 const int _kIndeterminateLinearDuration = 1800;
@@ -8,20 +9,14 @@ abstract class HealthProgressIndicator extends StatefulWidget {
     Key key,
     this.maxHealth,
     this.curHealth,
+    this.tempHealth,
     this.healing,
   }) : super(key: key);
 
   final int maxHealth;
   final int curHealth;
+  final int tempHealth;
   final int healing;
-
-  final Color backgroundColor = const Color.fromRGBO(223, 214, 199, 8);
-  final Animation<Color> healthColor = const AlwaysStoppedAnimation<Color>(
-    Color.fromRGBO(202, 46, 85, 8),
-  );
-  final Animation<Color> healingColor = const AlwaysStoppedAnimation<Color>(
-    Color.fromRGBO(219, 174, 172, 1),
-  );
 }
 
 class LinearHealthProgressIndicator extends HealthProgressIndicator {
@@ -29,13 +24,14 @@ class LinearHealthProgressIndicator extends HealthProgressIndicator {
     Key key,
     int maxHealth,
     int curHealth,
+    int tempHealth,
     int healing,
     Color backgroundColor,
-    Animation<Color> healthColor,
   }) : super(
           key: key,
           maxHealth: maxHealth,
           curHealth: curHealth,
+          tempHealth: tempHealth,
           healing: healing,
         );
 
@@ -48,10 +44,18 @@ class _LinearHealthProgressIndicatorState
     extends State<LinearHealthProgressIndicator>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
+  bool _showText;
+  Animation<Color> _healthColor = AlwaysStoppedAnimation<Color>(
+    Colors.red[300],
+  );
+  Animation<Color> _healingColor = AlwaysStoppedAnimation<Color>(
+    Colors.green[300],
+  );
 
   @override
   void initState() {
     super.initState();
+    _showText = false;
     _controller = AnimationController(
       duration: const Duration(milliseconds: _kIndeterminateLinearDuration),
       vsync: this,
@@ -76,20 +80,34 @@ class _LinearHealthProgressIndicatorState
 
   Widget _buildIndicator(BuildContext context, double animationValue,
       TextDirection textDirection) {
-    return Container(
-      constraints: const BoxConstraints(
-        minWidth: double.infinity,
-        minHeight: 17,
-      ),
-      child: CustomPaint(
-        painter: _LinearHealthProgressIndicatorPainter(
-          backgroundColor: widget.backgroundColor,
-          healthColor: widget.healthColor.value,
-          healingColor: widget.healingColor.value,
-          healthValue: (widget.curHealth / widget.maxHealth),
-          healingValue: (widget.healing / widget.maxHealth),
-          animationValue: animationValue,
-          textDirection: textDirection,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _showText = true;
+        });
+        Future.delayed(Duration(seconds: 3), () {
+          setState(() {
+            _showText = false;
+          });
+        });
+      },
+      child: Container(
+        constraints: const BoxConstraints(
+          minWidth: double.infinity,
+          minHeight: 17,
+        ),
+        child: CustomPaint(
+          painter: _LinearHealthProgressIndicatorPainter(
+            curHealth: widget.curHealth,
+            curHealthColor: _healthColor.value,
+            healing: widget.healing,
+            healingColor: _healingColor.value,
+            temp: widget.tempHealth,
+            maxHealth: widget.maxHealth,
+            animationValue: animationValue,
+            textDirection: textDirection,
+            showText: _showText,
+          ),
         ),
       ),
     );
@@ -98,10 +116,8 @@ class _LinearHealthProgressIndicatorState
   @override
   Widget build(BuildContext context) {
     final TextDirection textDirection = Directionality.of(context);
-
     // if (widget.value != null)
     //   return _buildIndicator(context, _controller.value, textDirection);
-
     return AnimatedBuilder(
       animation: _controller.view,
       builder: (BuildContext context, Widget child) {
@@ -113,21 +129,34 @@ class _LinearHealthProgressIndicatorState
 
 class _LinearHealthProgressIndicatorPainter extends CustomPainter {
   const _LinearHealthProgressIndicatorPainter({
-    this.backgroundColor,
-    this.healthColor,
+    // this.backgroundColor,
+    this.curHealth,
+    this.curHealthColor,
+    this.healing,
     this.healingColor,
-    this.healthValue,
-    this.healingValue,
+    this.maxHealth,
     this.animationValue,
+    this.showText,
+    this.temp,
+    this.tempColor,
     @required this.textDirection,
   }) : assert(textDirection != null);
+  final Color backgroundColor = const Color.fromRGBO(223, 214, 199, 8);
 
-  final Color backgroundColor;
-  final Color healthColor;
+  // final Color backgroundColor;
+  final int curHealth;
+  final Color curHealthColor;
+
+  final int healing;
   final Color healingColor;
-  final double healthValue;
-  final double healingValue;
+
+  final int temp;
+  final Color tempColor;
+
+  final int maxHealth;
+
   final double animationValue;
+  final bool showText;
   final TextDirection textDirection;
 
   @override
@@ -139,45 +168,86 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
     canvas.drawRect(Offset.zero & size, bkgPaint);
 
     final healthPaint = Paint()
-      ..color = healthColor
+      ..color = curHealthColor
       ..style = PaintingStyle.fill;
 
     final healingPaint = Paint()
       ..color = healingColor
       ..style = PaintingStyle.fill;
 
-    void drawHealthBar(double x, double width) {
+    final tempPaint = Paint()
+      ..color = Colors.grey
+      ..style = PaintingStyle.fill;
+
+    void drawBar({double begin, double width, Paint paint}) {
       if (width <= 0.0) return;
-      double left = x;
+      double left = begin;
       canvas.drawRect(
         Offset(left, 0.0) & Size(width, size.height),
-        healthPaint,
+        paint,
       );
     }
 
-    void drawHealingBar(double x, double width) {
-      if (width <= 0.0) return;
-      double left = x;
-      canvas.drawRect(
-        Offset(left, 0.0) & Size(width, size.height),
-        healingPaint,
+    void drawText(String text, Offset offset) {
+      TextSpan span = TextSpan(
+        style: TextStyle(color: Colors.white, fontFamily: 'Cinzel'),
+        text: "$text",
+      );
+      TextPainter tp = TextPainter(
+        text: span,
+        textAlign: TextAlign.left,
+        textDirection: TextDirection.ltr,
+      );
+      tp.layout();
+      tp.paint(
+        canvas,
+        offset,
       );
     }
 
-    drawHealthBar(0.0, healthValue.clamp(0.0, 1.0) * size.width as double);
-    drawHealingBar(
-      healthValue.clamp(0.0, 1.0) * size.width as double,
-      healingValue.clamp(0.0, 1.0) * size.width as double,
+    int max = math.max(maxHealth, curHealth + healing + temp);
+
+    double healthBegin = 0.0;
+    double healthSize = (curHealth / max).clamp(0.0, 1.0) * size.width;
+    drawBar(
+      begin: healthBegin,
+      width: healthSize,
+      paint: healthPaint,
     );
+
+    double healingBegin = healthBegin + healthSize;
+    double healingSize = (healing / max).clamp(0.0, 1.0) * size.width;
+    drawBar(
+      begin: healingBegin,
+      width: healingSize,
+      paint: healingPaint,
+    );
+
+    double tempBegin = healingBegin + healingSize;
+    double tempSize = (temp / max).clamp(0.0, 1.0) * size.width;
+    drawBar(
+      begin: tempBegin,
+      width: tempSize,
+      paint: tempPaint,
+    );
+
+    showText ? drawText("$curHealth", Offset(healthSize / 2, 0)) : null;
+
+    showText
+        ? drawText("$healing", Offset(healingBegin + (healingSize / 2), 0))
+        : null;
+
+    showText ? drawText("$temp", Offset(tempBegin + (tempSize / 2), 0)) : null;
   }
 
   @override
   bool shouldRepaint(_LinearHealthProgressIndicatorPainter oldPainter) {
     return oldPainter.backgroundColor != backgroundColor ||
-        oldPainter.healthColor != healthColor ||
-        oldPainter.healthValue != healthValue ||
-        oldPainter.healingValue != healingValue ||
+        oldPainter.curHealth != curHealth ||
+        oldPainter.healing != healing ||
+        oldPainter.temp != temp ||
+        oldPainter.maxHealth != maxHealth ||
         oldPainter.animationValue != animationValue ||
-        oldPainter.textDirection != textDirection;
+        oldPainter.showText != showText;
   }
 }

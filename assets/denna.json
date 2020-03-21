@@ -8,9 +8,9 @@
   "armour": 18,
   "level": 2,
   "maxHealth": 10,
-  "curHealth": 2,
+  "curHealth": 6,
   "tempHealth": 3,
-  "healing": 4,
+  "healing": 3,
   "proficiencyBonus": 2,
   "passivePerception": 16,
   "skills": {
