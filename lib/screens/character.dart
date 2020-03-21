@@ -45,10 +45,12 @@ class _CharacterScreenState extends State<CharacterScreen>
     return BlocProvider(
       create: (BuildContext context) =>
           CharacterFetchBloc(charRepo: widget.charRepo)
-            ..add(CharacterSelectedEvent(
-              filePath: "assets/characters.json",
-              charName: charName,
-            )),
+            ..add(
+              CharacterSelectedEvent(
+                filePath: "assets/characters.json",
+                charName: charName,
+              ),
+            ),
       child: Scaffold(
         appBar: MyAppBar(),
         body: CustomScrollView(
@@ -61,23 +63,23 @@ class _CharacterScreenState extends State<CharacterScreen>
                 maxHeight: 150,
               ),
             ),
-            CharacterTabs(tabController: _tabController),
-            SliverToBoxAdapter(
-              child: Container(
-                // To-Do: How to make this relative?
-                height: 600,
-                child: TabBarView(
-                  physics: BouncingScrollPhysics(),
-                  controller: _tabController,
-                  children: <Widget>[
-                    AbilitiesTabView(),
-                    // Container(color: Colors.red, height: 200),
-                    Container(color: Colors.red, height: 200),
-                    Container(color: Colors.green, height: 200),
-                  ],
-                ),
-              ),
-            ),
+            // CharacterTabs(tabController: _tabController),
+            // SliverToBoxAdapter(
+            //   child: Container(
+            //     // To-Do: How to make this relative?
+            //     height: 600,
+            //     child: TabBarView(
+            //       physics: BouncingScrollPhysics(),
+            //       controller: _tabController,
+            //       children: <Widget>[
+            //         AbilitiesTabView(),
+            //         // Container(color: Colors.red, height: 200),
+            //         Container(color: Colors.red, height: 200),
+            //         Container(color: Colors.green, height: 200),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

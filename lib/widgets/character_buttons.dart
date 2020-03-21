@@ -97,6 +97,9 @@ class _CharacterButtonsState extends State<CharacterButtons> {
               size: 12,
             ),
             onPressed: () {
+              // charBloc.add(
+              //   CharacterUpdateEvent();
+              // );
             },
           ),
           HealthButton(

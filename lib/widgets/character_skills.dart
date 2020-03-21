@@ -10,7 +10,7 @@ class CharacterSkills extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
       builder: (context, state) {
-        if (state is CharacterFetchedState) {
+        if (state is Fetched) {
           Character char = state.char;
           return Expanded(
             child: Column(

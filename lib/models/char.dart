@@ -1,38 +1,41 @@
-class Character {
+import 'package:dnd/blocs/character_event.dart';
+
+class Character extends CharacterEvent {
   Character(
-      this.name,
-      this.surname,
-      this.avatar,
-      this.abilities,
-      this.spells,
-      this.skills,
-      this.race,
-      this.charClass,
-      this.alignment,
-      this.maxHealth,
-      this.curHealth,
-      this.tempHealth,
-      this.healing,
-      this.level,
-      this.armour,
-      this.proficiencies,
-      this.proficiencyBonus,
-      this.savingThrows);
+    this.name,
+    this.surname,
+    this.avatar,
+    this.abilities,
+    this.spells,
+    this.skills,
+    this.race,
+    this.charClass,
+    this.alignment,
+    this.maxHealth,
+    this.curHealth,
+    this.tempHealth,
+    this.healing,
+    this.level,
+    this.armour,
+    this.proficiencies,
+    this.proficiencyBonus,
+    this.savingThrows,
+  );
 
   final String name;
   final String surname;
   final String avatar;
 
-  int level;
+  final int level;
   final String race;
   final String charClass;
 
-  List<dynamic> proficiencies;
-  Map<String, dynamic> abilities;
-  int proficiencyBonus;
-  Map<String, dynamic> spells;
-  Map<String, dynamic> skills;
-  Map<String, dynamic> savingThrows;
+  final List<dynamic> proficiencies;
+  final Map<String, dynamic> abilities;
+  final int proficiencyBonus;
+  final Map<String, dynamic> spells;
+  final Map<String, dynamic> skills;
+  final Map<String, dynamic> savingThrows;
 
   final String alignment;
 
@@ -41,6 +44,17 @@ class Character {
   int healing;
   int tempHealth;
   int armour;
+
+  void takeDamage(int amount) {
+    if (this.armour > 0)
+      this.armour -= amount;
+    else
+      this.curHealth -= amount;
+  }
+
+  void heal(int amount) {
+    this.healing += amount;
+  }
 
   Character.fromJson(Map<String, dynamic> json)
       : name = json['name'],

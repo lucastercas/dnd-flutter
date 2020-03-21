@@ -11,7 +11,7 @@ class CharacterAbilitiesList extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
       builder: (context, state) {
-        if (state is CharacterFetchedState) {
+        if (state is Fetched) {
           Character char = state.char;
           return Container(
             height: 108,

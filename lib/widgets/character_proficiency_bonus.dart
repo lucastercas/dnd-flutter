@@ -10,7 +10,7 @@ class CharacterProficiencyBonus extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
       builder: (context, state) {
-        if (state is CharacterFetchedState) {
+        if (state is Fetched) {
           Character char = state.char;
           return Row(
             children: <Widget>[

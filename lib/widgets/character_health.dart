@@ -16,8 +16,8 @@ class CharacterHealth extends StatelessWidget {
         BlocProvider.of<CharacterFetchBloc>(context);
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterFetchState state) {
-        if (state is CharacterFetchedState) {
+      builder: (BuildContext context, CharacterState state) {
+        if (state is Fetched) {
           final Character char = state.char;
           return Flexible(
             fit: FlexFit.loose,

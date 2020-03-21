@@ -12,8 +12,8 @@ class CharacterAvatar extends StatelessWidget {
     );
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterFetchState state) {
-        if (state is CharacterFetchedState) {
+      builder: (BuildContext context, CharacterState state) {
+        if (state is Fetched) {
           final Character char = state.char;
           return ClipRRect(
             borderRadius: BorderRadius.circular(8),

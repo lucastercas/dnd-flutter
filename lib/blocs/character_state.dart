@@ -1,17 +1,27 @@
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class CharacterFetchState {}
-
-class CharacterUninitializedState extends CharacterFetchState {}
-
-class CharacterFetchingState extends CharacterFetchState {}
-
-class CharacterFetchedState extends CharacterFetchState {
-  final Character char;
-  CharacterFetchedState({@required this.char});
+class CharacterState extends Equatable {
+  const CharacterState();
+  @override
+  List<Object> get props => [];
 }
 
-class CharacterErrorState extends CharacterFetchState {}
+class Initial extends CharacterState {}
 
-class CharacterEmptyState extends CharacterFetchState {}
+class Fetching extends CharacterState {}
+
+class Fetched extends CharacterState {
+  final Character char;
+  const Fetched({@required this.char});
+  @override
+  List<Object> get props => [char];
+}
+
+class Update extends CharacterState {
+  final Character char;
+  const Update({@required this.char});
+  @override
+  List<Object> get props => [char];
+}
