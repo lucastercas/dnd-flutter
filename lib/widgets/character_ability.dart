@@ -7,13 +7,11 @@ class AbilityWidget extends StatelessWidget {
     Key key,
     @required this.name,
     @required this.value,
-    @required this.mod,
     @required this.proficient,
   }) : super(key: key);
 
   final String name;
   final int value;
-  final int mod;
   final bool proficient;
 
   @override
@@ -22,7 +20,7 @@ class AbilityWidget extends StatelessWidget {
       padding: EdgeInsets.only(left: 4, right: 4),
       child: Stack(
         children: <Widget>[
-          ModAbility(name: name, mod: mod, proficient: proficient),
+          ModAbility(name: name, value: value, proficient: proficient),
           ValueAbility(value: value)
         ],
       ),

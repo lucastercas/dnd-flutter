@@ -36,6 +36,7 @@ class CharacterProficiencyBonus extends StatelessWidget {
             ],
           );
         }
+        return Container();
       },
     );
   }

@@ -34,6 +34,7 @@ class _CharacterScreenState extends State<CharacterScreen>
   @override
   void dispose() {
     _tabController.dispose();
+    _charListingBloc.close();
     super.dispose();
   }
 

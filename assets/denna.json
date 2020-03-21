@@ -60,29 +60,11 @@
     "Wisdom": { "value": 2, "proficient": false }
   },
   "abilities": {
-    "str": {
-      "value": 16,
-      "mod": 3
-    },
-    "con": {
-      "value": 15,
-      "mod": 2
-    },
-    "dex": {
-      "value": 9,
-      "mod": -1
-    },
-    "cha": {
-      "value": 14,
-      "mod": 2
-    },
-    "int": {
-      "value": 11,
-      "mod": 0
-    },
-    "wis": {
-      "value": 13,
-      "mod": 1
-    }
+    "str": 16,
+    "con": 15,
+    "dex": 9,
+    "cha": 14,
+    "int": 11,
+    "wis": 13
   }
 }

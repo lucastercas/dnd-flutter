@@ -24,8 +24,7 @@ class CharacterAbilitiesList extends StatelessWidget {
                 String abilityName = char.abilities.keys.elementAt(index);
                 var curAbility = char.abilities[abilityName];
                 return AbilityWidget(
-                  mod: curAbility["mod"],
-                  value: curAbility["value"],
+                  value: curAbility,
                   name: abilityName,
                   proficient: char.proficiencies.contains(abilityName),
                 );

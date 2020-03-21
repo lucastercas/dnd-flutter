@@ -1,5 +1,4 @@
 import 'package:dnd/blocs/char_bloc.dart';
-import 'package:dnd/blocs/character_listing_event.dart';
 import 'package:dnd/blocs/player_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/character_armour.dart';

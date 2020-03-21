@@ -34,7 +34,7 @@ class CharacterSavingThrows extends StatelessWidget {
                           char.savingThrows[savingThrowName];
                       return Container(
                         child: Text(
-                          "${curSavingThrow["value"]} ${savingThrowName}",
+                          "${curSavingThrow["value"]} $savingThrowName",
                           style: TextStyle(
                             fontSize: 11,
                             fontWeight: curSavingThrow["proficient"]

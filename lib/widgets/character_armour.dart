@@ -6,28 +6,14 @@ void bezierTo(Path path, Offset control, Offset end) {
 
 Path makePath(Size size) {
   Path path = Path();
-
   path.moveTo(0, 10);
-  Offset control1 = Offset(5, 10);
-  Offset end1 = Offset(5, 5);
-  bezierTo(path, control1, end1);
-
+  bezierTo(path, Offset(5, 10), Offset(5, 5));
   path.lineTo(size.width / 2, 0);
-
   path.lineTo(size.width - 5, 5);
-
-  Offset control4 = Offset(size.width - 5, 10);
-  Offset end4 = Offset(size.width, 10);
-  bezierTo(path, control4, end4);
-
-  Offset control5 = Offset(size.width - 5, size.height - 5);
-  Offset end5 = Offset(size.width / 2, size.height);
-  bezierTo(path, control5, end5);
-
-  Offset control6 = Offset(5, size.height - 5);
-  Offset end6 = Offset(0, 10);
-  bezierTo(path, control6, end6);
-
+  bezierTo(path, Offset(size.width - 5, 10), Offset(size.width, 10));
+  bezierTo(path, Offset(size.width - 5, size.height - 5),
+      Offset(size.width / 2, size.height));
+  bezierTo(path, Offset(5, size.height - 5), Offset(0, 10));
   path.close();
   return path;
 }
@@ -70,7 +56,7 @@ class Armour extends StatelessWidget {
           alignment: Alignment(0, 0),
           color: Colors.black,
           child: Text(
-            "${armourValue}",
+            "$armourValue",
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,

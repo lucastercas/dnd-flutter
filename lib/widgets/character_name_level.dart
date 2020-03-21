@@ -17,8 +17,7 @@ class CharacterLevelName extends StatelessWidget {
       bloc: charBloc,
       builder: (BuildContext context, CharacterListingState state) {
         if (state is CharacterFetchedState) {
-          final fetchedState = state as CharacterFetchedState;
-          final Character char = fetchedState.char;
+          final Character char = state.char;
           return Column(
             children: <Widget>[
               Text(char.name, style: _textStyle),

@@ -10,15 +10,14 @@ class BlackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(1.0),
+      padding: const EdgeInsets.all(1),
       child: SizedBox(
         height: 20,
         child: MaterialButton(
           child: Text(
-            this.text,
+            text,
             style: TextStyle(
               color: Colors.white,
-              
               fontSize: 12,
               textBaseline: TextBaseline.alphabetic,
             ),
