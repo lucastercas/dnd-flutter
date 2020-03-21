@@ -10,7 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterScreen extends StatefulWidget {
   final CharacterRepository charRepo;
-  CharacterScreen({this.charRepo});
+  final String charName;
+  CharacterScreen({this.charRepo, this.charName});
   @override
   _CharacterScreenState createState() => _CharacterScreenState();
 }
@@ -44,7 +45,10 @@ class _CharacterScreenState extends State<CharacterScreen>
       create: (BuildContext context) => _charListingBloc,
       child: Scaffold(
         appBar: MyAppBar(),
-        body: CharacterScreenWidget(tabController: _tabController),
+        body: CharacterScreenWidget(
+          tabController: _tabController,
+          charName: widget.charName,
+        ),
       ),
     );
   }
@@ -54,16 +58,18 @@ class CharacterScreenWidget extends StatelessWidget {
   const CharacterScreenWidget({
     Key key,
     @required TabController tabController,
+    @required String charName,
   })  : _tabController = tabController,
         super(key: key);
 
   final TabController _tabController;
+  final String charName = "oi";
 
   @override
   Widget build(BuildContext context) {
     final CharacterListingBloc charBloc =
         BlocProvider.of<CharacterListingBloc>(context);
-    charBloc.add(CharacterSelectedEvent(filePath: "assets/denna.json"));
+    charBloc.add(CharacterSelectedEvent(filePath: "assets/$charName.json"));
     return CustomScrollView(
       slivers: <Widget>[
         SliverPersistentHeader(

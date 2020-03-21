@@ -1,5 +1,6 @@
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/screens/character.dart';
+import 'package:dnd/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(fontFamily: 'Cinzel'),
       debugShowCheckedModeBanner: true,
       title: 'D&D App Mockup',
-      home: CharacterScreen(charRepo: charRepo),
-      // home: HomeScreen(),
+      // home: CharacterScreen(charRepo: charRepo),
+      home: HomeScreen(),
     );
   }
 }
