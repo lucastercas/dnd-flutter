@@ -1,5 +1,6 @@
 {
   "Denna": {
+    "avatar": "female-human-1",
     "playerName": "Laura Terças",
     "name": "Denna",
     "surname": "Arliden",
@@ -71,6 +72,7 @@
   },
   "Kvothe": {
     "playerName": "Lucas Terças",
+    "avatar": "male-human-1",
     "name": "Kvothe",
     "surname": "Arliden",
     "race": "Human",

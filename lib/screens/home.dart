@@ -37,8 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class HomeScreenWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final CharacterListingBloc charListingBloc =
-        BlocProvider.of<CharacterListingBloc>(
+    final charListingBloc = BlocProvider.of<CharacterListingBloc>(
       context,
     );
     charListingBloc.add(CharacterListingEvent(
@@ -65,8 +64,21 @@ class HomeScreenWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(224, 215, 201, 1),
                     ),
-                    child: Center(
-                      child: Text(characters[index].name),
+                    child: Row(
+                      children: <Widget>[
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: SizedBox(
+                            width: 75,
+                            height: 90,
+                            child: Image.asset(
+                              "assets/images/${characters[index].avatar}.jpg",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Text(characters[index].name),
+                      ],
                     ),
                   ),
                 ),
