@@ -1,0 +1,144 @@
+{
+  "Denna": {
+    "avatar": "female-human-1",
+    "playerName": "Laura Terças",
+    "name": "Denna",
+    "surname": "Arliden",
+    "race": "Human",
+    "class": "Bard",
+    "alignment": "Chaotic Neutral",
+    "armour": 18,
+    "level": 2,
+    "maxHealth": 10,
+    "curHealth": 6,
+    "tempHealth": 3,
+    "healing": 3,
+    "proficiencyBonus": 2,
+    "passivePerception": 16,
+    "skills": {
+      "Acrobatics": { "value": -1, "ability": "dex", "proficient": false },
+      "Animal Handling": { "value": 1, "ability": "wis", "proficient": false },
+      "Arcana": { "value": 0, "ability": "int", "proficient": false },
+      "Athletics": { "value": 5, "ability": "str", "proficient": true },
+      "Deception": { "value": 2, "ability": "cha", "proficient": false },
+      "History": { "value": 2, "ability": "int", "proficient": true },
+      "Insight": { "value": 1, "ability": "wis", "proficient": false },
+      "Intimidation": { "value": 2, "ability": "cha", "proficient": false },
+      "Investigation": { "value": 0, "ability": "int", "proficient": false },
+      "Medicine": { "value": 1, "ability": "wis", "proficient": false },
+      "Nature": { "value": 0, "ability": "int", "proficient": false },
+      "Perception": { "value": 3, "ability": "wis", "proficient": true },
+      "Perfomance": { "value": 2, "ability": "cha", "proficient": false },
+      "Persuation": { "value": 4, "ability": "cha", "proficient": true },
+      "Religion": { "value": 0, "ability": "int", "proficient": false },
+      "Sleight Of Hand": { "value": -1, "ability": "dex", "proficient": false },
+      "Stealth": { "value": -1, "ability": "dex", "proficient": false },
+      "Survival": { "value": 1, "ability": "wis", "proficient": false }
+    },
+    "items": ["Small Sword", "Dagger", "Leather Jacket"],
+    "spells": {
+      "slots": {
+        "Friendship": {
+          "used": false
+        },
+        "Animate Object": {
+          "used": true
+        }
+      },
+      "learned_spells": [
+        "Friendship",
+        "Animate Object",
+        "Bestow Curse",
+        "Blade Ward"
+      ]
+    },
+    "proficiencies": ["str", "con"],
+    "savingThrows": {
+      "Strenght": { "value": 5, "proficient": true },
+      "Constitution": { "value": 4, "proficient": true },
+      "Dexterity": { "value": -1, "proficient": false },
+      "Charisma": { "value": 2, "proficient": false },
+      "Intelligence": { "value": 0, "proficient": false },
+      "Wisdom": { "value": 2, "proficient": false }
+    },
+    "abilities": {
+      "str": 16,
+      "con": 15,
+      "dex": 9,
+      "cha": 14,
+      "int": 11,
+      "wis": 13
+    }
+  },
+  "Kvothe": {
+    "playerName": "Lucas Terças",
+    "avatar": "male-human-1",
+    "name": "Kvothe",
+    "surname": "Arliden",
+    "race": "Human",
+    "class": "Bard",
+    "alignment": "Chaotic Neutral",
+    "armour": 18,
+    "level": 2,
+    "maxHealth": 10,
+    "curHealth": 6,
+    "tempHealth": 3,
+    "healing": 3,
+    "proficiencyBonus": 2,
+    "passivePerception": 16,
+    "skills": {
+      "Acrobatics": { "value": -1, "ability": "dex", "proficient": false },
+      "Animal Handling": { "value": 1, "ability": "wis", "proficient": false },
+      "Arcana": { "value": 0, "ability": "int", "proficient": false },
+      "Athletics": { "value": 5, "ability": "str", "proficient": true },
+      "Deception": { "value": 2, "ability": "cha", "proficient": false },
+      "History": { "value": 2, "ability": "int", "proficient": true },
+      "Insight": { "value": 1, "ability": "wis", "proficient": false },
+      "Intimidation": { "value": 2, "ability": "cha", "proficient": false },
+      "Investigation": { "value": 0, "ability": "int", "proficient": false },
+      "Medicine": { "value": 1, "ability": "wis", "proficient": false },
+      "Nature": { "value": 0, "ability": "int", "proficient": false },
+      "Perception": { "value": 3, "ability": "wis", "proficient": true },
+      "Perfomance": { "value": 2, "ability": "cha", "proficient": false },
+      "Persuation": { "value": 4, "ability": "cha", "proficient": true },
+      "Religion": { "value": 0, "ability": "int", "proficient": false },
+      "Sleight Of Hand": { "value": -1, "ability": "dex", "proficient": false },
+      "Stealth": { "value": -1, "ability": "dex", "proficient": false },
+      "Survival": { "value": 1, "ability": "wis", "proficient": false }
+    },
+    "items": ["Small Sword", "Dagger", "Leather Jacket"],
+    "spells": {
+      "slots": {
+        "Friendship": {
+          "used": false
+        },
+        "Animate Object": {
+          "used": true
+        }
+      },
+      "learned_spells": [
+        "Friendship",
+        "Animate Object",
+        "Bestow Curse",
+        "Blade Ward"
+      ]
+    },
+    "proficiencies": ["str", "con"],
+    "savingThrows": {
+      "Strenght": { "value": 5, "proficient": true },
+      "Constitution": { "value": 4, "proficient": true },
+      "Dexterity": { "value": -1, "proficient": false },
+      "Charisma": { "value": 2, "proficient": false },
+      "Intelligence": { "value": 0, "proficient": false },
+      "Wisdom": { "value": 2, "proficient": false }
+    },
+    "abilities": {
+      "str": 16,
+      "con": 15,
+      "dex": 9,
+      "cha": 14,
+      "int": 11,
+      "wis": 13
+    }
+  }
+}

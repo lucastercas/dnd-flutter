@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/char_bloc.dart';
-import 'package:dnd/blocs/player_state.dart';
+import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +8,7 @@ class CharacterSkills extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder(
-      bloc: BlocProvider.of<CharacterListingBloc>(context),
+      bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (context, state) {
         if (state is CharacterFetchedState) {
           Character char = state.char;

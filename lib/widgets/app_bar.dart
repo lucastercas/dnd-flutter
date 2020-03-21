@@ -4,7 +4,7 @@ class MyAppBar extends StatelessWidget  with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Color.fromRGBO(244, 235, 221, 1000),
+      backgroundColor: Color.fromRGBO(244, 235, 221, 200),
       title: Center(
         child: Text(
           "D&D App Mockup",

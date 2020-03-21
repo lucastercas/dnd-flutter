@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/char_bloc.dart';
-import 'package:dnd/blocs/player_state.dart';
+import 'package:dnd/blocs/character_state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/character_armour.dart';
 import 'package:dnd/widgets/character_avatar.dart';
@@ -17,11 +17,11 @@ class CharacterStatus extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CharacterListingBloc charBloc =
-        BlocProvider.of<CharacterListingBloc>(context);
+    final CharacterBloc charBloc =
+        BlocProvider.of<CharacterBloc>(context);
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterListingState state) {
+      builder: (BuildContext context, CharacterState state) {
         if (state is CharacterUninitializedState ||
             state is CharacterFetchingState) {
           return Container(

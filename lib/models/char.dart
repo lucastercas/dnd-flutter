@@ -2,6 +2,7 @@ class Character {
   Character(
       this.name,
       this.surname,
+      this.avatar,
       this.abilities,
       this.spells,
       this.skills,
@@ -20,6 +21,7 @@ class Character {
 
   final String name;
   final String surname;
+  final String avatar;
 
   final int level;
   final String race;
@@ -45,6 +47,7 @@ class Character {
         surname = json['surname'],
         abilities = json['abilities'],
         skills = json['skills'],
+        avatar = json['avatar'],
         spells = json['spells'],
         race = json['race'],
         level = json['level'],
@@ -67,6 +70,7 @@ class Character {
         'level': level,
         'class': charClass,
         'maxHealth': maxHealth,
+        'avatar': avatar,
         'curHealth': curHealth,
         'tempHealth': tempHealth,
         'savingThrows': savingThrows,

@@ -24,9 +24,7 @@ flutter:
 
   assets:
    - assets/images/
-   - assets/spells.json
-   - assets/weapons.json
-   - assets/denna.json
+   - assets/
 
   fonts:
     - family: Cinzel
