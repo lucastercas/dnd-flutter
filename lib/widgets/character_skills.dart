@@ -1,5 +1,4 @@
 import 'package:dnd/blocs/character_bloc.dart';
-import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +9,7 @@ class CharacterSkills extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
       builder: (context, state) {
-        if (state is Fetched) {
+        if (state is FetchedState) {
           Character char = state.char;
           return Expanded(
             child: Column(
@@ -29,7 +28,7 @@ class CharacterSkills extends StatelessWidget {
                     itemCount: char.skills.length,
                     itemBuilder: (BuildContext context, int index) {
                       String skillName = char.skills.keys.elementAt(index);
-                      Map<String, dynamic> curSkill = char.skills[skillName];
+                      Map<dynamic, dynamic> curSkill = char.skills[skillName];
                       return Container(
                         child: Text(
                           "${curSkill["value"]} $skillName (${curSkill['ability']})",

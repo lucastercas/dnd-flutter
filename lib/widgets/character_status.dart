@@ -1,5 +1,4 @@
 import 'package:dnd/blocs/character_bloc.dart';
-import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/character_armour.dart';
 import 'package:dnd/widgets/character_avatar.dart';
@@ -25,7 +24,7 @@ class CharacterStatus extends StatelessWidget {
         print("State: $state");
         if (state is Initial) {
           return Container(child: CircularProgressIndicator());
-        } else if (state is Fetched) {
+        } else if (state is FetchedState) {
           final Character char = state.char;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

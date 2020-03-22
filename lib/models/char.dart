@@ -58,7 +58,7 @@ class Character {
   Character.fromSnapshot(DocumentSnapshot snapshot)
       : name = snapshot['name'],
         surname = snapshot['surname'],
-        _abilities = snapshot['_abilities'],
+        _abilities = snapshot['abilities'],
         skills = snapshot['skills'],
         avatar = snapshot['avatar'],
         spells = snapshot['spells'],
@@ -78,7 +78,7 @@ class Character {
   Character.fromJson(Map<dynamic, dynamic> json)
       : name = json['name'],
         surname = json['surname'],
-        _abilities = json['_abilities'],
+        _abilities = json['abilities'],
         skills = json['skills'],
         avatar = json['avatar'],
         spells = json['spells'],
@@ -109,7 +109,7 @@ class Character {
         'savingThrows': savingThrows,
         'healing': healing,
         'proficiencies': proficiencies,
-        '_abilities': _abilities,
+        'abilities': _abilities,
         'armour': armour,
         'proficiencyBonus': proficiencyBonus,
       };

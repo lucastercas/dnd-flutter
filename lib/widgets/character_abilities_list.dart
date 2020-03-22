@@ -1,5 +1,4 @@
 import 'package:dnd/blocs/character_bloc.dart';
-import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/character_ability.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ class CharacterAbilitiesList extends StatelessWidget {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
       builder: (context, state) {
-        if (state is Fetched) {
+        if (state is FetchedState) {
           Character char = state.char;
           return Container(
             height: 108,

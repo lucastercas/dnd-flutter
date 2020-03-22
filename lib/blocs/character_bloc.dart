@@ -13,20 +13,20 @@ abstract class CharacterEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CharacterSelectedEvent extends CharacterEvent {
-  final String filePath;
+class SelectedEvent extends CharacterEvent {
   final String charName;
-
-  CharacterSelectedEvent({
-    @required this.filePath,
-    @required this.charName,
-  });
+  SelectedEvent({@required this.charName});
 }
 
-class CharacterUpdateEvent extends CharacterEvent {
+class FetchedEvent extends CharacterEvent {
   final Character char;
-  CharacterUpdateEvent({@required this.char});
+  FetchedEvent({@required this.char});
 }
+
+// class CharacterUpdateEvent extends CharacterEvent {
+//   final Character char;
+//   CharacterUpdateEvent({@required this.char});
+// }
 
 abstract class CharacterState extends Equatable {
   const CharacterState();
@@ -36,11 +36,11 @@ abstract class CharacterState extends Equatable {
 
 class Initial extends CharacterState {}
 
-class Fetching extends CharacterState {}
+// class Fetching extends CharacterState {}
 
-class Fetched extends CharacterState {
+class FetchedState extends CharacterState {
   final Character char;
-  const Fetched({@required this.char});
+  const FetchedState({@required this.char});
   @override
   List<Object> get props => [char];
 }
@@ -67,11 +67,15 @@ class CharacterFetchBloc extends Bloc<CharacterEvent, CharacterState> {
   Stream<CharacterState> mapEventToState(
     CharacterEvent event,
   ) async* {
-    if (event is CharacterSelectedEvent) {
+    if (event is SelectedEvent) {
       subscription?.cancel();
-      subscription = charRepo.getCharacter(event.charName).listen((event) {
-        print(event);
-      });
+      subscription = charRepo.getCharacter(event.charName).listen(
+        (Character char) {
+          add(FetchedEvent(char: char));
+        },
+      );
+    } else if (event is FetchedEvent) {
+      yield FetchedState(char: event.char);
     }
     // yield Initial();
     // print("Mapping char fetching to new state");

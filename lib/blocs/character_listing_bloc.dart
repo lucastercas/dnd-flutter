@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
@@ -47,8 +46,7 @@ class CharacterListingBloc
           add(FetchedEvent(characters: characters));
         },
       );
-    }
-    if (event is FetchedEvent) {
+    } else if (event is FetchedEvent) {
       yield UpdateState(characters: event.characters);
     }
   }
