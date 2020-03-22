@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/character_bloc.dart';
-import 'package:dnd/blocs/character_event.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/widgets/abilities_tab_view.dart';
 import 'package:dnd/widgets/app_bar.dart';

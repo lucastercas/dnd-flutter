@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class FirestoreProvider {
   Firestore _firestore = Firestore.instance;
   // const FirestoreProvider(){
-    // _firestore = Firestore.instance;
+  // _firestore = Firestore.instance;
   // }
 
   Stream<QuerySnapshot> getCollectionStream(String col) {
@@ -18,11 +18,12 @@ class FirestoreProvider {
     return _firestore.collection(col).document(docId);
   }
 
-  Future<void> addDocument(String col, String name) async {
-    DocumentReference doc = await _firestore.collection(col).add({
-      'name': name,
-      'done': false,
-    });
+  Future<void> addDocument(
+    String col,
+    String name,
+    Map<String, dynamic> data,
+  ) async {
+    await _firestore.collection(col).document(name).setData(data);
   }
 }
 /*

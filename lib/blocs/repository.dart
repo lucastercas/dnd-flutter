@@ -31,6 +31,45 @@ class CharacterRepository {
         .transform(transformer);
   }
 
+  Future addCharacter() async {
+    await _firestoreProvider.addDocument("characters", "Lucas", {
+      "abilities": {
+        "str": 0,
+        "cha": 0,
+        "con": 0,
+        "int": 0,
+        "wis": 0,
+      },
+      "alignment": "Chaotic Good",
+      "armour": 0,
+      "avatar": "female-human-1",
+      "class": "Bard",
+      "items": [],
+      "curHealth": 0,
+      "healing": 3,
+      "level": 2,
+      "maxHealth": 10,
+      "name": "Lucas",
+      "passivePerception": 16,
+      "playerName": "Laura Terças",
+      "proficiencies": ["int", "cha"],
+      "proficiencyBonus": 2,
+      "race": "Human",
+      "savingThrows": {
+        "Charisma": {"proficient": true, "value": 2},
+        "Constitution": {"proficient": true, "value": 2},
+        "Dexterity": {"proficient": true, "value": 2},
+        "Intelligence": {"proficient": true, "value": 2},
+        "Strenght": {"proficient": true, "value": 2},
+        "Wisdom": {"proficient": true, "value": 2},
+      },
+      "skills": {},
+      "spells": {},
+      "surname": "asdfasdf",
+      "tempHealth": 3,
+    });
+  }
+
   Future<Character> fetchCharacterFromJson(String filePath, String charName) {
     return _charApiProvider.fetchCharacterFromJson(
       filePath: filePath,

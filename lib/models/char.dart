@@ -1,27 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Character {
-  Character(
-    this.name,
-    this.surname,
-    this.avatar,
-    this.abilities,
-    this.spells,
-    this.skills,
-    this.race,
-    this.charClass,
-    this.alignment,
-    this.maxHealth,
-    this.curHealth,
-    this.tempHealth,
-    this.healing,
-    this.level,
-    this.armour,
-    this.proficiencies,
-    this.proficiencyBonus,
-    this.savingThrows,
-  );
-
   String name;
   String surname;
   String avatar;
@@ -30,9 +9,9 @@ class Character {
   String race;
   String charClass;
 
-  List<dynamic> proficiencies;
-  Map<dynamic, dynamic> abilities;
   int proficiencyBonus;
+  List<dynamic> proficiencies;
+  Map<dynamic, dynamic> _abilities;
   Map<dynamic, dynamic> spells;
   Map<dynamic, dynamic> skills;
   Map<dynamic, dynamic> savingThrows;
@@ -45,21 +24,41 @@ class Character {
   int tempHealth;
   int armour;
 
-  void takeDamage(int amount) {
-    if (this.armour > 0)
-      this.armour -= amount;
-    else
-      this.curHealth -= amount;
+  Character() {
+    this._abilities = {
+      "str": 0,
+      "cha": 0,
+      "con": 0,
+      "dex": 0,
+      "int": 0,
+      "wis": 0,
+    };
+    this.proficiencies = [];
+    this.spells = {};
+    this.skills = {};
+    this.savingThrows = {};
   }
 
-  void heal(int amount) {
-    this.healing += amount;
+  void updateAbility({String name, int value}) {
+    print("Updating $name to $value");
+    this._abilities[name] = value;
   }
+
+  set strenght(int value) => this._abilities["str"] = value;
+  set charisma(int value) => this._abilities["cha"] = value;
+  set constitution(int value) => this._abilities["con"] = value;
+  set dexterity(int value) => this._abilities["dex"] = value;
+  set intelligence(int value) => this._abilities["int"] = value;
+  set wisdom(int value) => this._abilities["wid"] = value;
+
+  set abilities(Map<String, int> abilities) => this._abilities = abilities;
+
+  get abilities => this._abilities;
 
   Character.fromSnapshot(DocumentSnapshot snapshot)
       : name = snapshot['name'],
         surname = snapshot['surname'],
-        abilities = snapshot['abilities'],
+        _abilities = snapshot['_abilities'],
         skills = snapshot['skills'],
         avatar = snapshot['avatar'],
         spells = snapshot['spells'],
@@ -79,7 +78,7 @@ class Character {
   Character.fromJson(Map<dynamic, dynamic> json)
       : name = json['name'],
         surname = json['surname'],
-        abilities = json['abilities'],
+        _abilities = json['_abilities'],
         skills = json['skills'],
         avatar = json['avatar'],
         spells = json['spells'],
@@ -110,7 +109,7 @@ class Character {
         'savingThrows': savingThrows,
         'healing': healing,
         'proficiencies': proficiencies,
-        'abilities': abilities,
+        '_abilities': _abilities,
         'armour': armour,
         'proficiencyBonus': proficiencyBonus,
       };

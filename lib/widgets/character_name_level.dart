@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/character_bloc.dart';
-import 'package:dnd/blocs/character_state.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
