@@ -1,67 +1,84 @@
-import 'dart:convert';
-
-import 'package:dnd/models/char.dart';
+import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/repository.dart';
+import 'package:dnd/widgets/abilities_tab_view.dart';
+import 'package:dnd/widgets/app_bar.dart';
+import 'package:dnd/widgets/character_screen_tabs.dart';
+import 'package:dnd/widgets/character_screen_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterScreen extends StatefulWidget {
+  static const routeName = '/character';
+  final CharacterRepository charRepo;
+  CharacterScreen({
+    @required this.charRepo,
+  });
   @override
   _CharacterScreenState createState() => _CharacterScreenState();
 }
 
-class _CharacterScreenState extends State<CharacterScreen> {
-  Character parseJson(String data) {
-    if (data == null) return null;
-    Map charMap = jsonDecode(data);
-    return Character.fromJson(charMap);
+class _CharacterScreenState extends State<CharacterScreen>
+    with SingleTickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(
+      initialIndex: 0,
+      length: 3,
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: DefaultAssetBundle.of(context).loadString("assets/data.json"),
-      builder: (context, snapshot) {
-        Character char = parseJson(snapshot.data.toString());
-        return Container(
-          height: 180,
-          child: Row(
-            children: <Widget>[
-              Container(
-                width: 170,
-                height: 150,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Image.asset(
-                  "assets/images/bard.jpg",
-                  width: 170,
-                  height: 150,
+    final dynamic args = ModalRoute.of(context).settings.arguments;
+    final String charName = args["charName"];
+    return BlocProvider(
+      create: (BuildContext context) =>
+          CharacterFetchBloc(charRepo: widget.charRepo)
+            ..add(
+              SelectedEvent(charName: charName),
+            ),
+      child: Scaffold(
+        appBar: MyAppBar(),
+        body: CustomScrollView(
+          slivers: <Widget>[
+            SliverPersistentHeader(
+              floating: true,
+              pinned: true,
+              delegate: SliverCharacterStatusDelegate(
+                minHeight: 75,
+                maxHeight: 150,
+              ),
+            ),
+            CharacterTabs(tabController: _tabController),
+            SliverToBoxAdapter(
+              child: Container(
+                // To-Do: How to make this relative?
+                height: 600,
+                child: TabBarView(
+                  physics: BouncingScrollPhysics(),
+                  controller: _tabController,
+                  children: <Widget>[
+                    AbilitiesTabView(),
+                    Container(color: Colors.red, height: 100),
+                    Container(color: Colors.green, height: 100),
+                  ],
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("${char.name} ${char.surname}"),
-                  Text("${char.race} - ${char.charClass}"),
-                  Container(
-                    height: 10,
-                    width: 100,
-                    child: LinearProgressIndicator(
-                      value: 0.89,
-                      backgroundColor: Colors.amber,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                    ),
-                  ),
-                  // CircularProgressIndicator(
-                  //   backgroundColor: Colors.black,
-                  //   valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                  // )
-                ],
-              ),
-            ],
-          ),
-        );
-      },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

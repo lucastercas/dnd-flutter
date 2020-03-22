@@ -1,9 +1,0 @@
-{
-  "name": "Denna",
-  "surname": "Kvo",
-  "race": "Human",
-  "class": "Bard",
-  "max_health": 8,
-  "cur_health": 7,
-  "max_magic_slot": 2
-}
