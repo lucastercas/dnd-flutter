@@ -1,5 +1,4 @@
-import 'package:dnd/blocs/char_fetching_bloc.dart';
-import 'package:dnd/blocs/character_state.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,8 +14,8 @@ class CharacterLevelName extends StatelessWidget {
         BlocProvider.of<CharacterFetchBloc>(context);
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterFetchState state) {
-        if (state is CharacterFetchedState) {
+      builder: (BuildContext context, CharacterState state) {
+        if (state is FetchedState) {
           final Character char = state.char;
           return Column(
             children: <Widget>[

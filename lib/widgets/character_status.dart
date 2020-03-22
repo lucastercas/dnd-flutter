@@ -1,5 +1,4 @@
-import 'package:dnd/blocs/char_fetching_bloc.dart';
-import 'package:dnd/blocs/character_state.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/character_armour.dart';
 import 'package:dnd/widgets/character_avatar.dart';
@@ -21,23 +20,15 @@ class CharacterStatus extends StatelessWidget {
         BlocProvider.of<CharacterFetchBloc>(context);
     return BlocBuilder(
       bloc: charBloc,
-      builder: (BuildContext context, CharacterFetchState state) {
-        if (state is CharacterUninitializedState ||
-            state is CharacterFetchingState) {
-          return Container(
-            child: Center(child: CircularProgressIndicator()),
-          );
-        } else if (state is CharacterEmptyState) {
-          return Container(child: Text("Empty"));
-        } else if (state is CharacterErrorState) {
-          return Container(child: Text("Error"));
-        } else {
-          final fetchedState = state as CharacterFetchedState;
-          final Character char = fetchedState.char;
+      builder: (BuildContext context, CharacterState state) {
+        print("State: $state");
+        if (state is Initial) {
+          return Container(child: CircularProgressIndicator());
+        } else if (state is FetchedState) {
+          final Character char = state.char;
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              // Avatar, name and lvl part
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(

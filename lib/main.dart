@@ -1,9 +1,11 @@
 import 'package:dnd/blocs/repository.dart';
+import 'package:dnd/screens/add_character.dart';
 import 'package:dnd/screens/character.dart';
 import 'package:dnd/screens/home.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   CharacterRepository _repo = CharacterRepository();
   runApp(MyApp(charRepo: _repo));
 }
@@ -24,9 +26,9 @@ class MyApp extends StatelessWidget {
       title: 'D&D App Mockup',
       initialRoute: '/',
       routes: {
-        '/': (BuildContext context) => HomeScreen(charRepo: charRepo),
-        '/character': (BuildContext context) =>
-            CharacterScreen(charRepo: charRepo)
+        '/': (context) => HomeScreen(charRepo: charRepo),
+        '/character': (context) => CharacterScreen(charRepo: charRepo),
+        '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
       },
     );
   }

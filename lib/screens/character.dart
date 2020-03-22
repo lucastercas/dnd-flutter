@@ -1,5 +1,5 @@
-import 'package:dnd/blocs/char_fetching_bloc.dart';
-import 'package:dnd/blocs/character_event.dart';
+import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/character_bloc.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/widgets/abilities_tab_view.dart';
 import 'package:dnd/widgets/app_bar.dart';
@@ -45,10 +45,9 @@ class _CharacterScreenState extends State<CharacterScreen>
     return BlocProvider(
       create: (BuildContext context) =>
           CharacterFetchBloc(charRepo: widget.charRepo)
-            ..add(CharacterSelectedEvent(
-              filePath: "assets/characters.json",
-              charName: charName,
-            )),
+            ..add(
+              SelectedEvent(charName: charName),
+            ),
       child: Scaffold(
         appBar: MyAppBar(),
         body: CustomScrollView(
@@ -71,9 +70,8 @@ class _CharacterScreenState extends State<CharacterScreen>
                   controller: _tabController,
                   children: <Widget>[
                     AbilitiesTabView(),
-                    // Container(color: Colors.red, height: 200),
-                    Container(color: Colors.red, height: 200),
-                    Container(color: Colors.green, height: 200),
+                    Container(color: Colors.red, height: 100),
+                    Container(color: Colors.green, height: 100),
                   ],
                 ),
               ),

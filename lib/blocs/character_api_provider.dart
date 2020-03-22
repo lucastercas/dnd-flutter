@@ -3,7 +3,8 @@ import 'package:dnd/services/json_parser.dart';
 import 'package:flutter/material.dart';
 
 class CharacterApiProvider {
-  Future<Character> fetchCharacter({
+
+  Future<Character> fetchCharacterFromJson({
     @required String filePath,
     @required String charName,
   }) async {
@@ -13,12 +14,13 @@ class CharacterApiProvider {
     return char;
   }
 
-  Future<List<Character>> fetchCharacters({
+  Future<List<Character>> fetchCharactersFromJson({
     @required String filePath,
   }) async {
     Map<String, dynamic> data = await parseJson(filePath);
+    Map<String, dynamic> characters = data['characters'];
     List<Character> chars = List<Character>();
-    data.forEach((key, value) {
+    characters.forEach((key, value) {
       chars.add(Character.fromJson(value));
     });
     return chars;

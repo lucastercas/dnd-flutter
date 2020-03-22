@@ -1,38 +1,59 @@
+import 'dart:async';
+
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CharacterListingEvent {
-  final String filePath;
-  CharacterListingEvent({@required this.filePath});
+abstract class CharacterListingEvent {}
+
+class StartFetchEvent extends CharacterListingEvent {}
+
+class FetchedEvent extends CharacterListingEvent {
+  final List<Character> characters;
+  FetchedEvent({@required this.characters});
 }
 
 abstract class CharacterListingState {}
 
-class CharacterListingUninitializedState extends CharacterListingState {}
+class InitialState extends CharacterListingState {}
 
-class CharacterListingFetchedState extends CharacterListingState {
+class FetchingState extends CharacterListingState {}
+
+class UpdateState extends CharacterListingState {
   final List<Character> characters;
-  CharacterListingFetchedState({@required this.characters});
+  UpdateState({@required this.characters});
 }
 
 class CharacterListingBloc
     extends Bloc<CharacterListingEvent, CharacterListingState> {
   final CharacterRepository charRepo;
+  StreamSubscription subscription;
 
   CharacterListingBloc({this.charRepo}) : assert(charRepo != null);
 
   @override
-  CharacterListingState get initialState =>
-      CharacterListingUninitializedState();
+  CharacterListingState get initialState => InitialState();
 
   @override
   Stream<CharacterListingState> mapEventToState(
     CharacterListingEvent event,
   ) async* {
-    List<Character> characters;
-    characters = await charRepo.fetchCharacters(event.filePath);
-    yield CharacterListingFetchedState(characters: characters);
+    if (event is StartFetchEvent) {
+      subscription?.cancel();
+      subscription = charRepo.getCharacters().listen(
+        (List<Character> characters) {
+          add(FetchedEvent(characters: characters));
+        },
+      );
+    } else if (event is FetchedEvent) {
+      yield UpdateState(characters: event.characters);
+    }
+  }
+
+  @override
+  Future<void> close() {
+    subscription?.cancel();
+    return super.close();
   }
 }

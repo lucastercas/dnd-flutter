@@ -18,7 +18,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _charListingBloc = CharacterListingBloc(charRepo: widget.charRepo);
+    _charListingBloc = CharacterListingBloc(charRepo: widget.charRepo)
+      ..add(StartFetchEvent());
   }
 
   @override
@@ -27,67 +28,69 @@ class _HomeScreenState extends State<HomeScreen> {
       create: (BuildContext context) => _charListingBloc,
       child: Scaffold(
         appBar: MyAppBar(),
-        body: HomeScreenWidget(),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.pushNamed(context, '/add-character');
+          },
+        ),
         backgroundColor: Color.fromRGBO(244, 235, 221, 1),
+        body: BlocBuilder(
+          bloc: _charListingBloc,
+          builder: (BuildContext context, CharacterListingState state) {
+            if (state is InitialState) {
+              return Container(child: Text("$state."));
+            } else if (state is UpdateState) {
+              List<Character> characters = state.characters;
+              return ListView.builder(
+                itemCount: characters.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: MaterialButton(
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/character',
+                          arguments: {"charName": characters[index].name},
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          color: Color.fromRGBO(224, 215, 201, 1),
+                        ),
+                        child: Row(
+                          children: <Widget>[
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: SizedBox(
+                                width: 75,
+                                height: 90,
+                                child: Image.asset(
+                                  "assets/images/${characters[index].avatar}.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Text(characters[index].name),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }
-}
 
-class HomeScreenWidget extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    final charListingBloc = BlocProvider.of<CharacterListingBloc>(
-      context,
-    );
-    charListingBloc.add(CharacterListingEvent(
-      filePath: "assets/characters.json",
-    ));
-    return BlocBuilder(
-      bloc: charListingBloc,
-      builder: (BuildContext context, CharacterListingState state) {
-        if (state is CharacterListingFetchedState) {
-          List<Character> characters = state.characters;
-          return ListView.builder(
-            itemCount: characters.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                padding: EdgeInsets.all(8.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/character', arguments: {
-                      "charName": characters[index].name,
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(224, 215, 201, 1),
-                    ),
-                    child: Row(
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: SizedBox(
-                            width: 75,
-                            height: 90,
-                            child: Image.asset(
-                              "assets/images/${characters[index].avatar}.jpg",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        Text(characters[index].name),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
-        }
-        return Container(child: Text("$state"));
-      },
-    );
+  void dispose() {
+    _charListingBloc.close();
+    super.dispose();
   }
 }

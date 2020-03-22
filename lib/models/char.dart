@@ -1,40 +1,22 @@
-class Character {
-  Character(
-      this.name,
-      this.surname,
-      this.avatar,
-      this.abilities,
-      this.spells,
-      this.skills,
-      this.race,
-      this.charClass,
-      this.alignment,
-      this.maxHealth,
-      this.curHealth,
-      this.tempHealth,
-      this.healing,
-      this.level,
-      this.armour,
-      this.proficiencies,
-      this.proficiencyBonus,
-      this.savingThrows);
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-  final String name;
-  final String surname;
-  final String avatar;
+class Character {
+  String name;
+  String surname;
+  String avatar;
 
   int level;
-  final String race;
-  final String charClass;
+  String race;
+  String charClass;
 
-  List<dynamic> proficiencies;
-  Map<String, dynamic> abilities;
   int proficiencyBonus;
-  Map<String, dynamic> spells;
-  Map<String, dynamic> skills;
-  Map<String, dynamic> savingThrows;
+  List<dynamic> proficiencies;
+  Map<dynamic, dynamic> _abilities;
+  Map<dynamic, dynamic> spells;
+  Map<dynamic, dynamic> skills;
+  Map<dynamic, dynamic> savingThrows;
 
-  final String alignment;
+  String alignment;
 
   int maxHealth;
   int curHealth;
@@ -42,10 +24,61 @@ class Character {
   int tempHealth;
   int armour;
 
-  Character.fromJson(Map<String, dynamic> json)
+  Character() {
+    this._abilities = {
+      "str": 0,
+      "cha": 0,
+      "con": 0,
+      "dex": 0,
+      "int": 0,
+      "wis": 0,
+    };
+    this.proficiencies = [];
+    this.spells = {};
+    this.skills = {};
+    this.savingThrows = {};
+  }
+
+  void updateAbility({String name, int value}) {
+    print("Updating $name to $value");
+    this._abilities[name] = value;
+  }
+
+  set strenght(int value) => this._abilities["str"] = value;
+  set charisma(int value) => this._abilities["cha"] = value;
+  set constitution(int value) => this._abilities["con"] = value;
+  set dexterity(int value) => this._abilities["dex"] = value;
+  set intelligence(int value) => this._abilities["int"] = value;
+  set wisdom(int value) => this._abilities["wid"] = value;
+
+  set abilities(Map<String, int> abilities) => this._abilities = abilities;
+
+  get abilities => this._abilities;
+
+  Character.fromSnapshot(DocumentSnapshot snapshot)
+      : name = snapshot['name'],
+        surname = snapshot['surname'],
+        _abilities = snapshot['abilities'],
+        skills = snapshot['skills'],
+        avatar = snapshot['avatar'],
+        spells = snapshot['spells'],
+        race = snapshot['race'],
+        level = snapshot['level'],
+        alignment = snapshot['alignment'],
+        charClass = snapshot['class'],
+        maxHealth = snapshot['maxHealth'],
+        curHealth = snapshot['curHealth'],
+        tempHealth = snapshot['tempHealth'],
+        healing = snapshot['healing'],
+        proficiencies = snapshot['proficiencies'],
+        savingThrows = snapshot['savingThrows'],
+        armour = snapshot['armour'],
+        proficiencyBonus = snapshot['proficiencyBonus'];
+
+  Character.fromJson(Map<dynamic, dynamic> json)
       : name = json['name'],
         surname = json['surname'],
-        abilities = json['abilities'],
+        _abilities = json['abilities'],
         skills = json['skills'],
         avatar = json['avatar'],
         spells = json['spells'],
@@ -76,7 +109,7 @@ class Character {
         'savingThrows': savingThrows,
         'healing': healing,
         'proficiencies': proficiencies,
-        'abilities': abilities,
+        'abilities': _abilities,
         'armour': armour,
         'proficiencyBonus': proficiencyBonus,
       };
