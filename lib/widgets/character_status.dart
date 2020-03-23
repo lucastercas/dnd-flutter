@@ -39,9 +39,7 @@ class CharacterStatus extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 expanded
-                    ? Text(
-                        "${char.race} ${char.charClass} - ${char.alignment}",
-                      )
+                    ? Text("${char.race} ${char.charClass} - ${char.alignment}")
                     : SizedBox(),
                 Divider(color: Colors.black, height: expanded ? 3 : 0),
                 Row(

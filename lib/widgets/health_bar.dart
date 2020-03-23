@@ -4,36 +4,21 @@ import 'package:flutter/material.dart';
 
 const int _kIndeterminateLinearDuration = 1800;
 
-abstract class HealthProgressIndicator extends StatefulWidget {
-  const HealthProgressIndicator({
+class LinearHealthProgressIndicator extends StatefulWidget {
+  final int maxHealth;
+  final int curHealth;
+  final int tempHealth;
+  final int healing;
+  final Color backgroundColor;
+
+  const LinearHealthProgressIndicator({
     Key key,
     this.maxHealth,
     this.curHealth,
     this.tempHealth,
     this.healing,
+    this.backgroundColor,
   }) : super(key: key);
-
-  final int maxHealth;
-  final int curHealth;
-  final int tempHealth;
-  final int healing;
-}
-
-class LinearHealthProgressIndicator extends HealthProgressIndicator {
-  const LinearHealthProgressIndicator({
-    Key key,
-    int maxHealth,
-    int curHealth,
-    int tempHealth,
-    int healing,
-    Color backgroundColor,
-  }) : super(
-          key: key,
-          maxHealth: maxHealth,
-          curHealth: curHealth,
-          tempHealth: tempHealth,
-          healing: healing,
-        );
 
   @override
   _LinearHealthProgressIndicatorState createState() =>
@@ -92,10 +77,8 @@ class _LinearHealthProgressIndicatorState
         });
       },
       child: Container(
-        constraints: const BoxConstraints(
-          minWidth: double.infinity,
-          minHeight: 17,
-        ),
+        constraints:
+            const BoxConstraints(minWidth: double.infinity, minHeight: 17),
         child: CustomPaint(
           painter: _LinearHealthProgressIndicatorPainter(
             curHealth: widget.curHealth,
@@ -199,37 +182,22 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       );
       tp.layout();
-      tp.paint(
-        canvas,
-        offset,
-      );
+      tp.paint(canvas, offset);
     }
 
     int max = math.max(maxHealth, curHealth + healing + temp);
 
     double healthBegin = 0.0;
     double healthSize = (curHealth / max).clamp(0.0, 1.0) * size.width;
-    drawBar(
-      begin: healthBegin,
-      width: healthSize,
-      paint: healthPaint,
-    );
+    drawBar(begin: healthBegin, width: healthSize, paint: healthPaint);
 
     double healingBegin = healthBegin + healthSize;
     double healingSize = (healing / max).clamp(0.0, 1.0) * size.width;
-    drawBar(
-      begin: healingBegin,
-      width: healingSize,
-      paint: healingPaint,
-    );
+    drawBar(begin: healingBegin, width: healingSize, paint: healingPaint);
 
     double tempBegin = healingBegin + healingSize;
     double tempSize = (temp / max).clamp(0.0, 1.0) * size.width;
-    drawBar(
-      begin: tempBegin,
-      width: tempSize,
-      paint: tempPaint,
-    );
+    drawBar(begin: tempBegin, width: tempSize, paint: tempPaint);
 
     if (showText && curHealth > 0) {
       if (curHealth > 0) drawText("$curHealth", Offset(healthSize / 2, 0));
