@@ -30,7 +30,7 @@ class Update extends CharacterEvent {
   List<Object> get props => [characterName, updateData];
 }
 
-class Finish extends CharacterAddEvent {
+class Finish extends AddCharacterEvent {
   @override
   List<Object> get props => [];
 }

@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-abstract class CharacterAddEvent extends Equatable {}
+abstract class AddCharacterEvent extends Equatable {}
 
-class Start extends CharacterAddEvent {
+class Start extends AddCharacterEvent {
   @override
   List<Object> get props => [];
 }
 
-class Update extends CharacterAddEvent {
+class Update extends AddCharacterEvent {
   final String ability;
   final int value;
   Update({@required this.ability, @required this.value});
@@ -16,7 +16,7 @@ class Update extends CharacterAddEvent {
   List<Object> get props => [ability, value];
 }
 
-class Finish extends CharacterAddEvent {
+class Finish extends AddCharacterEvent {
   @override
   List<Object> get props => [];
 }
