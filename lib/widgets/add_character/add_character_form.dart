@@ -17,6 +17,13 @@ class _AddCharacterFormState extends State<AddCharacterForm> {
   bool _validate;
   AddCharacterBloc _addCharacterBloc;
 
+  final FocusNode _strFocus = FocusNode();
+  final FocusNode _dexFocus = FocusNode();
+  final FocusNode _conFocus = FocusNode();
+  final FocusNode _intFocus = FocusNode();
+  final FocusNode _wisFocus = FocusNode();
+  final FocusNode _chaFocus = FocusNode();
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +38,6 @@ class _AddCharacterFormState extends State<AddCharacterForm> {
     return BlocBuilder(
       bloc: _addCharacterBloc,
       builder: (BuildContext context, AddCharacterState state) {
-        print("State is: $state");
         if (state is Initial || state is Updated) {
           return Form(
             autovalidate: _validate,
@@ -43,12 +49,35 @@ class _AddCharacterFormState extends State<AddCharacterForm> {
                 ),
                 Column(
                   children: <Widget>[
-                    AbilityPicker(abilityName: "str"),
-                    AbilityPicker(abilityName: "dex"),
-                    AbilityPicker(abilityName: "con"),
-                    AbilityPicker(abilityName: "wis"),
-                    AbilityPicker(abilityName: "cha"),
-                    AbilityPicker(abilityName: "int"),
+                    AbilityPicker(
+                      abilityName: "str",
+                      curFocus: _strFocus,
+                      nextFocus: _dexFocus,
+                    ),
+                    AbilityPicker(
+                      abilityName: "dex",
+                      curFocus: _dexFocus,
+                      nextFocus: _conFocus,
+                    ),
+                    AbilityPicker(
+                      abilityName: "con",
+                      curFocus: _conFocus,
+                      nextFocus: _intFocus,
+                    ),
+                    AbilityPicker(
+                      abilityName: "int",
+                      curFocus: _intFocus,
+                      nextFocus: _wisFocus,
+                    ),
+                    AbilityPicker(
+                      abilityName: "wis",
+                      curFocus: _wisFocus,
+                      nextFocus: _chaFocus,
+                    ),
+                    AbilityPicker(
+                      abilityName: "cha",
+                      curFocus: _chaFocus,
+                    ),
                   ],
                 ),
                 RaisedButton(
@@ -65,9 +94,9 @@ class _AddCharacterFormState extends State<AddCharacterForm> {
           WidgetsBinding.instance.addPostFrameCallback(
             (_) => Navigator.pop(context),
           );
-          return CircularProgressIndicator();
+          return SizedBox.expand(child: CircularProgressIndicator());
         } else {
-          return CircularProgressIndicator();
+          return SizedBox.expand(child: CircularProgressIndicator());
         }
       },
     );

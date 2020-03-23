@@ -6,8 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AbilityPicker extends StatefulWidget {
   final String abilityName;
+  final FocusNode curFocus;
+  final FocusNode nextFocus;
 
-  AbilityPicker({@required this.abilityName});
+  AbilityPicker({
+    @required this.abilityName,
+    @required this.curFocus,
+    this.nextFocus,
+  });
   @override
   _AbilityPickerState createState() => _AbilityPickerState();
 }
@@ -48,11 +54,21 @@ class _AbilityPickerState extends State<AbilityPicker> {
           ),
           SizedBox(
             height: 35,
-            width: 35,
+            width: 30,
             child: TextFormField(
+              textInputAction: TextInputAction.next,
               controller: this._controller,
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
+              focusNode: widget.curFocus,
+              decoration: InputDecoration(
+                border: InputBorder.none,
+              ),
+              onFieldSubmitted: (String text) {
+                print("$text submitted");
+                widget.curFocus.unfocus();
+                FocusScope.of(context).requestFocus(widget.nextFocus);
+              },
             ),
           ),
           ArrowButton(
