@@ -1,4 +1,5 @@
-import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/character/bloc.dart';
+import 'package:dnd/blocs/character/state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/health_bar.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,8 @@ class CharacterHealth extends StatelessWidget {
     return BlocBuilder(
       bloc: charBloc,
       builder: (BuildContext context, CharacterState state) {
-        if (state is FetchedState) {
-          final Character char = state.char;
+        if (state is Fetched) {
+          final Character char = state.character;
           return Flexible(
             fit: FlexFit.loose,
             child: Column(

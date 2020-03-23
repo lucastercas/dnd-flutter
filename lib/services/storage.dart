@@ -5,7 +5,6 @@ class StorageProvider {
 
   void uploadImage(String path, var data) {
     final StorageReference ref = _storage.ref().child(path);
-    print(ref);
     final StorageUploadTask uploadTask = ref.putFile(data);
 
     //await uploadTask.onComplete;

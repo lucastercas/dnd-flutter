@@ -25,6 +25,9 @@ class CharacterRepository {
   }
 
   Stream<List<Character>> getCharacters() {
+    Stream<QuerySnapshot> collection = _firestoreProvider.getCollectionStream(
+      "characters",
+    );
     var transformer =
         StreamTransformer<QuerySnapshot, List<Character>>.fromHandlers(
       handleData: (QuerySnapshot docs, EventSink sink) {
@@ -35,9 +38,18 @@ class CharacterRepository {
         sink.add(chars);
       },
     );
-    return _firestoreProvider
-        .getCollectionStream("characters")
-        .transform(transformer);
+    return collection.transform(transformer);
+  }
+
+  updateCharacter(
+    String charName,
+    Map<String, dynamic> data,
+  ) async {
+    await _firestoreProvider.updateDocument(
+      "characters",
+      charName,
+      data,
+    );
   }
 
   Future addCharacter() async {

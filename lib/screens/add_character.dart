@@ -1,4 +1,5 @@
-import 'package:dnd/blocs/add_character_bloc.dart';
+import 'package:dnd/blocs/add_character/bloc.dart';
+import 'package:dnd/blocs/add_character/event.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
@@ -15,21 +16,20 @@ class AddCharacterScreen extends StatefulWidget {
 class _AddCharacterScreenState extends State<AddCharacterScreen> {
   var _formKey;
   bool _validate;
-  CharacterAddBloc _charAddBloc;
+  CharacterAddBloc _addCharBloc;
 
   @override
   void initState() {
     super.initState();
     _formKey = GlobalKey<FormState>();
     _validate = false;
-    _charAddBloc = CharacterAddBloc(charRepo: widget.charRepo);
-    // ..add(Start());
+    _addCharBloc = CharacterAddBloc(charRepo: widget.charRepo);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => _charAddBloc,
+      create: (context) => _addCharBloc,
       child: Scaffold(
         appBar: MyAppBar(),
         backgroundColor: Color.fromRGBO(244, 235, 221, 1),
@@ -40,7 +40,7 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
 
   @override
   void dispose() {
-    _charAddBloc.close();
+    _addCharBloc.close();
     super.dispose();
   }
 }
@@ -59,18 +59,14 @@ class AddCharacterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CharacterAddBloc charAddBloc = BlocProvider.of<CharacterAddBloc>(
-      context,
-    );
-
+    CharacterAddBloc addCharBloc = BlocProvider.of<CharacterAddBloc>(context);
     return Form(
       autovalidate: _validate,
       key: _formKey,
       child: Column(
         children: <Widget>[
           TextFormField(
-            decoration: InputDecoration(hintText: 'Character Name'),
-          ),
+              decoration: InputDecoration(hintText: 'Character Name')),
           Column(
             children: <Widget>[
               AbilityChooser(text: "str"),
@@ -83,9 +79,7 @@ class AddCharacterForm extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () {
-              if (_formKey.currentState.validate()) {
-                charAddBloc.add(Finish());
-              }
+              if (_formKey.currentState.validate()) addCharBloc.add(Finish());
             },
             child: Text("Finish"),
           ),
@@ -115,9 +109,8 @@ class _AbilityChooserState extends State<AbilityChooser> {
 
   @override
   Widget build(BuildContext context) {
-    CharacterAddBloc charAddBloc = BlocProvider.of<CharacterAddBloc>(context);
     return BlocBuilder(
-      bloc: charAddBloc,
+      bloc: BlocProvider.of<CharacterAddBloc>(context),
       builder: (context, state) {
         return SizedBox(
           height: 30,
@@ -158,7 +151,7 @@ class UpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CharacterAddBloc charAddBloc = BlocProvider.of<CharacterAddBloc>(context);
+    CharacterAddBloc addCharBloc = BlocProvider.of<CharacterAddBloc>(context);
     return MaterialButton(
       padding: EdgeInsets.all(0),
       height: 25,
@@ -172,7 +165,7 @@ class UpButton extends StatelessWidget {
         if (value < 30) {
           value++;
           controller.text = value.toString();
-          charAddBloc.add(Update(ability: this.ability, value: value));
+          addCharBloc.add(Update(ability: this.ability, value: value));
         }
       },
       color: Colors.black,
@@ -183,10 +176,12 @@ class UpButton extends StatelessWidget {
 class DownButton extends StatelessWidget {
   final TextEditingController controller;
   final String ability;
+
   DownButton({@required this.controller, @required this.ability});
+
   @override
   Widget build(BuildContext context) {
-    CharacterAddBloc charAddBloc = BlocProvider.of<CharacterAddBloc>(context);
+    CharacterAddBloc addCharBloc = BlocProvider.of<CharacterAddBloc>(context);
     return MaterialButton(
       padding: EdgeInsets.all(0),
       height: 25,
@@ -200,7 +195,7 @@ class DownButton extends StatelessWidget {
         if (value > 1) {
           value--;
           controller.text = value.toString();
-          charAddBloc.add(Update(ability: this.ability, value: value));
+          addCharBloc.add(Update(ability: this.ability, value: value));
         }
       },
       color: Colors.black,

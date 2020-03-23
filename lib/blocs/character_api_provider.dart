@@ -8,7 +8,6 @@ class CharacterApiProvider {
     @required String filePath,
     @required String charName,
   }) async {
-    print("Getting Character $charName");
     Map<String, dynamic> data = await parseJson(filePath);
     Character char = Character.fromJson(data[charName]);
     return char;

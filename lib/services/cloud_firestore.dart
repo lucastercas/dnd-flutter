@@ -18,12 +18,20 @@ class FirestoreProvider {
     return _firestore.collection(col).document(docId);
   }
 
-  Future<void> addDocument(
+  Future addDocument(
     String col,
-    String name,
+    String doc,
     Map<String, dynamic> data,
   ) async {
-    await _firestore.collection(col).document(name).setData(data);
+    await _firestore.document("$col/$doc").setData(data);
+  }
+
+  Future updateDocument(
+    String col,
+    String doc,
+    Map<String, dynamic> data,
+  ) async {
+    await _firestore.document("$col/$doc").updateData(data);
   }
 }
 /*

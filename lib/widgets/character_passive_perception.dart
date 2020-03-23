@@ -1,4 +1,5 @@
-import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/character/state.dart';
+import 'package:dnd/blocs/character/bloc.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,9 +9,9 @@ class CharacterPassivePerception extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder(
       bloc: BlocProvider.of<CharacterFetchBloc>(context),
-      builder: (context, state) {
-        if (state is FetchedState) {
-          Character char = state.char;
+      builder: (context, CharacterState state) {
+        if (state is Fetched) {
+          Character char = state.character;
           return Row(
             children: <Widget>[
               Container(

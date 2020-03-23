@@ -1,4 +1,6 @@
-import 'package:dnd/blocs/character_listing_bloc.dart';
+import 'package:dnd/blocs/list_character/bloc.dart';
+import 'package:dnd/blocs/list_character/event.dart';
+import 'package:dnd/blocs/list_character/state.dart';
 import 'package:dnd/blocs/repository.dart';
 import 'package:dnd/models/char.dart';
 import 'package:dnd/widgets/app_bar.dart';
@@ -37,10 +39,10 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color.fromRGBO(244, 235, 221, 1),
         body: BlocBuilder(
           bloc: _charListingBloc,
-          builder: (BuildContext context, CharacterListingState state) {
-            if (state is InitialState) {
+          builder: (BuildContext context, ListCharacterState state) {
+            if (state is Initial) {
               return Container(child: Text("$state."));
-            } else if (state is UpdateState) {
+            } else if (state is Update) {
               List<Character> characters = state.characters;
               return ListView.builder(
                 itemCount: characters.length,

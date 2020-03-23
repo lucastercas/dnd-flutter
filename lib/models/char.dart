@@ -40,7 +40,6 @@ class Character {
   }
 
   void updateAbility({String name, int value}) {
-    print("Updating $name to $value");
     this._abilities[name] = value;
   }
 

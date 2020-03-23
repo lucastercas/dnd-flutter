@@ -1,4 +1,5 @@
-import 'package:dnd/blocs/character_bloc.dart';
+import 'package:dnd/blocs/character/bloc.dart';
+import 'package:dnd/blocs/character/state.dart';
 import 'package:dnd/models/char.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +13,8 @@ class CharacterAvatar extends StatelessWidget {
     return BlocBuilder(
       bloc: charBloc,
       builder: (BuildContext context, CharacterState state) {
-        if (state is FetchedState) {
-          final Character char = state.char;
+        if (state is Fetched) {
+          final Character char = state.character;
           return ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: SizedBox(

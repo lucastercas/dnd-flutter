@@ -231,7 +231,7 @@ class _LinearHealthProgressIndicatorPainter extends CustomPainter {
       paint: tempPaint,
     );
 
-    showText ? drawText("$curHealth", Offset(healthSize / 2, 0)) : null;
+    showText ? drawText("$curHealth", Offset(healthSize / 2, 0)): SizedBox();
 
     showText
         ? drawText("$healing", Offset(healingBegin + (healingSize / 2), 0))
