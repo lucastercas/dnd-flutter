@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 
-class ValueAbility extends StatelessWidget {
-  const ValueAbility({
-    Key key,
-    @required this.value,
-  }) : super(key: key);
-
+class AbilityValue extends StatelessWidget {
   final int value;
+
+  const AbilityValue({Key key, @required this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,25 +17,20 @@ class ValueAbility extends StatelessWidget {
         decoration: BoxDecoration(
           color: Color.fromRGBO(224, 215, 201, 1),
           shape: BoxShape.circle,
-          border: Border.all(
-            width: 1.5,
-            color: Colors.black,
-          ),
+          border: Border.all(width: 1.5, color: Colors.black),
         ),
         child: Container(
           height: 30,
-          alignment: Alignment(0, 0),
           width: 50,
+          alignment: Alignment(0, 0), // Center text on container
           decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Color.fromRGBO(254, 245, 231, 1),
-          ),
+              shape: BoxShape.circle, color: Color.fromRGBO(254, 245, 231, 1)),
           child: Text(
             "${this.value}",
             style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.w500,
-              fontSize: 15
+              fontSize: 15,
             ),
           ),
         ),

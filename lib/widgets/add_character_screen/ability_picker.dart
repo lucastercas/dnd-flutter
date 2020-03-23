@@ -1,6 +1,6 @@
 import 'package:dnd/blocs/add_character/bloc.dart';
 import 'package:dnd/blocs/add_character/event.dart';
-import 'package:dnd/widgets/add_character/arrow_button.dart';
+import 'package:dnd/widgets/add_character_screen/arrow_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,10 +61,11 @@ class _AbilityPickerState extends State<AbilityPicker> {
               textAlign: TextAlign.center,
               keyboardType: TextInputType.number,
               focusNode: widget.curFocus,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-              ),
+              decoration: InputDecoration(border: InputBorder.none),
               onFieldSubmitted: (String text) {
+                int value = int.parse(text);
+                if (value < 0) _controller.text = "0";
+                if (value > 30) _controller.text = "30";
                 print("$text submitted");
                 widget.curFocus.unfocus();
                 FocusScope.of(context).requestFocus(widget.nextFocus);

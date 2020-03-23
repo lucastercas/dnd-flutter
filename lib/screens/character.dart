@@ -2,10 +2,10 @@ import 'package:dnd/blocs/character/bloc.dart';
 import 'package:dnd/blocs/character/event.dart';
 import 'package:dnd/blocs/character/state.dart';
 import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/widgets/abilities_tab_view.dart';
 import 'package:dnd/widgets/app_bar.dart';
-import 'package:dnd/widgets/character_screen_tabs.dart';
-import 'package:dnd/widgets/character_screen_header.dart';
+import 'package:dnd/widgets/character_screen/header_delegate.dart';
+import 'package:dnd/widgets/character_screen/tab_view.dart';
+import 'package:dnd/widgets/character_screen/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,19 +27,16 @@ class _CharacterScreenState extends State<CharacterScreen> {
     return BlocProvider(
       create: (BuildContext context) =>
           CharacterFetchBloc(charRepo: widget.charRepo)
-            ..add(Select(characterName: charName)),
-      child: Scaffold(
-        appBar: MyAppBar(),
-        body: CharacterScreenBody(),
-      ),
+            ..add(Select(
+              characterName: charName,
+            )),
+      child: Scaffold(appBar: MyAppBar(), body: CharacterScreenBody()),
     );
   }
 }
 
 class CharacterScreenBody extends StatefulWidget {
-  const CharacterScreenBody({
-    Key key,
-  }) : super(key: key);
+  const CharacterScreenBody({Key key}) : super(key: key);
 
   @override
   _CharacterScreenBodyState createState() => _CharacterScreenBodyState();
@@ -78,12 +75,12 @@ class _CharacterScreenBodyState extends State<CharacterScreenBody>
               SliverPersistentHeader(
                 floating: true,
                 pinned: true,
-                delegate: SliverCharacterStatusDelegate(
+                delegate: HeaderDelegate(
                   minHeight: 75,
                   maxHeight: 150,
                 ),
               ),
-              CharacterTabs(tabController: _tabController),
+              Tabs(tabController: _tabController),
               SliverToBoxAdapter(
                 child: Container(
                   // To-Do: How to make this relative?
@@ -92,6 +89,7 @@ class _CharacterScreenBodyState extends State<CharacterScreenBody>
                     physics: BouncingScrollPhysics(),
                     controller: _tabController,
                     children: <Widget>[
+                      // To-Do: Make spells and equipment screen
                       AbilitiesTabView(),
                       Container(color: Colors.red, height: 100),
                       Container(color: Colors.green, height: 100),

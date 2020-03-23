@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dnd/blocs/character/event.dart';
 import 'package:dnd/blocs/character/state.dart';
 import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterFetchBloc extends Bloc<CharacterEvent, CharacterState> {
@@ -39,25 +39,25 @@ class CharacterFetchBloc extends Bloc<CharacterEvent, CharacterState> {
       // yield Update();
     }
     // yield Initial();
-    // print("Mapping char fetching to new state");
+    // print("Mapping character fetching to new state");
     // print("$event");
     // if (event is CharacterSelectedEvent) {
-    //   Character char = await charRepo.fetchCharacter(
+    //   Character character = await charRepo.fetchCharacter(
     //     event.filePath,
     //     event.charName,
     //   );
-    //   yield Fetched(char: char);
+    //   yield Fetched(character: character);
     // } else if (event is CharacterUpdateEvent) {}
 
     // if (event is CharacterSelectedEvent) {
     //   try {
-    //     Character char = await charRepo.fetchCharacter(
+    //     Character character = await charRepo.fetchCharacter(
     //       event.filePath,
     //       event.charName,
     //     );
-    //     this.blocChar = char;
-    //     print(char.name);
-    //     if (char != null)
+    //     this.blocChar = character;
+    //     print(character.name);
+    //     if (character != null)
     //       yield this.blocChar;
     //     else
     //       yield null;

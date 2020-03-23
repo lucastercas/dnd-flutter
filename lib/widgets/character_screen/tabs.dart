@@ -2,13 +2,12 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
-class CharacterTabs extends StatelessWidget {
-  const CharacterTabs({
-    Key key,
-    @required TabController tabController,
-  }) : _tabController = tabController, super(key: key);
-
+class Tabs extends StatelessWidget {
   final TabController _tabController;
+
+  const Tabs({Key key, @required TabController tabController})
+      : _tabController = tabController,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +30,7 @@ class CharacterTabs extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.person),
-                    Text(
-                      "Abilities",
-                      style: TextStyle(fontFamily: 'Cinzel'),
-                    )
+                    Text("Abilities", style: TextStyle(fontFamily: 'Cinzel'))
                   ],
                 ),
               ),
@@ -42,10 +38,7 @@ class CharacterTabs extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.book),
-                    Text(
-                      "Spells",
-                      style: TextStyle(fontFamily: 'Cinzel'),
-                    ),
+                    Text("Spells", style: TextStyle(fontFamily: 'Cinzel')),
                   ],
                 ),
               ),
@@ -53,10 +46,7 @@ class CharacterTabs extends StatelessWidget {
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.card_travel),
-                    Text(
-                      "Equipments",
-                      style: TextStyle(fontFamily: 'Cinzel'),
-                    ),
+                    Text("Equipments", style: TextStyle(fontFamily: 'Cinzel')),
                   ],
                 ),
               ),
@@ -67,6 +57,7 @@ class CharacterTabs extends StatelessWidget {
     );
   }
 }
+
 class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
   _SliverTabBarDelegate({
     @required this.minHeight,
@@ -84,13 +75,8 @@ class _SliverTabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return new SizedBox.expand(
-      child: child,
-    );
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return new SizedBox.expand(child: child);
   }
 
   @override

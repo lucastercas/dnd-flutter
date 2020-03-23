@@ -1,4 +1,4 @@
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:dnd/services/json_parser.dart';
 import 'package:flutter/material.dart';
 
@@ -9,8 +9,8 @@ class CharacterApiProvider {
     @required String charName,
   }) async {
     Map<String, dynamic> data = await parseJson(filePath);
-    Character char = Character.fromJson(data[charName]);
-    return char;
+    Character character = Character.fromJson(data[charName]);
+    return character;
   }
 
   Future<List<Character>> fetchCharactersFromJson({

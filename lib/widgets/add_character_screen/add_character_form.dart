@@ -1,7 +1,7 @@
 import 'package:dnd/blocs/add_character/bloc.dart';
 import 'package:dnd/blocs/add_character/event.dart';
 import 'package:dnd/blocs/add_character/state.dart';
-import 'package:dnd/widgets/add_character/ability_picker.dart';
+import 'package:dnd/widgets/add_character_screen/ability_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,7 +67,7 @@ class _AddCharacterFormState extends State<AddCharacterForm> {
                     AbilityPicker(
                       abilityName: "int",
                       curFocus: _intFocus,
-                      nextFocus: _wisFocus,
+                      nextFocus: _wisFocus
                     ),
                     AbilityPicker(
                       abilityName: "wis",

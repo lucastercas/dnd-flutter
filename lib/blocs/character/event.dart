@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/add_character/event.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 

@@ -1,11 +1,8 @@
 import 'package:dnd/blocs/add_character/bloc.dart';
-import 'package:dnd/blocs/add_character/event.dart';
 import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/widgets/add_character/add_character_form.dart';
-import 'package:dnd/widgets/add_character/arrow_button.dart';
+import 'package:dnd/widgets/add_character_screen/add_character_form.dart';
 import 'package:dnd/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddCharacterScreen extends StatefulWidget {
@@ -21,7 +18,6 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
   @override
   void initState() {
     super.initState();
-
     _addCharBloc = AddCharacterBloc(charRepo: widget.charRepo);
   }
 
@@ -39,6 +35,7 @@ class _AddCharacterScreenState extends State<AddCharacterScreen> {
 
   @override
   void dispose() {
+    // TO-DO: How to not reset form when this screen disposes?
     _addCharBloc.close();
     super.dispose();
   }

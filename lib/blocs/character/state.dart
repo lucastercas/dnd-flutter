@@ -1,4 +1,4 @@
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -17,8 +17,8 @@ class Fetched extends CharacterState {
 }
 
 class Updated extends CharacterState {
-  final Character char;
-  Updated({@required this.char});
+  final Character character;
+  Updated({@required this.character});
   @override
-  List<Object> get props => [char];
+  List<Object> get props => [character];
 }
