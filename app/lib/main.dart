@@ -1,34 +1,51 @@
-import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/screens/add_character.dart';
-import 'package:dnd/screens/character.dart';
-import 'package:dnd/screens/home.dart';
+import 'package:dnd/blocs/authentication/authentication_bloc.dart';
+import 'package:dnd/repositories/user_repository.dart';
+import 'package:dnd/screens/home/home_screen.dart';
+import 'package:dnd/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'blocs/bloc_delegate.dart';
+import 'blocs/repository.dart';
+import 'screens/login/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  CharacterRepository _repo = CharacterRepository();
-  runApp(MyApp(charRepo: _repo));
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+  CharacterRepository charRepo = CharacterRepository();
+  UserRepository userRepo = UserRepository();
+  runApp(BlocProvider(
+    create: (context) =>
+        AuthenticationBloc(userRepository: userRepo)..add(AppStarted()),
+    child: MyApp(
+      charRepo: charRepo,
+      userRepo: userRepo,
+    ),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   final CharacterRepository charRepo;
+  final UserRepository userRepo;
 
-  MyApp({this.charRepo});
+  MyApp({@required this.charRepo, @required this.userRepo});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Cinzel',
-        backgroundColor: Color.fromRGBO(244, 235, 221, 1),
+        backgroundColor: Color(0xFFf2d7c9),
       ),
       debugShowCheckedModeBanner: true,
-      title: 'D&D App Mockup',
-      initialRoute: '/',
+      title: 'D&D ',
+      initialRoute: '/splash',
       routes: {
-        '/': (context) => HomeScreen(charRepo: charRepo),
-        '/character': (context) => CharacterScreen(charRepo: charRepo),
-        '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
+        '/splash': (context) => SplashScreen(),
+        '/login': (context) => LoginScreen(userRepository: userRepo),
+        '/home': (context) => HomeScreen(charRepo: charRepo),
+        // '/character': (context) => CharacterScreen(charRepo: charRepo),
+        // '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
       },
     );
   }

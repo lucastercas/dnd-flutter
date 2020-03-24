@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:dnd/blocs/character_api_provider.dart';
 import 'package:dnd/services/cloud_firestore.dart';
 
 class CharacterRepository {
   final FirestoreProvider _firestoreProvider = FirestoreProvider();
-  CharacterApiProvider _charApiProvider = CharacterApiProvider();
+  final CharacterApiProvider _charApiProvider = CharacterApiProvider();
 
   Stream<Character> getCharacter(String charName) {
     Stream<DocumentSnapshot> doc = _firestoreProvider.getDocumentStream(
@@ -17,14 +17,17 @@ class CharacterRepository {
     var transformer =
         StreamTransformer<DocumentSnapshot, Character>.fromHandlers(
       handleData: (DocumentSnapshot doc, EventSink sink) {
-        Character char = Character.fromSnapshot(doc);
-        sink.add(char);
+        Character character = Character.fromSnapshot(doc);
+        sink.add(character);
       },
     );
     return doc.transform(transformer);
   }
 
   Stream<List<Character>> getCharacters() {
+    Stream<QuerySnapshot> collection = _firestoreProvider.getCollectionStream(
+      "characters",
+    );
     var transformer =
         StreamTransformer<QuerySnapshot, List<Character>>.fromHandlers(
       handleData: (QuerySnapshot docs, EventSink sink) {
@@ -35,12 +38,21 @@ class CharacterRepository {
         sink.add(chars);
       },
     );
-    return _firestoreProvider
-        .getCollectionStream("characters")
-        .transform(transformer);
+    return collection.transform(transformer);
   }
 
-  Future addCharacter() async {
+  updateCharacter(
+    String charName,
+    Map<String, dynamic> data,
+  ) async {
+    await _firestoreProvider.updateDocument(
+      "characters",
+      charName,
+      data,
+    );
+  }
+
+  Future addCharacter({Character character}) async {
     await _firestoreProvider.addDocument("characters", "Lucas", {
       "abilities": {
         "str": 0,

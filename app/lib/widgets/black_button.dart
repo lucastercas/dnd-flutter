@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 class BlackButton extends StatelessWidget {
+  final Widget child;
+  final Function onPressed;
+
   BlackButton({
-    this.text,
+    this.child,
     this.onPressed,
   });
-
-  final String text;
-  final Function onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -16,14 +16,8 @@ class BlackButton extends StatelessWidget {
       child: SizedBox(
         height: 20,
         child: MaterialButton(
-          child: Text(
-            text,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              textBaseline: TextBaseline.alphabetic,
-            ),
-          ),
+          child: child,
+          minWidth: 12,
           onPressed: onPressed,
           color: Colors.black,
         ),
