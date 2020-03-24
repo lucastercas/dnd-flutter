@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddCharacterBloc extends Bloc<AddCharacterEvent, AddCharacterState> {
   final Character character = Character();
   final CharacterRepository charRepo;
+
   AddCharacterBloc({this.charRepo});
 
   @override
@@ -22,10 +23,8 @@ class AddCharacterBloc extends Bloc<AddCharacterEvent, AddCharacterState> {
       } else if (event.key == 'avatar') {
         character.avatar = event.value;
       }
-      // if (event.key == )
       yield Updated(character: this.character);
     } else if (event is Finish) {
-      print("[AddCharacterBloc] - Finish Event Received");
       await charRepo.addCharacter(character: this.character);
       yield Finished();
     }
