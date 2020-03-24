@@ -1,4 +1,4 @@
-// import 'package:dnd/models/character.dart';
+// import 'package:dnd/models/char.dart';
 // import 'package:dnd/services/json_parser.dart';
 // import 'package:flutter/material.dart';
 
@@ -19,9 +19,9 @@
 // }
 
 // class CharacterScreenBottomBar extends StatelessWidget {
-//   const CharacterScreenBottomBar({Key key, this.character}) : super(key: key);
+//   const CharacterScreenBottomBar({Key key, this.char}) : super(key: key);
 
-//   final Character character;
+//   final Character char;
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@
 //               child: Text("oi"),
 //             ),
 //           ),
-//           MagicSlots(character: character),
+//           MagicSlots(char: char),
 //         ],
 //       ),
 //     );
@@ -51,10 +51,10 @@
 // class MagicSlots extends StatelessWidget {
 //   const MagicSlots({
 //     Key key,
-//     @required this.character,
+//     @required this.char,
 //   }) : super(key: key);
 
-//   final Character character;
+//   final Character char;
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -68,10 +68,10 @@
 //           child: Container(
 //             child: ListView.builder(
 //               scrollDirection: Axis.horizontal,
-//               itemCount: character.spells["slots"].length,
+//               itemCount: char.spells["slots"].length,
 //               itemBuilder: (BuildContext context, int index) {
-//                 String key = character.spells["slots"].keys.elementAt(index);
-//                 var curSlot = character.spells["slots"][key];
+//                 String key = char.spells["slots"].keys.elementAt(index);
+//                 var curSlot = char.spells["slots"][key];
 //                 return MagicSlotDiamond(
 //                   used: curSlot["used"],
 //                   image: spells[key]["image"],

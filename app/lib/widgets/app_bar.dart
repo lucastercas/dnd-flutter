@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget with PreferredSizeWidget {
+class MyAppBar extends StatelessWidget  with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      primary: true,
-      backgroundColor: Color(0xFFe0d7c9),
-      elevation: 0,
+      backgroundColor: Color.fromRGBO(244, 235, 221, 200),
       title: Center(
-        child: Text("D&D App", style: TextStyle(color: Colors.black)),
+        child: Text(
+          "D&D App Mockup",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
     );
   }
