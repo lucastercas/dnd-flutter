@@ -1,6 +1,7 @@
 import 'package:dnd/repositories/user_repository.dart';
 import 'package:dnd/screens/login/bloc/login_bloc.dart';
 import 'package:dnd/screens/login/widgets/login_form.dart';
+import 'package:dnd/screens/login/widgets/register_button.dart';
 import 'package:dnd/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +17,7 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    LoginBloc loginBloc = LoginBloc(userRepository: _userRepository);
     ScreenUtil.init(
       context,
       allowFontScaling: true,
@@ -27,7 +29,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Color(0xFFe0d7c9),
       resizeToAvoidBottomInset: true,
       body: BlocProvider<LoginBloc>(
-        create: (context) => LoginBloc(userRepository: _userRepository),
+        create: (context) => loginBloc,
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[
@@ -35,7 +37,12 @@ class LoginScreen extends StatelessWidget {
             SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: LoginForm(),
+                child: Column(
+                  children: <Widget>[
+                    LoginForm(),
+                    RegisterButton(userRepository: _userRepository),
+                  ],
+                ),
               ),
             ),
           ],

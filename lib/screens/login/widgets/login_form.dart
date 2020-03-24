@@ -1,7 +1,7 @@
 import 'package:dnd/blocs/authentication/authentication_bloc.dart';
 import 'package:dnd/screens/login/bloc/login_bloc.dart';
-import 'package:dnd/screens/login/widgets/remember_me.dart';
 import 'package:dnd/screens/login/widgets/login_button.dart';
+import 'package:dnd/screens/login/widgets/remember_me.dart';
 import 'package:dnd/screens/login/widgets/social_icon.dart';
 import 'package:dnd/utils/custom_icons.dart';
 import 'package:flutter/material.dart';
@@ -84,136 +84,125 @@ class _LoginFormState extends State<LoginForm> {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
-          return Column(
-            children: <Widget>[
-              SizedBox(height: ScreenUtil().setHeight(180)),
-              Container(
-                width: double.infinity,
-                height: ScreenUtil().setHeight(500),
-                decoration: BoxDecoration(
-                  color: Color(0xFFe0d7c9),
-                  borderRadius: BorderRadius.circular(8.0),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, 15.0),
-                      blurRadius: 15.0,
+          return SizedBox(
+            width: ScreenUtil().setWidth(700),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: ScreenUtil().setHeight(180)),
+                Container(
+                  width: double.infinity,
+                  height: ScreenUtil().setHeight(500),
+                  decoration: BoxDecoration(
+                    color: Color(0xFFe0d7c9),
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, 15.0),
+                        blurRadius: 15.0,
+                      ),
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0.0, -10.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: ScreenUtil().setSp(60),
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: .6,
+                          ),
+                        ),
+                        Text(
+                          "Email",
+                          style: TextStyle(fontSize: ScreenUtil().setSp(30)),
+                        ),
+                        TextFormField(
+                          controller: _emailController,
+                          validator: (_) {
+                            return !state.isEmailValid ? 'Invalid Email' : null;
+                          },
+                          keyboardType: TextInputType.emailAddress,
+                          autovalidate: true,
+                          autocorrect: false,
+                          decoration: InputDecoration(
+                            hintText: "email",
+                            hintStyle: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          "Password",
+                          style: TextStyle(fontSize: ScreenUtil().setSp(30)),
+                        ),
+                        TextFormField(
+                          controller: _passwordController,
+                          obscureText: true,
+                          autovalidate: true,
+                          autocorrect: false,
+                          validator: (_) {
+                            return !state.isPasswordValid
+                                ? 'Invalid Password'
+                                : null;
+                          },
+                          decoration: InputDecoration(
+                            hintText: "username",
+                            hintStyle:
+                                TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                        ),
+                        SizedBox(height: ScreenUtil().setHeight(35)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            Text(
+                              "Forgot Password?",
+                              style: TextStyle(
+                                color: Colors.blue,
+                                fontSize: ScreenUtil().setSp(28),
+                              ),
+                            )
+                          ],
+                        )
+                      ],
                     ),
-                    BoxShadow(
-                      color: Colors.black12,
-                      offset: Offset(0.0, -10.0),
-                      blurRadius: 10.0,
+                  ),
+                ),
+                SizedBox(height: ScreenUtil().setHeight(40)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    RememberMe(),
+                    LoginButon(
+                      onPressed: this._isLoginEnabled(state)
+                          ? this._onFormSubmitted
+                          : null,
                     ),
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: ScreenUtil().setSp(60),
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: .6,
-                        ),
-                      ),
-                      Text(
-                        "Email",
-                        style: TextStyle(fontSize: ScreenUtil().setSp(30)),
-                      ),
-                      TextFormField(
-                        controller: _emailController,
-                        validator: (_) {
-                          return !state.isEmailValid ? 'Invalid Email' : null;
-                        },
-                        keyboardType: TextInputType.emailAddress,
-                        autovalidate: true,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          hintText: "email",
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                      ),
-                      Text(
-                        "Password",
-                        style: TextStyle(fontSize: ScreenUtil().setSp(30)),
-                      ),
-                      TextFormField(
-                        controller: _passwordController,
-                        obscureText: true,
-                        autovalidate: true,
-                        autocorrect: false,
-                        validator: (_) {
-                          return !state.isPasswordValid
-                              ? 'Invalid Password'
-                              : null;
-                        },
-                        decoration: InputDecoration(
-                          hintText: "username",
-                          hintStyle:
-                              TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                      ),
-                      SizedBox(height: ScreenUtil().setHeight(35)),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              color: Colors.blue,
-                              fontSize: ScreenUtil().setSp(28),
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: ScreenUtil().setHeight(40)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  RememberMe(),
-                  LoginButon(
-                    onPressed: this._isLoginEnabled(state)
-                        ? this._onFormSubmitted
-                        : null,
-                  ),
-                ],
-              ),
-              SizedBox(height: ScreenUtil().setHeight(40)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SocialIcon(
-                    iconData: CustomIcons.googlePlus,
-                    onPressed: () {
-                      _loginBloc.add(LoginWithGooglePressed());
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(height: ScreenUtil().setHeight(40)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text("New User? "),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "SignUp",
-                      style: TextStyle(
-                        color: Color(0xFF5d74e3),
-                      ),
+                SizedBox(height: ScreenUtil().setHeight(40)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SocialIcon(
+                      iconData: CustomIcons.googlePlus,
+                      onPressed: () {
+                        _loginBloc.add(LoginWithGooglePressed());
+                      },
                     ),
-                  )
-                ],
-              )
-            ],
+                  ],
+                ),
+              ],
+            ),
           );
         },
       ),
