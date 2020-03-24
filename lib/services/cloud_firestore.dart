@@ -14,6 +14,10 @@ class FirestoreProvider {
     return _firestore.collection(col).document(doc).snapshots();
   }
 
+  CollectionReference getCollectionReference(String col) {
+    return _firestore.collection(col).reference();
+  }
+
   DocumentReference getDocumentReference(String col, String docId) {
     return _firestore.collection(col).document(docId);
   }

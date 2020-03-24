@@ -15,11 +15,18 @@ class AddCharacterBloc extends Bloc<AddCharacterEvent, AddCharacterState> {
   @override
   Stream<AddCharacterState> mapEventToState(AddCharacterEvent event) async* {
     if (event is Update) {
-      character.updateAbility(name: event.ability, value: event.value);
+      if (event.key == 'ability') {
+        Map<String, int> ability = event.value;
+        String key = ability.keys.elementAt(0);
+        character.updateAbility(name: key, value: ability[key]);
+      } else if (event.key == 'avatar') {
+        character.avatar = event.value;
+      }
+      // if (event.key == )
       yield Updated(character: this.character);
     } else if (event is Finish) {
       print("[AddCharacterBloc] - Finish Event Received");
-      await charRepo.addCharacter();
+      await charRepo.addCharacter(character: this.character);
       yield Finished();
     }
   }

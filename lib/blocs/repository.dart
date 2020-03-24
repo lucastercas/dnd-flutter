@@ -52,7 +52,7 @@ class CharacterRepository {
     );
   }
 
-  Future addCharacter() async {
+  Future addCharacter({Character character}) async {
     await _firestoreProvider.addDocument("characters", "Lucas", {
       "abilities": {
         "str": 0,

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Character {
   String name;
   String surname;
-  String avatar;
+  String _avatar;
 
   int level;
   String race;
@@ -43,6 +43,8 @@ class Character {
     this._abilities[name] = value;
   }
 
+  set avatar(String path) => this._avatar = path;
+
   set strenght(int value) => this._abilities["str"] = value;
   set charisma(int value) => this._abilities["cha"] = value;
   set constitution(int value) => this._abilities["con"] = value;
@@ -53,13 +55,14 @@ class Character {
   set abilities(Map<String, int> abilities) => this._abilities = abilities;
 
   get abilities => this._abilities;
+  get avatar => this._avatar;
 
   Character.fromSnapshot(DocumentSnapshot snapshot)
       : name = snapshot['name'],
         surname = snapshot['surname'],
         _abilities = snapshot['abilities'],
         skills = snapshot['skills'],
-        avatar = snapshot['avatar'],
+        _avatar = snapshot['avatar'],
         spells = snapshot['spells'],
         race = snapshot['race'],
         level = snapshot['level'],
@@ -79,7 +82,7 @@ class Character {
         surname = json['surname'],
         _abilities = json['abilities'],
         skills = json['skills'],
-        avatar = json['avatar'],
+        _avatar = json['avatar'],
         spells = json['spells'],
         race = json['race'],
         level = json['level'],
@@ -102,7 +105,7 @@ class Character {
         'level': level,
         'class': charClass,
         'maxHealth': maxHealth,
-        'avatar': avatar,
+        'avatar': _avatar,
         'curHealth': curHealth,
         'tempHealth': tempHealth,
         'savingThrows': savingThrows,

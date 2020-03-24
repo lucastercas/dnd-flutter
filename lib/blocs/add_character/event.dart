@@ -9,11 +9,11 @@ class Start extends AddCharacterEvent {
 }
 
 class Update extends AddCharacterEvent {
-  final String ability;
-  final int value;
-  Update({@required this.ability, @required this.value});
+  final String key;
+  final dynamic value;
+  Update({@required this.key, @required this.value});
   @override
-  List<Object> get props => [ability, value];
+  List<Object> get props => [key, value];
 }
 
 class Finish extends AddCharacterEvent {

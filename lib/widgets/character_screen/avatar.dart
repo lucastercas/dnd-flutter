@@ -29,7 +29,7 @@ class Avatar extends StatelessWidget {
         // To-Do: Get avatar from firebase storage
         child: Image.asset(
           "assets/images/${character.avatar}.jpg",
-          fit: BoxFit.cover
+          fit: BoxFit.cover,
         ),
       ),
     );

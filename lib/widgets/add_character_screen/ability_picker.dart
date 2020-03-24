@@ -47,7 +47,7 @@ class _AbilityPickerState extends State<AbilityPicker> {
                 value++;
                 _controller.text = value.toString();
                 _addCharacterBloc.add(
-                  Update(ability: widget.abilityName, value: value),
+                  Update(key: 'ability', value: {widget.abilityName: value}),
                 );
               }
             },
@@ -80,7 +80,7 @@ class _AbilityPickerState extends State<AbilityPicker> {
                 value--;
                 _controller.text = value.toString();
                 _addCharacterBloc.add(
-                  Update(ability: widget.abilityName, value: value),
+                  Update(key: 'ability', value: {widget.abilityName: value}),
                 );
               }
             },
