@@ -1,19 +1,19 @@
 import 'package:dnd/repositories/user_repository.dart';
+import 'package:dnd/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
-  final UserRepository userRepository;
-  RegisterScreen({@required this.userRepository});
+class RegisterScreen extends StatelessWidget {
+  final UserRepository _userRepository;
 
-  @override
-  _RegisterScreenState createState() => _RegisterScreenState();
-}
+  RegisterScreen({@required UserRepository userRepository})
+      : assert(userRepository != null),
+        _userRepository = userRepository;
 
-class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      appBar: MyAppBar(),
+      body: Center(),
     );
   }
 }

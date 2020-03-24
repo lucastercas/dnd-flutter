@@ -34,9 +34,7 @@ class _RememberMeState extends State<RememberMe> {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        SizedBox(
-          width: 12.0,
-        ),
+        SizedBox(width: 12.0),
         GestureDetector(
           onTap: () {
             setState(() {
@@ -45,14 +43,10 @@ class _RememberMeState extends State<RememberMe> {
           },
           child: radioButton(_isRememberMeSelected),
         ),
-        SizedBox(
-          width: 8.0,
-        ),
+        SizedBox(width: 8.0),
         Text(
           "Remember me",
-          style: TextStyle(
-            fontSize: 12,
-          ),
+          style: TextStyle(fontSize: 12),
         )
       ],
     );

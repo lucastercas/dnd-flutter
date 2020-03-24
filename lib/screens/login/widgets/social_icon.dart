@@ -4,15 +4,12 @@ class SocialIcon extends StatelessWidget {
   final IconData iconData;
   final Function onPressed;
 
-  SocialIcon({
-    @required this.iconData,
-    @required this.onPressed,
-  });
+  SocialIcon({@required this.iconData, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
-    return new Padding(
-      padding: EdgeInsets.only(left: 14.0),
+    return Padding(
+      padding: const EdgeInsets.only(left: 14.0),
       child: Container(
         width: 50.0,
         height: 50.0,

@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dnd/repositories/user_repository.dart';
+import 'package:dnd/screens/login/bloc/validators.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
-
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   UserRepository _userRepository;
@@ -55,15 +55,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapEmailChangedToState(String email) async* {
     yield state.update(
-      // isEmailValid: Validators.isValidEmail(email),
-      isEmailValid: true,
+      isEmailValid: Validators.isValidEmail(email),
     );
   }
 
   Stream<LoginState> _mapPasswordChangedToState(String password) async* {
     yield state.update(
-      // isPasswordValid: Validators.isValidPassword(password),
-      isPasswordValid: true,
+      isPasswordValid: Validators.isValidPassword(password),
     );
   }
 

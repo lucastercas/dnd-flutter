@@ -17,7 +17,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LoginBloc loginBloc = LoginBloc(userRepository: _userRepository);
     ScreenUtil.init(
       context,
       allowFontScaling: true,
@@ -29,7 +28,7 @@ class LoginScreen extends StatelessWidget {
       backgroundColor: Color(0xFFe0d7c9),
       resizeToAvoidBottomInset: true,
       body: BlocProvider<LoginBloc>(
-        create: (context) => loginBloc,
+        create: (context) => LoginBloc(userRepository: _userRepository),
         child: Stack(
           fit: StackFit.expand,
           children: <Widget>[

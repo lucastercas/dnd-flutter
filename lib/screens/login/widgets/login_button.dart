@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginButon extends StatelessWidget {
-  final Function onPressed;
+  final Function _onPressed;
 
-  const LoginButon({@required this.onPressed, Key key}) : super(key: key);
+  const LoginButon({@required Function onPressed, Key key})
+      : _onPressed = onPressed,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,12 @@ class LoginButon extends StatelessWidget {
         ),
         child: MaterialButton(
           color: Colors.transparent,
-          onPressed: onPressed,
+          onPressed: _onPressed,
           child: Center(
             child: Text(
               "SIGNIN",
               style: TextStyle(
                 color: Colors.black,
-                // fontFamily: "Poppins-Bold",
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
                 letterSpacing: 1.0,
