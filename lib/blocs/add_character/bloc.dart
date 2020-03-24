@@ -1,24 +1,31 @@
 import 'package:dnd/blocs/add_character/event.dart';
 import 'package:dnd/blocs/add_character/state.dart';
 import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CharacterAddBloc extends Bloc<CharacterAddEvent, CharacterAddState> {
-  final Character char = Character();
+class AddCharacterBloc extends Bloc<AddCharacterEvent, AddCharacterState> {
+  final Character character = Character();
   final CharacterRepository charRepo;
-  CharacterAddBloc({this.charRepo});
+
+  AddCharacterBloc({this.charRepo});
 
   @override
-  CharacterAddState get initialState => Initial(character: this.char);
+  AddCharacterState get initialState => Initial(character: this.character);
 
   @override
-  Stream<CharacterAddState> mapEventToState(CharacterAddEvent event) async* {
+  Stream<AddCharacterState> mapEventToState(AddCharacterEvent event) async* {
     if (event is Update) {
-      char.updateAbility(name: event.ability, value: event.value);
-      yield Updated(character: this.char);
+      if (event.key == 'ability') {
+        Map<String, int> ability = event.value;
+        String key = ability.keys.elementAt(0);
+        character.updateAbility(name: key, value: ability[key]);
+      } else if (event.key == 'avatar') {
+        character.avatar = event.value;
+      }
+      yield Updated(character: this.character);
     } else if (event is Finish) {
-      await charRepo.addCharacter();
+      await charRepo.addCharacter(character: this.character);
       yield Finished();
     }
   }

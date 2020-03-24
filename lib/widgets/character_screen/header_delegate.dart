@@ -1,17 +1,17 @@
 import 'dart:math' as math;
 
-import 'package:dnd/widgets/character_status.dart';
+import 'package:dnd/widgets/character_screen/header.dart';
 import 'package:flutter/material.dart';
 
+class HeaderDelegate
+    extends SliverPersistentHeaderDelegate {
+  final double minHeight;
+  final double maxHeight;
 
-class SliverCharacterStatusDelegate extends SliverPersistentHeaderDelegate {
-  SliverCharacterStatusDelegate({
+  HeaderDelegate({
     @required this.minHeight,
     @required this.maxHeight,
   });
-
-  final double minHeight;
-  final double maxHeight;
 
   @override
   Widget build(
@@ -21,9 +21,7 @@ class SliverCharacterStatusDelegate extends SliverPersistentHeaderDelegate {
   ) {
     return Container(
       color: Color.fromRGBO(244, 235, 221, 1),
-      child: CharacterStatus(
-        expanded: shrinkOffset < 5,
-      ),
+      child: Header(expanded: shrinkOffset < 5),
     );
   }
 
@@ -33,7 +31,7 @@ class SliverCharacterStatusDelegate extends SliverPersistentHeaderDelegate {
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(SliverCharacterStatusDelegate oldDelegate) {
+  bool shouldRebuild(HeaderDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight;
   }

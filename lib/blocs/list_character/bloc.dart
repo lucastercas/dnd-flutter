@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:dnd/blocs/list_character/event.dart';
 import 'package:dnd/blocs/list_character/state.dart';
 import 'package:dnd/blocs/repository.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CharacterListingBloc

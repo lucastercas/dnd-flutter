@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/add_character/event.dart';
-import 'package:dnd/models/char.dart';
+import 'package:dnd/models/character.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +30,7 @@ class Update extends CharacterEvent {
   List<Object> get props => [characterName, updateData];
 }
 
-class Finish extends CharacterAddEvent {
+class Finish extends AddCharacterEvent {
   @override
   List<Object> get props => [];
 }
