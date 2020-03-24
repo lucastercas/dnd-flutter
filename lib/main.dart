@@ -1,12 +1,12 @@
+import 'package:dnd/blocs/authentication/authentication_bloc.dart';
 import 'package:dnd/repositories/user_repository.dart';
+import 'package:dnd/screens/home/home_screen.dart';
+import 'package:dnd/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'blocs/bloc_delegate.dart';
 import 'blocs/repository.dart';
-import 'screens/add_character.dart';
-import 'screens/character.dart';
-import 'screens/home.dart';
 import 'screens/login/login_screen.dart';
 
 void main() {
@@ -14,9 +14,13 @@ void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   CharacterRepository charRepo = CharacterRepository();
   UserRepository userRepo = UserRepository();
-  runApp(MyApp(
-    charRepo: charRepo,
-    userRepo: userRepo,
+  runApp(BlocProvider(
+    create: (context) =>
+        AuthenticationBloc(userRepository: userRepo)..add(AppStarted()),
+    child: MyApp(
+      charRepo: charRepo,
+      userRepo: userRepo,
+    ),
   ));
 }
 
@@ -35,12 +39,13 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: true,
       title: 'D&D ',
-      initialRoute: '/login',
+      initialRoute: '/splash',
       routes: {
+        '/splash': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(userRepository: userRepo),
         '/home': (context) => HomeScreen(charRepo: charRepo),
-        '/character': (context) => CharacterScreen(charRepo: charRepo),
-        '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
+        // '/character': (context) => CharacterScreen(charRepo: charRepo),
+        // '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
       },
     );
   }

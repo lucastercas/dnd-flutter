@@ -25,10 +25,14 @@ class _LoginFormState extends State<LoginForm> {
     super.initState();
     _loginBloc = BlocProvider.of<LoginBloc>(context);
     _emailController.addListener(() {
-      _loginBloc.add(EmailChanged(email: _emailController.text));
+      _loginBloc.add(
+        EmailChanged(email: _emailController.text),
+      );
     });
     _passwordController.addListener(() {
-      _loginBloc.add(PasswordChanged(password: _passwordController.text));
+      _loginBloc.add(
+        PasswordChanged(password: _passwordController.text),
+      );
     });
   }
 
@@ -42,7 +46,9 @@ class _LoginFormState extends State<LoginForm> {
   void _onFormSubmitted() {
     _loginBloc.add(
       LoginWithCredentialsPressed(
-          email: _emailController.text, password: _passwordController.text),
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
     );
   }
 
