@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Navigator.pushNamed(context, '/add-character');
           },
         ),
-        backgroundColor: Color.fromRGBO(244, 235, 221, 1),
+        backgroundColor: Color(0xFFf4ebdd),
         body: BlocBuilder(
           bloc: _charListingBloc,
           builder: (BuildContext context, ListCharacterState state) {
