@@ -24,21 +24,28 @@ class CharacterRepository {
     return doc.transform(transformer);
   }
 
-  Stream<List<Character>> getCharacters() {
+  Map<String, Character> getCharacters(String playerUID) {
+    print('Getting Characters');
     Stream<QuerySnapshot> collection = _firestoreProvider.getCollectionStream(
       "characters",
     );
-    var transformer =
-        StreamTransformer<QuerySnapshot, List<Character>>.fromHandlers(
-      handleData: (QuerySnapshot docs, EventSink sink) {
-        List<Character> chars = List<Character>();
-        docs.documents.forEach((DocumentSnapshot doc) {
-          chars.add(Character.fromSnapshot(doc));
-        });
-        sink.add(chars);
-      },
-    );
-    return collection.transform(transformer);
+    Map<String, Character> chars = Map<String, Character>();
+    collection.listen((QuerySnapshot docs) {
+      docs.documents.forEach((DocumentSnapshot doc) {
+        final String id = doc.documentID;
+        if (doc["playerUID"] == playerUID)
+          chars[id] = Character.fromSnapshot(doc);
+      });
+    });
+    return chars;
+
+    // var transformer =
+    //     StreamTransformer<QuerySnapshot, List<Character>>.fromHandlers(
+    //   handleData: (QuerySnapshot docs, EventSink sink) {
+    //     sink.add(chars);
+    //   },
+    // );
+    // return collection.transform(transformer);
   }
 
   updateCharacter(

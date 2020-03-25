@@ -114,7 +114,8 @@ firebase-debug.log
 typings/
 
 node_modules/
-lib/
+# lib/
+functions/lib/
 
 ## Compiled JavaScript files
 **/*.js
