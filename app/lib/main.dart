@@ -15,8 +15,10 @@ void main() {
   CharacterRepository charRepo = CharacterRepository();
   UserRepository userRepo = UserRepository();
   runApp(BlocProvider(
-    create: (context) =>
-        AuthenticationBloc(userRepository: userRepo)..add(AppStarted()),
+    create: (context) => AuthenticationBloc(userRepository: userRepo)
+      ..add(
+        AppStarted(),
+      ),
     child: MyApp(
       charRepo: charRepo,
       userRepo: userRepo,

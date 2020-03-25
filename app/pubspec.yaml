@@ -21,6 +21,7 @@ dependencies:
   flutter_screenutil: ^1.1.0
   firebase_auth: ^0.15.5+3
   google_sign_in: ^4.2.0
+  font_awesome_flutter: ^8.7.0
 
 dev_dependencies:
   flutter_test:
@@ -39,9 +40,18 @@ flutter:
       fonts:
         - asset: assets/fonts/Cinzel/Cinzel-Regular.ttf
         - asset: assets/fonts/Cinzel/Cinzel-Black.ttf
+        - asset: assets/fonts/Cinzel/Cinzel-Bold.ttf
+    - family: Kalam
+      fonts:
+        - asset: assets/fonts/Kalam/Kalam-Regular.ttf
+        - asset: assets/fonts/Kalam/Kalam-Light.ttf
+        - asset: assets/fonts/Kalam/Kalam-Bold.ttf
     - family: Great Vibes
       fonts:
         - asset: assets/fonts/Great_Vibes/GreatVibes-Regular.ttf
     - family: Sacramento
       fonts:
         - asset: assets/fonts/Sacramento/Sacramento-Regular.ttf
+    - family: Viaoda Libre
+      fonts:
+        - asset: assets/fonts/Viaoda_Libre/ViaodaLibre-Regular.ttf
