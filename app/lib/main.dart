@@ -1,13 +1,13 @@
 import 'package:dnd/blocs/authentication/authentication_bloc.dart';
+import 'package:dnd/blocs/bloc_delegate.dart';
+import 'package:dnd/blocs/character_repository.dart';
 import 'package:dnd/repositories/user_repository.dart';
+import 'package:dnd/screens/character/character_screen.dart';
 import 'package:dnd/screens/home/home_screen.dart';
+import 'package:dnd/screens/login/login_screen.dart';
 import 'package:dnd/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'blocs/bloc_delegate.dart';
-import 'blocs/repository.dart';
-import 'screens/login/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash': (context) => SplashScreen(),
         '/login': (context) => LoginScreen(userRepository: userRepo),
-        '/home': (context) => HomeScreen(charRepo: charRepo),
-        // '/character': (context) => CharacterScreen(charRepo: charRepo),
+        '/home': (context) => HomeScreen(characterRepository: charRepo),
+        '/character': (context) => CharacterScreen(charRepo: charRepo),
         // '/add-character': (context) => AddCharacterScreen(charRepo: charRepo),
       },
     );

@@ -1,4 +1,4 @@
-import 'package:dnd/widgets/character_screen/linear_health_progress_indicator_painter.dart';
+import 'package:dnd/screens/character/widgets/linear_health_progress_indicator_painter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

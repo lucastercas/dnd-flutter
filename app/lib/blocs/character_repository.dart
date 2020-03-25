@@ -9,10 +9,10 @@ class CharacterRepository {
   final FirestoreProvider _firestoreProvider = FirestoreProvider();
   final CharacterApiProvider _charApiProvider = CharacterApiProvider();
 
-  Stream<Character> getCharacter(String charName) {
+  Stream<Character> getCharacter(String characterId) {
     Stream<DocumentSnapshot> doc = _firestoreProvider.getDocumentStream(
       "characters",
-      charName,
+      characterId,
     );
     var transformer =
         StreamTransformer<DocumentSnapshot, Character>.fromHandlers(
@@ -24,19 +24,18 @@ class CharacterRepository {
     return doc.transform(transformer);
   }
 
-  Map<String, Character> getCharacters(String playerUID) {
+  Future<Map<String, Character>> getCharacters(String playerUID) async {
     print('Getting Characters');
-    Stream<QuerySnapshot> collection = _firestoreProvider.getCollectionStream(
-      "characters",
-    );
     Map<String, Character> chars = Map<String, Character>();
-    collection.listen((QuerySnapshot docs) {
-      docs.documents.forEach((DocumentSnapshot doc) {
-        final String id = doc.documentID;
-        if (doc["playerUID"] == playerUID)
-          chars[id] = Character.fromSnapshot(doc);
-      });
+    var documents = await _firestoreProvider
+        .getCollectionReference("characters")
+        .getDocuments();
+    documents.documents.forEach((DocumentSnapshot doc) {
+      final String id = doc.documentID;
+      if (doc["playerUID"] == playerUID)
+        chars[id] = Character.fromSnapshot(doc);
     });
+
     return chars;
 
     // var transformer =

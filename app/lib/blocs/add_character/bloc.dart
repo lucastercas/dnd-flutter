@@ -21,7 +21,7 @@ class AddCharacterBloc extends Bloc<AddCharacterEvent, AddCharacterState> {
         String key = ability.keys.elementAt(0);
         character.updateAbility(name: key, value: ability[key]);
       } else if (event.key == 'avatar') {
-        character.avatar = event.value;
+        character.avatarUrl = event.value;
       }
       yield Updated(character: this.character);
     } else if (event is Finish) {

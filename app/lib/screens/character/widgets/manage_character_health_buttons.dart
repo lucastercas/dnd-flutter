@@ -1,6 +1,5 @@
-import 'package:dnd/blocs/character/bloc.dart';
-import 'package:dnd/blocs/character/event.dart';
 import 'package:dnd/models/character.dart';
+import 'package:dnd/screens/character/bloc/character_bloc.dart';
 import 'package:dnd/widgets/black_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,13 +28,13 @@ class ManageHealthButtons extends StatefulWidget {
 
 class _CharacterButtonsState extends State<ManageHealthButtons> {
   ButtonsState _state;
-  CharacterFetchBloc _charBloc;
+  CharacterBloc _characterBloc;
 
   @override
   void initState() {
     super.initState();
     _state = ButtonsState.Default;
-    _charBloc = BlocProvider.of<CharacterFetchBloc>(context);
+    _characterBloc = BlocProvider.of<CharacterBloc>(context);
   }
 
   @override
@@ -53,8 +52,9 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         return _buildUpdateButtons(
           text: widget.character.curHealth.toString(),
           upButtonPress: () {
-            if (widget.character.curHealth < widget.character.maxHealth)
-              _update({"curHealth": widget.character.curHealth + 1});
+            if (widget.character.curHealth < widget.character.maxHealth) {
+              // _update({"curHealth": widget.character.curHealth + 1});
+            }
           },
           downButtonPress: () {
             if (widget.character.curHealth <= 0)
@@ -64,8 +64,9 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
                   builder: (context) {
                     return AlertDialog(title: Text("You Deead!"));
                   });
-            else
-              _update({"curHealth": widget.character.curHealth - 1});
+            else {
+              // _update({"curHealth": widget.character.curHealth - 1});
+            }
           },
         );
         break;
@@ -73,11 +74,13 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         return _buildUpdateButtons(
           text: widget.character.healing.toString(),
           upButtonPress: () {
-            _update({"healing": widget.character.healing + 1});
+            // _update({"healing": widget.character.healing + 1});
           },
           downButtonPress: () {
-            if (widget.character.healing > 0)
-              _update({"healing": widget.character.healing - 1});
+            if (widget.character.healing > 0) {
+              // _update({"healing": widget.character.healing - 1});
+
+            }
           },
         );
         break;
@@ -85,11 +88,13 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         return _buildUpdateButtons(
           text: widget.character.tempHealth.toString(),
           upButtonPress: () {
-            _update({"tempHealth": widget.character.tempHealth + 1});
+            // _update({"tempHealth": widget.character.tempHealth + 1});
           },
           downButtonPress: () {
-            if (widget.character.tempHealth > 0)
-              _update({"tempHealth": widget.character.tempHealth - 1});
+            if (widget.character.tempHealth > 0) {
+              //_update({"tempHealth": widget.character.tempHealth - 1});
+
+            }
           },
         );
         break;
@@ -171,9 +176,10 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
     ];
   }
 
-  void _update(Map<String, dynamic> data) {
-    this._charBloc.add(
-          Update(characterName: widget.character.name, updateData: data),
-        );
-  }
+  // To-Do
+  // void _update(Map<String, dynamic> data) {
+  //   this._characterBloc.add(
+  //         Update(characterName: widget.character.name, updateData: data),
+  //       );
+  // }
 }

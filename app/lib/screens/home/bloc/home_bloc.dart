@@ -21,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is ScreenStarted) {
       Map<String, Character> characters =
-          _characteRepository.getCharacters(event.playerUID);
+          await _characteRepository.getCharacters(event.playerUID);
       yield Fetched(characters);
     }
   }

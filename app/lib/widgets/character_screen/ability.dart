@@ -1,5 +1,5 @@
-import 'package:dnd/widgets/character_screen/ability_mod.dart';
-import 'package:dnd/widgets/character_screen/ability_value.dart';
+import 'package:dnd/screens/character/widgets/abilities_tab/ability_mod.dart';
+import 'package:dnd/screens/character/widgets/abilities_tab/ability_value.dart';
 import 'package:flutter/material.dart';
 
 class Ability extends StatelessWidget {
