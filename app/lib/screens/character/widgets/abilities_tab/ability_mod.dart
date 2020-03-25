@@ -1,6 +1,118 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
-Path decorationPath(Size size) {
+class _AbilityWidgetPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5
+      ..color = Colors.black;
+    Path path = _widgetPath(size);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class _AbilityWidgetDecorationPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.5
+      ..color = Colors.grey[700];
+    Path path = _decorationPath(size);
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class _AbilityWidgetClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) => _widgetPath(size);
+  @override
+  bool shouldReclip(_AbilityWidgetClipper oldClipper) => false;
+}
+
+class AbilityModifier extends StatelessWidget {
+  final String name;
+  final int value;
+  final bool proficient;
+
+  const AbilityModifier({
+    Key key,
+    @required this.name,
+    @required this.value,
+    @required this.proficient,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: ScreenUtil().setHeight(155),
+      width: ScreenUtil().setWidth(135),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black45,
+            offset: Offset(3, 5),
+            blurRadius: 3,
+          ),
+        ],
+      ),
+      child: Stack(
+        children: <Widget>[
+          ClipPath(
+            clipper: _AbilityWidgetClipper(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: proficient
+                    ? Color.fromRGBO(204, 195, 181, 1)
+                    : Color.fromRGBO(244, 235, 221, 1),
+              ),
+              alignment: Alignment(0, 0),
+              child: Column(
+                children: <Widget>[
+                  this._buildName(),
+                  this._buildValue(),
+                ],
+              ),
+            ),
+          ),
+          CustomPaint(
+            painter: _AbilityWidgetDecorationPainter(),
+            child: Container(height: 80),
+          ),
+          CustomPaint(
+            painter: _AbilityWidgetPainter(),
+            child: Container(height: 80),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildValue() {
+    int value = (this.value * 0.5 - 5).floor();
+    return Text(
+      "$value",
+      style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
+    );
+  }
+
+  Widget _buildName() {
+    return Text(
+      "${this.name}",
+      style: TextStyle(fontWeight: FontWeight.w600),
+    );
+  }
+}
+
+Path _decorationPath(Size size) {
   Path path = Path();
   // Top left curve
   path.moveTo(2, 7);
@@ -49,7 +161,7 @@ Path decorationPath(Size size) {
   return path;
 }
 
-Path widgetPath(Size size) {
+Path _widgetPath(Size size) {
   Path path = Path();
   // Top Left Thing
   path.moveTo(2, 7);
@@ -72,106 +184,4 @@ Path widgetPath(Size size) {
   path.quadraticBezierTo(7, size.height / 3, 0, 20);
   path.close();
   return path;
-}
-
-class AbilityWidgetPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5
-      ..color = Colors.black;
-    Path path = widgetPath(size);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class AbilityWidgetDecorationPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5
-      ..color = Colors.grey[700];
-    Path path = decorationPath(size);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class AbilityWidgetClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) => widgetPath(size);
-  @override
-  bool shouldReclip(AbilityWidgetClipper oldClipper) => false;
-}
-
-class AbilityModifier extends StatelessWidget {
-  final String name;
-  final int value;
-  final bool proficient;
-
-  const AbilityModifier({
-    Key key,
-    @required this.name,
-    @required this.value,
-    @required this.proficient,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 80,
-      width: 75,
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: AbilityWidgetClipper(),
-            child: Container(
-              decoration: BoxDecoration(
-                color: proficient
-                    ? Color.fromRGBO(204, 195, 181, 1)
-                    : Color.fromRGBO(244, 235, 221, 1),
-              ),
-              alignment: Alignment(0, 0),
-              child: Column(
-                children: <Widget>[
-                  this._buildName(),
-                  this._buildValue(),
-                ],
-              ),
-            ),
-          ),
-          CustomPaint(
-            painter: AbilityWidgetDecorationPainter(),
-            child: Container(height: 80),
-          ),
-          CustomPaint(
-            painter: AbilityWidgetPainter(),
-            child: Container(height: 80),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildValue() {
-    int value = (this.value * 0.5 - 5).floor();
-    return Text(
-      "$value",
-      style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
-    );
-  }
-
-  Widget _buildName() {
-    return Text(
-      "${this.name}",
-      style: TextStyle(fontWeight: FontWeight.w600),
-    );
-  }
 }

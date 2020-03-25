@@ -3,6 +3,7 @@ import 'package:dnd/screens/character/bloc/character_bloc.dart';
 import 'package:dnd/widgets/character_screen/ability.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 class AbilitiesList extends StatelessWidget {
   @override
@@ -22,7 +23,7 @@ class AbilitiesList extends StatelessWidget {
 
   Widget _buildBody(Character character) {
     return Container(
-      height: 108,
+      height: ScreenUtil().setHeight(220),
       padding: EdgeInsets.only(top: 8),
       child: ListView.builder(
         physics: BouncingScrollPhysics(),

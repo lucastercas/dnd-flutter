@@ -13,16 +13,10 @@ class AbilitiesTabView extends StatelessWidget {
         AbilitiesList(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            ProficiencyBonus(),
-            PassivePerception(),
-          ],
+          children: <Widget>[ProficiencyBonus(), PassivePerception()],
         ),
         Row(
-          children: <Widget>[
-            SavingThrows(),
-            Skills(),
-          ],
+          children: <Widget>[SavingThrows(), Skills()],
         ),
       ],
     );
