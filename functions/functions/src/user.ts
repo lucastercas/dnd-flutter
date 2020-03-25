@@ -11,7 +11,9 @@ export const onCreateUser = functions.auth.user().onCreate(async user => {
     uid: user.uid,
     email: user.email,
     displayName: user.displayName || `Usuario${Math.floor(Math.random()*10000000)}`,
-    photoUrl: user.photoURL
+    photoUrl: user.photoURL,
+    characters: [],
+    games: [],
   };
 
   const docPath = `users/${user.uid}`;

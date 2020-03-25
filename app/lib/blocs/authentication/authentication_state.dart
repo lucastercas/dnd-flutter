@@ -18,7 +18,7 @@ class Authenticated extends AuthenticationState {
   List<Object> get props => [user];
 
   @override
-  String toString() => 'Authenticated { displayName: $user }';
+  String toString() => 'Authenticated { user: $user }';
 }
 
 class Unauthenticated extends AuthenticationState {}

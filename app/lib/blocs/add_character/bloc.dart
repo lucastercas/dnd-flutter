@@ -1,6 +1,6 @@
 import 'package:dnd/blocs/add_character/event.dart';
 import 'package:dnd/blocs/add_character/state.dart';
-import 'package:dnd/blocs/repository.dart';
+import 'package:dnd/blocs/character_repository.dart';
 import 'package:dnd/models/character.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

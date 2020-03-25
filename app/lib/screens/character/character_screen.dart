@@ -1,7 +1,7 @@
 import 'package:dnd/blocs/character/bloc.dart';
 import 'package:dnd/blocs/character/event.dart';
 import 'package:dnd/blocs/character/state.dart';
-import 'package:dnd/blocs/repository.dart';
+import 'package:dnd/blocs/character_repository.dart';
 import 'package:dnd/widgets/app_bar.dart';
 import 'package:dnd/widgets/character_screen/header_delegate.dart';
 import 'package:dnd/widgets/character_screen/tab_view.dart';

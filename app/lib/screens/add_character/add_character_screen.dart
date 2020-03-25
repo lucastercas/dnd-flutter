@@ -1,5 +1,5 @@
 import 'package:dnd/blocs/add_character/bloc.dart';
-import 'package:dnd/blocs/repository.dart';
+import 'package:dnd/blocs/character_repository.dart';
 import 'package:dnd/widgets/add_character_screen/add_character_form.dart';
 import 'package:dnd/widgets/app_bar.dart';
 import 'package:flutter/material.dart';

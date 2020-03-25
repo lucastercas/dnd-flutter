@@ -57,7 +57,7 @@ class UserRepository {
     return {
       "uid": user.uid,
       "email": user.email,
-      "displayName": user.displayName
+      "displayName": user.displayName != null ? user.displayName : ""
     };
   }
 }
