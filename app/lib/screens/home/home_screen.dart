@@ -50,9 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ListTile(
               title: Text("Log Out"),
               onTap: () {
-                BlocProvider.of<AuthenticationBloc>(context).add(
-                  LoggedOut(),
-                );
+                BlocProvider.of<AuthenticationBloc>(context).add(LoggedOut());
               },
             ),
           ],
@@ -67,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, state) {
             return Column(
               children: <Widget>[
-                if (state is Authenticated) Text(state.displayName),
+                if (state is Authenticated) Text(state.user["displayName"]),
                 BlocProvider<CharacterListingBloc>(
                   create: (BuildContext context) => _charListingBloc,
                   child: _buildBody(),

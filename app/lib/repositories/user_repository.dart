@@ -21,19 +21,14 @@ class UserRepository {
     return _firebaseAuth.currentUser();
   }
 
-  // To-Do: Change this to user username
   Future<void> signInWithCredentials(String email, String password) {
     return _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+        email: email, password: password);
   }
 
   Future<void> signUp({String username, String email, String password}) async {
     AuthResult authResult = await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+        email: email, password: password);
     FirebaseUser user = authResult.user;
     UserUpdateInfo updateInfo = UserUpdateInfo();
     updateInfo.displayName = username;
@@ -49,6 +44,7 @@ class UserRepository {
     ]);
   }
 
+  // To-Do: How to check if user still exists?
   Future<bool> isSignedIn() async {
     final FirebaseUser currentUser = await _firebaseAuth.currentUser();
     currentUser.reload();
@@ -56,7 +52,12 @@ class UserRepository {
     return currentUser != null;
   }
 
-  Future<String> getUser() async {
-    return (await _firebaseAuth.currentUser()).displayName;
+  Future<Map<String, dynamic>> getUser() async {
+    FirebaseUser user = await _firebaseAuth.currentUser();
+    return {
+      "uid": user.uid,
+      "email": user.email,
+      "displayName": user.displayName
+    };
   }
 }

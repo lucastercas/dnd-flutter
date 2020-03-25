@@ -10,7 +10,7 @@ export const onCreateUser = functions.auth.user().onCreate(async user => {
   const data = {
     uid: user.uid,
     email: user.email,
-    displayName: user.displayName || "Usuario",
+    displayName: user.displayName || `Usuario${Math.floor(Math.random()*10000000)}`,
     photoUrl: user.photoURL
   };
 
