@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Character {
   String name;
   String surname;
-  String _avatar;
+  String _avatarUrl;
 
   int level;
   String race;
@@ -43,7 +43,7 @@ class Character {
     this._abilities[name] = value;
   }
 
-  set avatar(String path) => this._avatar = path;
+  set avatarUrl(String path) => this._avatarUrl = path;
 
   set strenght(int value) => this._abilities["str"] = value;
   set charisma(int value) => this._abilities["cha"] = value;
@@ -55,14 +55,14 @@ class Character {
   set abilities(Map<String, int> abilities) => this._abilities = abilities;
 
   get abilities => this._abilities;
-  get avatar => this._avatar;
+  get avatarUrl => this._avatarUrl;
 
   Character.fromSnapshot(DocumentSnapshot snapshot)
       : name = snapshot['name'],
         surname = snapshot['surname'],
         _abilities = snapshot['abilities'],
         skills = snapshot['skills'],
-        _avatar = snapshot['avatar'],
+        _avatarUrl = snapshot['avatar'],
         spells = snapshot['spells'],
         race = snapshot['race'],
         level = snapshot['level'],
@@ -82,7 +82,7 @@ class Character {
         surname = json['surname'],
         _abilities = json['abilities'],
         skills = json['skills'],
-        _avatar = json['avatar'],
+        _avatarUrl = json['avatar'],
         spells = json['spells'],
         race = json['race'],
         level = json['level'],
@@ -105,7 +105,7 @@ class Character {
         'level': level,
         'class': charClass,
         'maxHealth': maxHealth,
-        'avatar': _avatar,
+        'avatarUrl': _avatarUrl,
         'curHealth': curHealth,
         'tempHealth': tempHealth,
         'savingThrows': savingThrows,

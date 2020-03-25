@@ -1,10 +1,9 @@
-import 'package:dnd/blocs/character/bloc.dart';
-import 'package:dnd/blocs/character/state.dart';
 import 'package:dnd/models/character.dart';
-import 'package:dnd/widgets/character_screen/armour.dart';
-import 'package:dnd/widgets/character_screen/avatar.dart';
-import 'package:dnd/widgets/character_screen/health_bar.dart';
-import 'package:dnd/widgets/character_screen/manage_character_health_buttons.dart';
+import 'package:dnd/screens/character/bloc/character_bloc.dart';
+import 'package:dnd/screens/character/widgets/armour.dart';
+import 'package:dnd/screens/character/widgets/avatar.dart';
+import 'package:dnd/screens/character/widgets/character_health.dart';
+import 'package:dnd/screens/character/widgets/manage_character_health_buttons.dart';
 import 'package:dnd/widgets/vertical_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,10 +12,10 @@ const TextStyle _textStyle = TextStyle(
   fontSize: 14,
 );
 
-class Header extends StatelessWidget {
+class CharacterInfoHeader extends StatelessWidget {
   final bool expanded;
 
-  Header({this.expanded});
+  CharacterInfoHeader({this.expanded});
 
   Widget _buildNameLevel(Character character) {
     return Column(
@@ -29,9 +28,9 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder(
-      bloc: BlocProvider.of<CharacterFetchBloc>(context),
-      builder: (BuildContext context, CharacterState state) {
+    return BlocBuilder<CharacterBloc, CharacterState>(
+      bloc: BlocProvider.of<CharacterBloc>(context),
+      builder: (context, state) {
         var newState = state as Fetched;
         final Character character = newState.character;
         return Row(

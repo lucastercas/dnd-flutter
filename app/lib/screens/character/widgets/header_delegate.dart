@@ -1,14 +1,14 @@
 import 'dart:math' as math;
 
-import 'package:dnd/widgets/character_screen/header.dart';
+import 'package:dnd/screens/character/widgets/header.dart';
 import 'package:flutter/material.dart';
 
-class HeaderDelegate
+class CharacterInfoHeaderDelegate
     extends SliverPersistentHeaderDelegate {
   final double minHeight;
   final double maxHeight;
 
-  HeaderDelegate({
+  CharacterInfoHeaderDelegate({
     @required this.minHeight,
     @required this.maxHeight,
   });
@@ -21,7 +21,7 @@ class HeaderDelegate
   ) {
     return Container(
       color: Color.fromRGBO(244, 235, 221, 1),
-      child: Header(expanded: shrinkOffset < 5),
+      child: CharacterInfoHeader(expanded: shrinkOffset < 5),
     );
   }
 
@@ -31,7 +31,7 @@ class HeaderDelegate
   double get minExtent => minHeight;
 
   @override
-  bool shouldRebuild(HeaderDelegate oldDelegate) {
+  bool shouldRebuild(CharacterInfoHeaderDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight;
   }

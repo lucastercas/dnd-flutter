@@ -34,6 +34,7 @@ flutter:
    - assets/images/
    - assets/seeds/
    - assets/fonts/
+   - assets/gifs/
 
   fonts:
     - family: Cinzel
