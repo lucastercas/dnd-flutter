@@ -9,7 +9,7 @@ class AbilityValue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      left: 6.5,
+      left: 1,
       bottom: 10,
       child: Container(
         height: ScreenUtil().setHeight(70),

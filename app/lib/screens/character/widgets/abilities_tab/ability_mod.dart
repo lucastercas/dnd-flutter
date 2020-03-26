@@ -1,42 +1,7 @@
+import 'package:dnd/widgets/border_clipper.dart';
+import 'package:dnd/widgets/border_shadow_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/screenutil.dart';
-
-class _AbilityWidgetPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5
-      ..color = Colors.black;
-    Path path = _widgetPath(size);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class _AbilityWidgetDecorationPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 1.5
-      ..color = Colors.grey[700];
-    Path path = _decorationPath(size);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class _AbilityWidgetClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) => _widgetPath(size);
-  @override
-  bool shouldReclip(_AbilityWidgetClipper oldClipper) => false;
-}
 
 class AbilityModifier extends StatelessWidget {
   final String name;
@@ -52,46 +17,31 @@ class AbilityModifier extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: ScreenUtil().setHeight(155),
-      width: ScreenUtil().setWidth(135),
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            offset: Offset(3, 5),
-            blurRadius: 3,
-          ),
-        ],
+    return CustomPaint(
+      painter: BorderShadowPainter(
+        clipper: BorderClipper(generatePath: _borderPath),
+        generateBorderPath: _borderPath,
+        shadow: BoxShadow(
+          color: Colors.black45,
+          offset: Offset(3, 5),
+          blurRadius: 3,
+        ),
       ),
-      child: Stack(
-        children: <Widget>[
-          ClipPath(
-            clipper: _AbilityWidgetClipper(),
-            child: Container(
-              decoration: BoxDecoration(
-                color: proficient
-                    ? Color.fromRGBO(204, 195, 181, 1)
-                    : Color.fromRGBO(244, 235, 221, 1),
-              ),
-              alignment: Alignment(0, 0),
-              child: Column(
-                children: <Widget>[
-                  this._buildName(),
-                  this._buildValue(),
-                ],
-              ),
-            ),
+      child: ClipPath(
+        clipper: BorderClipper(generatePath: _borderPath),
+        child: Container(
+          height: ScreenUtil().setHeight(155),
+          color: proficient
+              ? Color.fromRGBO(204, 195, 181, 1)
+              : Color.fromRGBO(244, 235, 221, 1),
+          alignment: Alignment(0, 0),
+          child: Column(
+            children: <Widget>[
+              this._buildName(),
+              this._buildValue(),
+            ],
           ),
-          CustomPaint(
-            painter: _AbilityWidgetDecorationPainter(),
-            child: Container(height: 80),
-          ),
-          CustomPaint(
-            painter: _AbilityWidgetPainter(),
-            child: Container(height: 80),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -112,56 +62,7 @@ class AbilityModifier extends StatelessWidget {
   }
 }
 
-Path _decorationPath(Size size) {
-  Path path = Path();
-  // Top left curve
-  path.moveTo(2, 7);
-  path.quadraticBezierTo(10, 7, 7, 1);
-  // Go to right
-  path.lineTo(size.width - 7, 1);
-  // Top right curve
-  path.quadraticBezierTo(size.width - 10, 7, size.width - 2, 7);
-  // Right decoration 1
-  path.quadraticBezierTo(size.width - 7, 30, size.width, 30);
-  // Right decoration 2
-  path.quadraticBezierTo(
-    size.width - 2,
-    size.height / 1.5,
-    size.width - 5,
-    size.height - 15,
-  );
-  // Right decoration 3
-  path.quadraticBezierTo(
-    size.width + 5,
-    size.height - 12,
-    size.width - 2,
-    size.height - 5,
-  );
-  path.lineTo(size.width - 20, size.height + 13);
-  // Right decoration 4
-  path.quadraticBezierTo(
-    size.width - 7,
-    size.height + 10,
-    size.width - 5,
-    size.height + 6,
-  );
-  // Go to left
-  path.quadraticBezierTo(size.width / 2, size.height + 3, 5, size.height + 7);
-  // Left decoration 4
-  path.quadraticBezierTo(7, size.height + 10, 20, size.height + 13);
-  // path.lineTo(18.5, size.height + 10.5);
-  path.lineTo(2, size.height - 5);
-  // Left decoration 3
-  path.quadraticBezierTo(-5, size.height - 12, 5, size.height - 15);
-  // Left decoration 2
-  path.quadraticBezierTo(2, size.height / 1.5, 0, 30);
-  // Left decoration 1
-  path.quadraticBezierTo(7, 30, 2, 7);
-  path.close();
-  return path;
-}
-
-Path _widgetPath(Size size) {
+Path _borderPath(Size size) {
   Path path = Path();
   // Top Left Thing
   path.moveTo(2, 7);

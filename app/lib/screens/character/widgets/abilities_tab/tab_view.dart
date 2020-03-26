@@ -4,6 +4,7 @@ import 'package:dnd/screens/character/widgets/abilities_tab/proficiency_bonus.da
 import 'package:dnd/screens/character/widgets/abilities_tab/saving_throws.dart';
 import 'package:dnd/screens/character/widgets/abilities_tab/skills.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AbilitiesTabView extends StatelessWidget {
   @override
@@ -11,9 +12,12 @@ class AbilitiesTabView extends StatelessWidget {
     return Column(
       children: <Widget>[
         AbilitiesList(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[ProficiencyBonus(), PassivePerception()],
+        SizedBox(
+          height: ScreenUtil().setHeight(75),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[ProficiencyBonus(), PassivePerception()],
+          ),
         ),
         Row(
           children: <Widget>[SavingThrows(), Skills()],

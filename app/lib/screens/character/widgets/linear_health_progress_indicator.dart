@@ -79,8 +79,10 @@ class _LinearHealthProgressIndicatorState
         });
       },
       child: Container(
-        constraints:
-            const BoxConstraints(minWidth: double.infinity, minHeight: 17),
+        constraints: const BoxConstraints(
+          minWidth: double.infinity,
+          minHeight: 17,
+        ),
         child: CustomPaint(
           painter: LinearHealthProgressIndicatorPainter(
             curHealth: widget.curHealth,

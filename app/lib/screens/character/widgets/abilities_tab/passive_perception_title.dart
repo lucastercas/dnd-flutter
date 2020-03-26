@@ -12,17 +12,15 @@ Path _borderPath(Size size) {
   path.lineTo(size.width, size.height - 5);
   path.lineTo(size.width - 5, size.height);
   // Go to bottom left
-  path.lineTo(0, size.height);
+  path.lineTo(-2, size.height);
   // Go to top left
-  path.quadraticBezierTo(7, size.height / 2, 0, 0);
+  path.quadraticBezierTo(7, size.height / 2, -2, 0);
   path.close();
   return path;
 }
 
-class ProficiencyBonusTitle extends StatelessWidget {
-  const ProficiencyBonusTitle({
-    Key key,
-  }) : super(key: key);
+class PassivePerceptionTitle extends StatelessWidget {
+  const PassivePerceptionTitle({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,7 @@ class ProficiencyBonusTitle extends StatelessWidget {
           child: Container(
             alignment: Alignment(1, 0),
             child: Text(
-              "Proficiency Bonus",
+              "Passive Perception",
               style: TextStyle(fontSize: 10),
             ),
           ),

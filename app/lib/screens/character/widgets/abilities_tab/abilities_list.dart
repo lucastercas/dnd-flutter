@@ -1,6 +1,6 @@
 import 'package:dnd/models/character.dart';
 import 'package:dnd/screens/character/bloc/character_bloc.dart';
-import 'package:dnd/widgets/character_screen/ability.dart';
+import 'package:dnd/screens/character/widgets/abilities_tab/ability.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/screenutil.dart';

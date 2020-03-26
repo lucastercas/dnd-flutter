@@ -65,7 +65,10 @@ class LinearHealthProgressIndicatorPainter extends CustomPainter {
 
     void drawText(String text, Offset offset) {
       TextSpan span = TextSpan(
-        style: TextStyle(color: Colors.white, fontFamily: 'Cinzel'),
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Cinzel',
+        ),
         text: "$text",
       );
       TextPainter tp = TextPainter(

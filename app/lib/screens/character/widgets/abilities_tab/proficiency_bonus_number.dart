@@ -1,3 +1,5 @@
+import 'package:dnd/widgets/border_clipper.dart';
+import 'package:dnd/widgets/border_shadow_painter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,37 +19,6 @@ Path _borderPath(Size size) {
   return path;
 }
 
-class _BorderShadowPainter extends CustomPainter {
-  final Shadow shadow;
-  final CustomClipper<Path> clipper;
-
-  _BorderShadowPainter({@required this.shadow, @required this.clipper});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final Paint shadowPaint = shadow.toPaint();
-    final Path shadowClipPath = clipper.getClip(size).shift(shadow.offset);
-    canvas.drawPath(shadowClipPath, shadowPaint);
-    final Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 2
-      ..color = Colors.black;
-    final Path path = _borderPath(size);
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
-
-class _BorderClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) => _borderPath(size);
-
-  @override
-  bool shouldReclip(_BorderClipper oldClipper) => false;
-}
-
 class ProficiencyBonusNumber extends StatelessWidget {
   final int _proficiencyBonus;
 
@@ -60,8 +31,9 @@ class ProficiencyBonusNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: _BorderShadowPainter(
-        clipper: _BorderClipper(),
+      painter: BorderShadowPainter(
+        generateBorderPath: _borderPath,
+        clipper: BorderClipper(generatePath: _borderPath),
         shadow: BoxShadow(
           color: Colors.black45,
           offset: Offset(3, 5),
@@ -69,7 +41,7 @@ class ProficiencyBonusNumber extends StatelessWidget {
         ),
       ),
       child: ClipPath(
-        clipper: _BorderClipper(),
+        clipper: BorderClipper(generatePath: _borderPath),
         child: Container(
           height: ScreenUtil().setHeight(60),
           width: ScreenUtil().setWidth(75),
