@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-Path _borderPath(Size size) {
-  Path path = Path();
-
-  return path;
-}
-
 class PassivePerceptionNumber extends StatelessWidget {
   final int number;
   PassivePerceptionNumber({@required this.number});

@@ -25,11 +25,11 @@ class PassivePerception extends StatelessWidget {
 
   Widget _buildBody(Character character) {
     return Container(
-      width: ScreenUtil().setWidth(275),
+      width: ScreenUtil().setWidth(305),
       child: Stack(
         children: <Widget>[
           PassivePerceptionNumber(number: character.proficiencyBonus),
-          Positioned(left: 35, top: 5, child: PassivePerceptionTitle()),
+          Positioned(left: 31, top: 5, child: PassivePerceptionTitle()),
           CustomPaint(
             painter: DecorationPainter(generatePath: _decorationPath),
             child: Container(height: ScreenUtil().setHeight(50)),
@@ -40,11 +40,13 @@ class PassivePerception extends StatelessWidget {
   }
 
   Path _decorationPath(Size size) {
+    print(size);
     Path path = Path();
-    path.moveTo(3, 5);
+    path.moveTo(2, 7);
     // To-Do: Transform this to cubicFor
-    path.quadraticBezierTo(10, 0, 20, 0);
-    path.quadraticBezierTo(35, 12, 45, 5);
+    path.cubicTo(15, -10, 25, 17, 42, 5);
+    // path.quadraticBezierTo(10, 0, 15, 0);
+    // path.quadraticBezierTo(35, 12, 45, 5);
     // Go to top right
     path.lineTo(size.width - 20, 5);
     path.lineTo(size.width - 5, 15);
@@ -52,10 +54,17 @@ class PassivePerception extends StatelessWidget {
     path.lineTo(size.width - 5, size.height - 5);
     path.lineTo(size.width - 20, size.height + 5);
     // Go to bottom left
-    path.lineTo(45, size.height + 5);
-    path.quadraticBezierTo(35, size.height - 3, 20, size.height+10);
-    path.quadraticBezierTo(10, size.height+10, 3, size.height + 5);
-
+    path.lineTo(42, size.height + 5);
+    path.cubicTo(
+      25,
+      size.height - 5,
+      15,
+      size.height + 17,
+      2,
+      size.height + 5,
+    );
+    // path.quadraticBezierTo(35, size.height - 3, 20, size.height + 10);
+    // path.quadraticBezierTo(10, size.height + 10, 2, size.height + 4);
     return path;
   }
 }

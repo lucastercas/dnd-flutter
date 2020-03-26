@@ -19,7 +19,7 @@ class Ability extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: ScreenUtil().setWidth(135),
+      width: ScreenUtil().setWidth(150),
       padding: EdgeInsets.only(left: 4, right: 4),
       child: Stack(
         children: <Widget>[

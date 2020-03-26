@@ -25,7 +25,7 @@ class ProficiencyBonus extends StatelessWidget {
 
   Widget _buildBody(Character character) {
     return Container(
-      width: ScreenUtil().setWidth(270),
+      width: ScreenUtil().setWidth(310),
       child: Stack(
         children: <Widget>[
           ProficiencyBonusNumber(proficiencyBonus: character.proficiencyBonus),
@@ -53,8 +53,8 @@ class ProficiencyBonus extends StatelessWidget {
     path.lineTo(55, size.height + 3);
     path.quadraticBezierTo(35, size.height - 3, 25, size.height + 5);
 
-    path.moveTo(37, size.height + 5);
-    path.quadraticBezierTo(46, size.height / 2, 37, 3);
+    path.moveTo(32, size.height + 5);
+    path.quadraticBezierTo(41, size.height / 2, 32, 3);
     return path;
   }
 }

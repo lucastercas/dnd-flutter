@@ -15,7 +15,7 @@ class AbilitiesTabView extends StatelessWidget {
         SizedBox(
           height: ScreenUtil().setHeight(75),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[ProficiencyBonus(), PassivePerception()],
           ),
         ),

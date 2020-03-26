@@ -40,13 +40,13 @@ class ProficiencyBonusTitle extends StatelessWidget {
         clipper: BorderClipper(generatePath: _borderPath),
         child: Container(
           height: ScreenUtil().setHeight(50),
-          width: ScreenUtil().setWidth(200),
+          width: ScreenUtil().setWidth(240),
           color: Color(0xFFf4e1dd),
           child: Container(
             alignment: Alignment(1, 0),
             child: Text(
               "Proficiency Bonus",
-              style: TextStyle(fontSize: 10),
+              style: TextStyle(fontSize: ScreenUtil().setSp(22)),
             ),
           ),
         ),
