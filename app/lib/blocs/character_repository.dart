@@ -47,10 +47,7 @@ class CharacterRepository {
     // return collection.transform(transformer);
   }
 
-  updateCharacter(
-    String charName,
-    Map<String, dynamic> data,
-  ) async {
+  Future updateCharacter(String charName, Map<String, dynamic> data) async {
     await _firestoreProvider.updateDocument(
       "characters",
       charName,

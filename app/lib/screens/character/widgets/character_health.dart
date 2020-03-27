@@ -3,6 +3,7 @@ import 'package:dnd/screens/character/bloc/character_bloc.dart';
 import 'package:dnd/screens/character/widgets/linear_health_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 class CharacterHealth extends StatelessWidget {
   final bool expanded;
@@ -14,12 +15,8 @@ class CharacterHealth extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (context, state) {
-        if (state is Fetched)
-          return _buildBody(state.character);
-        // else if (state is Updated)
-        //   return _buildBody(state.character);
-        else
-          return Container();
+        if (state is Updated) return _buildBody(state.character);
+        return Container();
       },
     );
   }
@@ -34,7 +31,7 @@ class CharacterHealth extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
           Container(
-            width: 230,
+            width: ScreenUtil().setWidth(600),
             child: LinearHealthProgressIndicator(
               maxHealth: character.maxHealth,
               curHealth: character.curHealth,

@@ -6,8 +6,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'character_state.dart';
 part 'character_event.dart';
+part 'character_state.dart';
 
 class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
   final CharacterRepository _characterRepository;
@@ -22,15 +22,21 @@ class CharacterBloc extends Bloc<CharacterEvent, CharacterState> {
 
   @override
   Stream<CharacterState> mapEventToState(CharacterEvent event) async* {
-    if (event is ScreenStarted) {
+    if (event is Fetch) {
       _subscription?.cancel();
       _subscription = _characterRepository
           .getCharacter(event.charId)
           .listen((Character character) {
-        add(Fetch(character: character));
+        add(Start(character: character));
       });
-    } else if (event is Fetch) {
-      yield Fetched(character: event.character);
+    } else if (event is Start) {
+      yield Updated(character: event.character);
+    } else if (event is Update) {
+      await _characterRepository.updateCharacter(
+        event.characterName,
+        event.update,
+      );
+      // yield Update(character: character);
     }
   }
 

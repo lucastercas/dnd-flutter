@@ -13,12 +13,8 @@ class ProficiencyBonus extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (context, CharacterState state) {
-        if (state is Fetched)
-          return _buildBody(state.character);
-        // else if (state is Updated)
-        //   return _buildBody(state.character);
-        else
-          return Container();
+        if (state is Updated) return _buildBody(state.character);
+        return Container();
       },
     );
   }
@@ -29,7 +25,11 @@ class ProficiencyBonus extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           ProficiencyBonusNumber(proficiencyBonus: character.proficiencyBonus),
-          Positioned(right: 3, top: 3, child: ProficiencyBonusTitle()),
+          Positioned(
+            right: ScreenUtil().setWidth(3),
+            top: 3,
+            child: ProficiencyBonusTitle(),
+          ),
           CustomPaint(
             painter: DecorationPainter(generatePath: _decorationPath),
             child: Container(height: ScreenUtil().setHeight(50)),
@@ -45,16 +45,32 @@ class ProficiencyBonus extends StatelessWidget {
     path.quadraticBezierTo(35, 9, 55, 3);
     // Go to top right
     path.lineTo(size.width - 20, 3);
-    path.lineTo(size.width - 3, 12);
+    path.quadraticBezierTo(
+      ScreenUtil().setWidth(309),
+      8,
+      ScreenUtil().setWidth(308),
+      12,
+    );
     // Go to bottom right
-    path.lineTo(size.width - 3, size.height - 6);
-    path.lineTo(size.width - 20, size.height + 3);
+    path.moveTo(ScreenUtil().setWidth(310), size.height - 6);
+    path.quadraticBezierTo(
+      ScreenUtil().setWidth(308),
+      size.height - 1,
+      size.width - 20,
+      size.height + 3,
+    );
+    // path.lineTo(size.width - 20, size.height + 3);
     // Go to bottom left
     path.lineTo(55, size.height + 3);
     path.quadraticBezierTo(35, size.height - 3, 25, size.height + 5);
 
-    path.moveTo(32, size.height + 5);
-    path.quadraticBezierTo(41, size.height / 2, 32, 3);
+    path.moveTo(ScreenUtil().setWidth(75), size.height + 5);
+    path.quadraticBezierTo(
+      ScreenUtil().setWidth(85),
+      size.height / 2,
+      ScreenUtil().setWidth(75),
+      3,
+    );
     return path;
   }
 }

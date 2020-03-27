@@ -34,7 +34,7 @@ class CharacterScreen extends StatelessWidget {
         },
         child: BlocProvider<CharacterBloc>(
           create: (context) => CharacterBloc(characterRepository: charRepo)
-            ..add(ScreenStarted(charId: charId)),
+            ..add(Fetch(charId: charId)),
           child: CharacterInfo(),
         ),
       ),

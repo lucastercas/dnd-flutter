@@ -1,6 +1,8 @@
 import 'package:dnd/screens/character/bloc/character_bloc.dart';
 import 'package:dnd/screens/character/widgets/abilities_tab/tab_view.dart';
+import 'package:dnd/screens/character/widgets/equipments_tab/tab_view.dart';
 import 'package:dnd/screens/character/widgets/header_delegate.dart';
+import 'package:dnd/screens/character/widgets/spells_tab/tab_view.dart';
 import 'package:dnd/screens/character/widgets/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +41,7 @@ class _CharacterInfoState extends State<CharacterInfo>
               pinned: true,
               // To-Do: Check this height
               delegate: CharacterInfoHeaderDelegate(
-                minHeight: ScreenUtil().setHeight(150),
+                minHeight: ScreenUtil().setHeight(170),
                 maxHeight: ScreenUtil().setHeight(300),
               ),
             ),
@@ -54,11 +56,8 @@ class _CharacterInfoState extends State<CharacterInfo>
                   children: <Widget>[
                     // To-Do: Make spells and equipment screen
                     AbilitiesTabView(),
-                    Container(
-                      color: Colors.red,
-                      height: ScreenUtil().setHeight(1000),
-                    ),
-                    Container(color: Colors.green, height: 100),
+                    SpellsTabView(),
+                    EquipmentsTabView(),
                   ],
                 ),
               ),

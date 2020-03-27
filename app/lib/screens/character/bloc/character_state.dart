@@ -15,10 +15,10 @@ class Uninitialized extends CharacterState {
   String toString() => "UninitializedCharacterState: { }";
 }
 
-class Fetched extends CharacterState {
+class Updated extends CharacterState {
   final Character character;
 
-  Fetched({@required this.character});
+  Updated({@required this.character});
   @override
   List<Object> get props => [character];
   @override

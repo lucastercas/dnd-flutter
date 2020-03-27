@@ -9,22 +9,18 @@ class Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
-      builder: ( context,  state) {
-        if (state is Fetched)
-          return _buildBody(state.character);
-        // else if (state is Updated)
-        //   return _buildBody(state.character);
-        else
-          return Container();
+      builder: (context, state) {
+        if (state is Updated) return _buildBody(state.character);
+        return Container();
       },
     );
   }
 
   ClipRRect _buildBody(Character character) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(5),
       child: SizedBox(
-        width: ScreenUtil().setWidth(150),
+        width: ScreenUtil().setWidth(100),
         // To-Do: Get avatar from firebase storage
         child: Image.network(
           character.avatarUrl,

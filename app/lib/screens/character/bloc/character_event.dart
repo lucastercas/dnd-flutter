@@ -2,20 +2,30 @@ part of 'character_bloc.dart';
 
 abstract class CharacterEvent extends Equatable {}
 
-class ScreenStarted extends CharacterEvent {
+class Fetch extends CharacterEvent {
   final String charId;
-  ScreenStarted({@required this.charId});
+  Fetch({@required this.charId});
   @override
   List<Object> get props => [charId];
   @override
-  String toString() => 'CharacterScreenStarted: { characterId: $charId }';
+  String toString() => 'CharacterFetch: { characterId: $charId }';
 }
 
-class Fetch extends CharacterEvent {
+class Start extends CharacterEvent {
   final Character character;
-  Fetch({@required this.character});
+  Start({@required this.character});
   @override
   List<Object> get props => [];
   @override
-  String toString() => '';
+  String toString() => 'NewCharacter: {name: ${character.name} }';
+}
+
+class Update extends CharacterEvent {
+  final String characterName;
+  final Map<String, dynamic> update;
+  Update({@required this.characterName, @required this.update});
+  @override
+  List<Object> get props => [];
+  @override
+  String toString() => 'UpdateCharacter: {name: ${characterName} }';
 }

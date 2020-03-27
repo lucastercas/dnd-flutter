@@ -3,6 +3,7 @@ import 'package:dnd/screens/character/bloc/character_bloc.dart';
 import 'package:dnd/widgets/black_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
 //To-Do: This file is ugly as fuck, fix this.
 // How to separate the widgets?
@@ -15,7 +16,7 @@ enum ButtonsState {
 
 TextStyle _btnTextStyle = TextStyle(
   color: Colors.white,
-  fontSize: 12,
+  fontSize: ScreenUtil().setSp(22),
   textBaseline: TextBaseline.alphabetic,
 );
 
@@ -53,18 +54,18 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
           text: widget.character.curHealth.toString(),
           upButtonPress: () {
             if (widget.character.curHealth < widget.character.maxHealth) {
-              // _update({"curHealth": widget.character.curHealth + 1});
+              _update({"curHealth": widget.character.curHealth + 1});
             }
           },
           downButtonPress: () {
-            if (widget.character.curHealth <= 0)
+            if (widget.character.curHealth <= 0) {
               // To-Do: Change to k.o status
               showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(title: Text("You Deead!"));
                   });
-            else {
+            } else {
               // _update({"curHealth": widget.character.curHealth - 1});
             }
           },
@@ -92,8 +93,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
           },
           downButtonPress: () {
             if (widget.character.tempHealth > 0) {
-              //_update({"tempHealth": widget.character.tempHealth - 1});
-
+              // _update({"tempHealth": widget.character.tempHealth - 1});
             }
           },
         );
@@ -108,7 +108,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
   List<Widget> _buildDefaultButtons() {
     return [
       BlackButton(
-        child: Text("Damage", style: _btnTextStyle),
+        child: Text("Health", style: _btnTextStyle),
         onPressed: () {
           setState(() {
             _state = ButtonsState.Damage;
@@ -116,7 +116,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         },
       ),
       BlackButton(
-        child: Text("Heal", style: _btnTextStyle),
+        child: Text("Healing", style: _btnTextStyle),
         onPressed: () {
           setState(() {
             _state = ButtonsState.Heal;
@@ -124,7 +124,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         },
       ),
       BlackButton(
-        child: Text("Add Temp", style: _btnTextStyle),
+        child: Text("Temporary", style: _btnTextStyle),
         onPressed: () {
           setState(() {
             _state = ButtonsState.Temp;
@@ -144,7 +144,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         child: Icon(
           Icons.arrow_back,
           color: Colors.white,
-          size: 12,
+          size: ScreenUtil().setSp(25),
         ),
         onPressed: () {
           setState(() {
@@ -161,7 +161,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         child: Icon(
           Icons.keyboard_arrow_down,
           color: Colors.white,
-          size: 12,
+          size: ScreenUtil().setSp(25),
         ),
         onPressed: downButtonPress,
       ),
@@ -169,7 +169,7 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
         child: Icon(
           Icons.keyboard_arrow_up,
           color: Colors.white,
-          size: 12,
+          size: ScreenUtil().setSp(25),
         ),
         onPressed: upButtonPress,
       ),
@@ -177,9 +177,12 @@ class _CharacterButtonsState extends State<ManageHealthButtons> {
   }
 
   // To-Do
-  // void _update(Map<String, dynamic> data) {
-  //   this._characterBloc.add(
-  //         Update(characterName: widget.character.name, updateData: data),
-  //       );
-  // }
+  void _update(Map<String, dynamic> data) {
+    _characterBloc.add(
+      Update(
+        characterName: widget.character.name,
+        update: data,
+      ),
+    );
+  }
 }

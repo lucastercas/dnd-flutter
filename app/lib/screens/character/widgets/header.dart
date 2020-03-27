@@ -7,9 +7,10 @@ import 'package:dnd/screens/character/widgets/manage_character_health_buttons.da
 import 'package:dnd/widgets/vertical_divider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/screenutil.dart';
 
-const TextStyle _textStyle = TextStyle(
-  fontSize: 14,
+TextStyle _textStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(22),
 );
 
 class CharacterInfoHeader extends StatelessWidget {
@@ -17,13 +18,29 @@ class CharacterInfoHeader extends StatelessWidget {
 
   CharacterInfoHeader({this.expanded});
 
-  Widget _buildNameLevel(Character character) {
-    return Column(
-      children: <Widget>[
-        Text(character.name, style: _textStyle),
-        Text("LV. ${character.level}", style: _textStyle),
-      ],
-    );
+  Widget _buildTop(Character character) {
+    return expanded
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Avatar(),
+              Column(
+                children: <Widget>[
+                  Text(
+                    "${character.name}",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: ScreenUtil().setSp(35),
+                    ),
+                  ),
+                  Text(
+                      "LV. ${character.level} ${character.race} ${character.charClass} - ${character.alignment}"),
+                ],
+              )
+            ],
+          )
+        : Text(
+            "${character.name} - LV. ${character.level} ${character.race} ${character.charClass} - ${character.alignment}");
   }
 
   @override
@@ -31,42 +48,22 @@ class CharacterInfoHeader extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (context, state) {
-        var newState = state as Fetched;
+        var newState = state as Updated;
         final Character character = newState.character;
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  expanded ? Avatar() : Container(),
-                  expanded ? _buildNameLevel(character) : Container(),
-                ],
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            _buildTop(character),
+            Row(
+              mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                expanded
-                    ? Text(
-                        "${character.race} ${character.charClass} - ${character.alignment}")
-                    : SizedBox(),
-                Divider(color: Colors.black, height: expanded ? 3 : 0),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    expanded ? Container() : _buildNameLevel(character),
-                    CharacterHealth(expanded: expanded),
-                    MyVerticalDivider(),
-                    Armour(armourValue: character.armour)
-                  ],
-                ),
-                Divider(color: Colors.black, height: expanded ? 3 : 0),
-                ManageHealthButtons(character: character),
+                CharacterHealth(expanded: expanded),
+                MyVerticalDivider(),
+                Armour(armourValue: character.armour)
               ],
             ),
+            Divider(color: Colors.black, height: expanded ? 3 : 0),
+            ManageHealthButtons(character: character),
           ],
         );
       },

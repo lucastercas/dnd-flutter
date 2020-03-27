@@ -9,8 +9,7 @@ class Skills extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (BuildContext context, CharacterState state) {
-        if (state is Fetched) return _buildBody(state.character);
-        // if (state is Updated) return _buildBody(state.character);
+        if (state is Updated) return _buildBody(state.character);
         return Container();
       },
     );

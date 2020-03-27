@@ -14,7 +14,7 @@ Path _borderPath(Size size) {
   // Go to bottom left
   path.lineTo(0, size.height);
   // Go to top left
-  path.quadraticBezierTo(7, size.height / 2, 0, 0);
+  path.quadraticBezierTo(5, size.height / 2, 0, 0);
   path.close();
   return path;
 }

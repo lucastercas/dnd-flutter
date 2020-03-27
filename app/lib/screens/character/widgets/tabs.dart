@@ -19,15 +19,19 @@ class Tabs extends StatelessWidget {
         child: Container(
           color: Color.fromRGBO(224, 215, 201, 1),
           child: TabBar(
-            isScrollable: true,
+            // isScrollable: true,
+
             unselectedLabelColor: Colors.grey,
             labelColor: Colors.black,
             indicatorColor: Colors.black,
             indicatorWeight: 3,
+            indicatorPadding: EdgeInsets.all(0),
+            labelPadding: EdgeInsets.all(0),
             controller: _tabController,
             tabs: <Widget>[
               Tab(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.person),
                     Text("Abilities", style: TextStyle(fontFamily: 'Cinzel'))
@@ -36,6 +40,7 @@ class Tabs extends StatelessWidget {
               ),
               Tab(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.book),
                     Text("Spells", style: TextStyle(fontFamily: 'Cinzel')),
@@ -44,6 +49,7 @@ class Tabs extends StatelessWidget {
               ),
               Tab(
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(Icons.card_travel),
                     Text("Equipments", style: TextStyle(fontFamily: 'Cinzel')),

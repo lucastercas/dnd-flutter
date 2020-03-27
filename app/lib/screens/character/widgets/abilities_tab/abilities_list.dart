@@ -11,12 +11,8 @@ class AbilitiesList extends StatelessWidget {
     return BlocBuilder<CharacterBloc, CharacterState>(
       bloc: BlocProvider.of<CharacterBloc>(context),
       builder: (context, state) {
-        if (state is Fetched)
-          return _buildBody(state.character);
-        // else if (state is Updated)
-        //   return _buildBody(state.character);
-        else
-          return Container();
+        if (state is Updated) return _buildBody(state.character);
+        return Container();
       },
     );
   }
